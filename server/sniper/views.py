@@ -64,7 +64,7 @@ def register(request):
 def testimg(request):
 	print(request.FILES);
 	f = request.FILES.get('image', None);
-	print(handleimage(f, 'img_%d' % request.user.id));
+	print(handleimage(f, 'img_%d.jpg' % request.user.id));
 	return jsonresponse({'success': False});
 
 def groups(request):
@@ -127,3 +127,23 @@ def groups_start(request):
 	group.is_started = True;
 	group.save();
 	return jsonresponse({'success': True});
+
+def mission(request):
+	groupid = request.GET.get('id', 0);
+	if groupid == 0:
+		return jsonresponse({'error': 'No group with that id'});
+
+	group = Group.objects.get(id=groupid);
+	if not group.is_started:
+		return jsonresponse({'started': False});
+
+	result = {'started': True};
+	player = Player.objects.get(user=request.user, group=group);
+	result['is_dead'] = player.is_dead;
+
+	if not player.is_dead:
+		# TODO Find mission object, etc.
+		pass;
+		
+	return jsonresponse(result);
+	

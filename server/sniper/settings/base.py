@@ -49,7 +49,7 @@ MEDIA_ROOT = ABS_PATH('media')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -69,6 +69,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     ABS_PATH('staticfiles'),
+    ('media', MEDIA_ROOT),
 )
 
 # List of finder classes that know how to find static files in
