@@ -1,6 +1,6 @@
 from django.contrib import admin;
-from sniper.models import Group, Player;
+from sniper import models;
  
-admin.site.register(Group);
-admin.site.register(Player);
-
+admin.site.register(models.Group);
+admin.site.register(models.Player);
+admin.site.register(models.Mission);

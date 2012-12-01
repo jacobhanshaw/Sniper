@@ -34,14 +34,14 @@ class Player(models.Model):
 	#kills = models.IntegerField();
 
 	def __str__(self):
-		return '%s -- %s' % (self.user.name, self.group.name);
+		return '%s -- %s' % (self.user.username, self.group.name);
 
 class Mission(models.Model):
 	player = models.ForeignKey(Player, related_name='player');
 	must_kill_player = models.ForeignKey(Player, related_name='must_kill_player');
 
 	def __str__(self):
-		return '%s to kill %s' % (self.player.user.name, self.must_kill_player.user.name);
+		return '%s to kill %s' % (self.player.user.username, self.must_kill_player.user.username);
 
 #class KillShots(models.Model):
 #	user = models.ForeignKey(User);

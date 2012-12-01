@@ -1,13 +1,26 @@
 import json;
+import os.path;
 from datetime import datetime;
 from django.http import HttpResponseRedirect, HttpResponse;
 from django.shortcuts import render_to_response;
 from django.contrib.auth.models import User;
 from django.contrib import auth;
 from django.db import IntegrityError;
+from sniper.settings import MEDIA_ROOT;
 from sniper.models import Group, Player;
 
 
+def handleimage(f, newname):
+	if not f:
+		return None;
+
+	result = os.path.join(MEDIA_ROOT, newname);
+	with open(result, 'wb') as destination:
+		for chunk in f.chunks():
+			destination.write(chunk);
+			
+	return result;
+	
 def jsonresponse(d):
 	return HttpResponse(json.dumps(d), 'application/json');
 
@@ -37,6 +50,8 @@ def logout(request):
 	return jsonresponse({'success': True});
 	
 def register(request):
+	# TODO Finish this
+	
 	try:
 		user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword');
 		user.save();
@@ -45,6 +60,12 @@ def register(request):
 	except IntegrityError:
 		# Username or email has already been taken
 		return jsonresponse({'error': 'Already taken'});
+
+def testimg(request):
+	print(request.FILES);
+	f = request.FILES.get('image', None);
+	print(handleimage(f, 'img_%d' % request.user.id));
+	return jsonresponse({'success': False});
 
 def groups(request):
 	objs = [{
@@ -63,6 +84,9 @@ def groups_create(request):
 	group.is_started = False;
 	group.started_time = datetime.now();
 	group.save();
+
+	# TODO Also add the current user to this group
+	
 	return jsonresponse({'success': True, 'group': group.id});
 
 def groups_join(request):
@@ -85,4 +109,21 @@ def groups_join(request):
 	player.is_dead = False;
 	player.save();
 	return jsonresponse({'success': True, 'name': group.name});
-	
+
+def groups_start(request):
+	groupid = request.POST.get('id', 0);
+	if groupid == 0:
+		return jsonresponse({'error': 'No group with that id'});
+
+	group = Group.objects.get(id=groupid);
+
+	possible = Player.objects.filter(user=request.user, group=group);
+	if len(possible) < 1:
+		return jsonresponse({'error': 'User not a member of the group'});
+
+	if group.is_started:
+		return jsonresponse({'error': 'Game has already started'});
+
+	group.is_started = True;
+	group.save();
+	return jsonresponse({'success': True});
