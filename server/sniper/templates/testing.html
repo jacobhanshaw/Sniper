@@ -1,0 +1,122 @@
+<html>
+<head>
+	<title>API Test</title>
+	<script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+
+function buildPrettyQuery(resultString, url, error)
+{
+	var output = '';
+	if (error)
+	{
+		output += '<p><div style="color: red;">';
+	}
+	else
+	{
+		output += '<p><div>';
+	}
+	output += '<div style="font-weight: bold;">' + url + '</div>'
+	output += '<pre>' + resultString + '</pre>';
+	output += '</div></p>';
+	return output;
+}
+
+function onSubmitApiCall()
+{
+	// Get form data
+	var thisForm = document.forms["apicall"];
+	var method = thisForm["method"].value;
+	var url = thisForm["url"].value;
+	var params = thisForm["params"].value;
+	var postdata = thisForm["postdata"].value;
+
+	// Make the call
+	callSocle6Api(method, url + params, postdata, function(result, error, url)
+	{
+		var prettyOutput = JSON.stringify(result, null, '\t');
+		$('#history').prepend(buildPrettyQuery(prettyOutput, url, error));
+	});
+}
+
+function buildArgString(argArray)
+{
+	var argString = '';
+	
+	for (var i = argArray.length - 1; i >= 0; i--)
+	{
+		var arg = argArray[i];
+		var encodedArg = encodeURIComponent(arg);
+		var argName = 'a' + i;
+		
+		if (arg != null)
+		{
+			if (argString != '')
+			{
+				argString = '&' + argString;
+			}
+			argString = argName + '=' + encodedArg + argString;
+		}
+		else if (argString != '')
+		{
+			argString = argName + '=&' + argString;
+		}
+	}
+	
+	if (argString != '')
+	{
+		argString = '?' + argString;
+	}
+	return argString;
+}
+
+function callSocle6Api(method, url, postdata, success)
+{
+	var queryString = '/' + url;
+	
+	// Make sure that if the user didn't put a backslash on the function name
+	// there is one in the query string.
+	if (url.substr(-1, 1) != '/')
+	{
+		url += '/';
+	}
+
+	
+	// Send off the query
+	$.ajax({
+		url: '' + queryString,
+		type: method,
+		data: postdata,
+		dataType: "json",
+		success: function(result)
+		{
+			success(result, false, queryString);
+		},
+		error: function(result)
+		{
+			success(result, true, queryString);
+		}
+	});
+}
+
+	</script>
+</head>
+<body>
+	<form name="apicall" onsubmit="onSubmitApiCall()" action="javascript:void(0);">
+		<input type="text" name="method" size="4" />
+		&nbsp;&nbsp;/
+		<input type="text" name="url" size="40"/>
+		<input type="text" name="params" size="40" />
+		<input type="submit" value="Submit" />
+		<span id="querytime" style="font-weight: bold;"></span><br /><br />
+		Post data:<br />
+		<textarea name="postdata"></textarea>
+	</form>
+	<div id="history">
+	</div>
+	<!--<p>
+		<div style="font-weight: bold;"></div>
+		<pre></pre>
+	</p>-->
+</body>
+</html>
+

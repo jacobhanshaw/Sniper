@@ -1,15 +1,21 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'skeletor.views.home', name='home'),
-    # url(r'^skeletor/', include('skeletor.foo.urls')),
+    url(r'^testing$', 'sniper.views.home', name='home'),
+    
+    url(r'^login$', 'sniper.views.login', name='login'),
+    url(r'^logout$', 'sniper.views.logout', name='logout'),
+    url(r'^register$', 'sniper.views.register', name='register'),
+    
+    url(r'^groups$', 'sniper.views.groups', name='groups'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+	# Administation
     url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += staticfiles_urlpatterns()
+

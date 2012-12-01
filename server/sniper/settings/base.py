@@ -136,7 +136,12 @@ INSTALLED_APPS = (
     # Uncomment to enable exception logging using Sentry; you also need
     # to set SENTRY_DSN below
     'raven.contrib.django',
+
+    'sniper',
 )
+
+# User profile for authentication
+AUTH_PROFILE_MODULE = 'sniper.UserProfile'
 
 # Get the SENTRY_DSN from your project settings page in Sentry (either self
 # hosted or on getsentry.com).
