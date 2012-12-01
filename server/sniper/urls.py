@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 	url(r'^groups/start$', 'sniper.views.groups_start', name='groups_start'),
 
 	url(r'^mission$', 'sniper.views.mission', name='mission'),
+	url(r'^killshot$', 'sniper.views.killshot', name='killshot'),
 
 	# Administation
 	url(r'^admin/', include(admin.site.urls)),

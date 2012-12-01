@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse;
 from django.shortcuts import render_to_response;
 from django.contrib.auth.models import User;
 from django.contrib import auth;
+from django.db.models import Count;
 from django.db import IntegrityError;
 from sniper.settings import MEDIA_ROOT;
 from sniper.models import Group, Player;
@@ -68,10 +69,17 @@ def testimg(request):
 	return jsonresponse({'success': False});
 
 def groups(request):
+	# Fetch only groups that haven't started
+	groups = Group.objects.filter(is_started=False);
+
+	# Determine how many players are in each group
+	groups = groups.annotate(num_players=Count('player'));
+
 	objs = [{
 		'id': x.id,
 		'name': x.name,
-	} for x in Group.objects.filter(is_started=False)];
+		'players': x.num_players,
+	} for x in groups];
 	return jsonresponse(objs);
 
 def groups_create(request):
@@ -147,3 +155,15 @@ def mission(request):
 		
 	return jsonresponse(result);
 	
+def killshot(request):
+	groupid = request.GET.get('id', 0);
+	if groupid == 0:
+		return jsonresponse({'error': 'No group with that id'});
+
+	group = Group.objects.get(id=groupid);
+	if not group.is_started:
+		return jsonresponse({'started': False});
+
+	# TODO Create new killshot
+		
+	return jsonresponse({'success': True});
