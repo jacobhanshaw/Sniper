@@ -10,6 +10,8 @@
 
 @implementation AppModel
 
+@synthesize machineGunRounds, shots;
+
 + (id)sharedAppModel
 {
     static dispatch_once_t pred = 0;
@@ -25,6 +27,7 @@
 
 -(void)initUserDefaults{
     defaults = [NSUserDefaults standardUserDefaults];
+    machineGunRounds = 5;
 }
 
 -(void)saveUserDefaults {

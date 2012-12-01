@@ -11,7 +11,7 @@
 
 @implementation RootViewController
 
-@synthesize startGame;
+@synthesize startGame, p;
 
 + (id)sharedRootViewController
 {
@@ -43,16 +43,54 @@
     
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [self play];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+-(void) postVolumeChange {
+    NSNotification *volumeRequestNotification = [NSNotification notificationWithName:@"VolumeButtonPressed" object:self];
+	[[NSNotificationCenter defaultCenter] postNotification:volumeRequestNotification];
+    [((CameraViewController *)self.presentedViewController) unique];
+}
 
 -(void) startGameSelected:(id)sender{
     CameraViewController *cameraView = [[CameraViewController alloc] init];
     [self presentViewController:cameraView animated:YES completion:nil];
+}
+
+- (void) play {
+    NSError *error;
+    // these 4 lines of code tell the system that "this app needs to play sound/music"
+    NSURL* url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pingtone" ofType:@"wav"]];
+    
+    p = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if(error != nil) NSLog(@"%@", [error localizedDescription]);
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &error];
+        if(error != nil) NSLog(@"%@", [error localizedDescription]);
+    [[AVAudioSession sharedInstance] setActive: YES error: &error];
+        if(error != nil) NSLog(@"%@", [error localizedDescription]);
+    [p setDelegate: self];
+    [p prepareToPlay];
+    [p play];
+    [p stop];
+    
+    CGRect frame = CGRectMake(-1000, -1000, 100, 100);
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+    [volumeView sizeToFit];
+    [self.view addSubview:volumeView];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(postVolumeChange)
+     name:@"AVSystemController_SystemVolumeDidChangeNotification"
+     object:nil];
+    
 }
 
 @end

@@ -6,13 +6,18 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
+#pragma once
+
 #import <Foundation/Foundation.h>
 
 @interface AppModel : NSObject {
     NSUserDefaults *defaults;
+    int             machineGunRounds;
+    NSMutableArray *shots;
 }
 
-
+@property (readwrite) int machineGunRounds;
+@property (nonatomic) NSMutableArray *shots;
 
 + (AppModel *)sharedAppModel;
 

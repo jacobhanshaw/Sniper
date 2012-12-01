@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD5166AA166A6ADE00BA9EC8 /* pingtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */; };
 		DDBC50DA16687C0500B9AFBF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50D916687C0500B9AFBF /* UIKit.framework */; };
 		DDBC50DC16687C0500B9AFBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50DB16687C0500B9AFBF /* Foundation.framework */; };
 		DDBC50DE16687C0500B9AFBF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50DD16687C0500B9AFBF /* CoreGraphics.framework */; };
@@ -31,6 +32,9 @@
 		DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF981166A0C1400CCA28C /* targetReticle.png */; };
 		DDCDF989166A1ECD00CCA28C /* Sniper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF987166A1ECD00CCA28C /* Sniper.xcdatamodeld */; };
 		DDCDF98B166A1F0500CCA28C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF98A166A1F0400CCA28C /* CoreData.framework */; };
+		DDCDFA01166A4A5000CCA28C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDFA00166A4A5000CCA28C /* AVFoundation.framework */; };
+		DDCDFA04166A4A9300CCA28C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDFA03166A4A9300CCA28C /* MediaPlayer.framework */; };
+		DDCDFA06166A637B00CCA28C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDFA05166A637B00CCA28C /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pingtone.wav; path = ../../../trunk/iPhoneClient/pingtone.wav; sourceTree = "<group>"; };
 		DDBC50D516687C0500B9AFBF /* Sniper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sniper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBC50D916687C0500B9AFBF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDBC50DB16687C0500B9AFBF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,6 +82,9 @@
 		DDCDF981166A0C1400CCA28C /* targetReticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = targetReticle.png; path = ../../../targetReticle.png; sourceTree = "<group>"; };
 		DDCDF988166A1ECD00CCA28C /* Sniper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sniper.xcdatamodel; sourceTree = "<group>"; };
 		DDCDF98A166A1F0400CCA28C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DDCDFA00166A4A5000CCA28C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DDCDFA03166A4A9300CCA28C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DDCDFA05166A637B00CCA28C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCDFA06166A637B00CCA28C /* AudioToolbox.framework in Frameworks */,
+				DDCDFA04166A4A9300CCA28C /* MediaPlayer.framework in Frameworks */,
+				DDCDFA01166A4A5000CCA28C /* AVFoundation.framework in Frameworks */,
 				DDCDF98B166A1F0500CCA28C /* CoreData.framework in Frameworks */,
 				DDCDF9631669F48800CCA28C /* AssetsLibrary.framework in Frameworks */,
 				DDBC50DA16687C0500B9AFBF /* UIKit.framework in Frameworks */,
@@ -127,6 +138,9 @@
 		DDBC50D816687C0500B9AFBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDCDFA05166A637B00CCA28C /* AudioToolbox.framework */,
+				DDCDFA03166A4A9300CCA28C /* MediaPlayer.framework */,
+				DDCDFA00166A4A5000CCA28C /* AVFoundation.framework */,
 				DDCDF98A166A1F0400CCA28C /* CoreData.framework */,
 				DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */,
 				DDBC50D916687C0500B9AFBF /* UIKit.framework */,
@@ -140,6 +154,7 @@
 		DDBC50DF16687C0500B9AFBF /* Sniper */ = {
 			isa = PBXGroup;
 			children = (
+				DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */,
 				DDCDF96D1669F84A00CCA28C /* Camera */,
 				DDCDF95F1669F3A500CCA28C /* Core */,
 				DDBC50E016687C0500B9AFBF /* Supporting Files */,
@@ -286,6 +301,7 @@
 				DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */,
 				DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */,
 				DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */,
+				DD5166AA166A6ADE00BA9EC8 /* pingtone.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

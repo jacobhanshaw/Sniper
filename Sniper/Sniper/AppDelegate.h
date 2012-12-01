@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
+#pragma once
+
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "AppModel.h"
