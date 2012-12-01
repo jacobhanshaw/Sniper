@@ -16,13 +16,21 @@
 		DDBC50EC16687C0500B9AFBF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBC50EB16687C0500B9AFBF /* Default.png */; };
 		DDBC50EE16687C0500B9AFBF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBC50ED16687C0500B9AFBF /* Default@2x.png */; };
 		DDBC50F016687C0500B9AFBF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBC50EF16687C0500B9AFBF /* Default-568h@2x.png */; };
-		DDBC50F316687C0500B9AFBF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBC50F216687C0500B9AFBF /* ViewController.m */; };
-		DDBC50F616687C0500B9AFBF /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDBC50F416687C0500B9AFBF /* ViewController.xib */; };
 		DDBC50FE16687C0600B9AFBF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50FD16687C0600B9AFBF /* SenTestingKit.framework */; };
 		DDBC50FF16687C0600B9AFBF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50D916687C0500B9AFBF /* UIKit.framework */; };
 		DDBC510016687C0600B9AFBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50DB16687C0500B9AFBF /* Foundation.framework */; };
 		DDBC510816687C0600B9AFBF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDBC510616687C0600B9AFBF /* InfoPlist.strings */; };
 		DDBC510B16687C0600B9AFBF /* SniperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBC510A16687C0600B9AFBF /* SniperTests.m */; };
+		DDCDF93A1669DFDB00CCA28C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF9381669DFDB00CCA28C /* RootViewController.m */; };
+		DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF9391669DFDB00CCA28C /* RootViewController.xib */; };
+		DDCDF93E1669DFFA00CCA28C /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF93D1669DFFA00CCA28C /* AppModel.m */; };
+		DDCDF9631669F48800CCA28C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */; };
+		DDCDF9701669F86C00CCA28C /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF96F1669F86C00CCA28C /* CameraViewController.m */; };
+		DDCDF97C166A023800CCA28C /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF97B166A023800CCA28C /* CameraOverlayView.m */; };
+		DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */; };
+		DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF981166A0C1400CCA28C /* targetReticle.png */; };
+		DDCDF989166A1ECD00CCA28C /* Sniper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF987166A1ECD00CCA28C /* Sniper.xcdatamodeld */; };
+		DDCDF98B166A1F0500CCA28C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF98A166A1F0400CCA28C /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,15 +57,26 @@
 		DDBC50EB16687C0500B9AFBF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DDBC50ED16687C0500B9AFBF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DDBC50EF16687C0500B9AFBF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		DDBC50F116687C0500B9AFBF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DDBC50F216687C0500B9AFBF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DDBC50F516687C0500B9AFBF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		DDBC50FC16687C0600B9AFBF /* SniperTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SniperTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBC50FD16687C0600B9AFBF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		DDBC510516687C0600B9AFBF /* SniperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SniperTests-Info.plist"; sourceTree = "<group>"; };
 		DDBC510716687C0600B9AFBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDBC510916687C0600B9AFBF /* SniperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SniperTests.h; sourceTree = "<group>"; };
 		DDBC510A16687C0600B9AFBF /* SniperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SniperTests.m; sourceTree = "<group>"; };
+		DDCDF9371669DFDB00CCA28C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		DDCDF9381669DFDB00CCA28C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		DDCDF9391669DFDB00CCA28C /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		DDCDF93C1669DFFA00CCA28C /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		DDCDF93D1669DFFA00CCA28C /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
+		DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		DDCDF96E1669F86C00CCA28C /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		DDCDF96F1669F86C00CCA28C /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		DDCDF97A166A023800CCA28C /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
+		DDCDF97B166A023800CCA28C /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
+		DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
+		DDCDF981166A0C1400CCA28C /* targetReticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = targetReticle.png; path = ../../../targetReticle.png; sourceTree = "<group>"; };
+		DDCDF988166A1ECD00CCA28C /* Sniper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sniper.xcdatamodel; sourceTree = "<group>"; };
+		DDCDF98A166A1F0400CCA28C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCDF98B166A1F0500CCA28C /* CoreData.framework in Frameworks */,
+				DDCDF9631669F48800CCA28C /* AssetsLibrary.framework in Frameworks */,
 				DDBC50DA16687C0500B9AFBF /* UIKit.framework in Frameworks */,
 				DDBC50DC16687C0500B9AFBF /* Foundation.framework in Frameworks */,
 				DDBC50DE16687C0500B9AFBF /* CoreGraphics.framework in Frameworks */,
@@ -106,6 +127,8 @@
 		DDBC50D816687C0500B9AFBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDCDF98A166A1F0400CCA28C /* CoreData.framework */,
+				DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */,
 				DDBC50D916687C0500B9AFBF /* UIKit.framework */,
 				DDBC50DB16687C0500B9AFBF /* Foundation.framework */,
 				DDBC50DD16687C0500B9AFBF /* CoreGraphics.framework */,
@@ -117,11 +140,8 @@
 		DDBC50DF16687C0500B9AFBF /* Sniper */ = {
 			isa = PBXGroup;
 			children = (
-				DDBC50E816687C0500B9AFBF /* AppDelegate.h */,
-				DDBC50E916687C0500B9AFBF /* AppDelegate.m */,
-				DDBC50F116687C0500B9AFBF /* ViewController.h */,
-				DDBC50F216687C0500B9AFBF /* ViewController.m */,
-				DDBC50F416687C0500B9AFBF /* ViewController.xib */,
+				DDCDF96D1669F84A00CCA28C /* Camera */,
+				DDCDF95F1669F3A500CCA28C /* Core */,
 				DDBC50E016687C0500B9AFBF /* Supporting Files */,
 			);
 			path = Sniper;
@@ -134,6 +154,7 @@
 				DDBC50E216687C0500B9AFBF /* InfoPlist.strings */,
 				DDBC50E516687C0500B9AFBF /* main.m */,
 				DDBC50E716687C0500B9AFBF /* Sniper-Prefix.pch */,
+				DDCDF981166A0C1400CCA28C /* targetReticle.png */,
 				DDBC50EB16687C0500B9AFBF /* Default.png */,
 				DDBC50ED16687C0500B9AFBF /* Default@2x.png */,
 				DDBC50EF16687C0500B9AFBF /* Default-568h@2x.png */,
@@ -158,6 +179,33 @@
 				DDBC510616687C0600B9AFBF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDCDF95F1669F3A500CCA28C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DDCDF987166A1ECD00CCA28C /* Sniper.xcdatamodeld */,
+				DDBC50E816687C0500B9AFBF /* AppDelegate.h */,
+				DDBC50E916687C0500B9AFBF /* AppDelegate.m */,
+				DDCDF93C1669DFFA00CCA28C /* AppModel.h */,
+				DDCDF93D1669DFFA00CCA28C /* AppModel.m */,
+				DDCDF9371669DFDB00CCA28C /* RootViewController.h */,
+				DDCDF9381669DFDB00CCA28C /* RootViewController.m */,
+				DDCDF9391669DFDB00CCA28C /* RootViewController.xib */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		DDCDF96D1669F84A00CCA28C /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				DDCDF96E1669F86C00CCA28C /* CameraViewController.h */,
+				DDCDF96F1669F86C00CCA28C /* CameraViewController.m */,
+				DDCDF97A166A023800CCA28C /* CameraOverlayView.h */,
+				DDCDF97B166A023800CCA28C /* CameraOverlayView.m */,
+				DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +283,9 @@
 				DDBC50EC16687C0500B9AFBF /* Default.png in Resources */,
 				DDBC50EE16687C0500B9AFBF /* Default@2x.png in Resources */,
 				DDBC50F016687C0500B9AFBF /* Default-568h@2x.png in Resources */,
-				DDBC50F616687C0500B9AFBF /* ViewController.xib in Resources */,
+				DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */,
+				DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */,
+				DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +322,11 @@
 			files = (
 				DDBC50E616687C0500B9AFBF /* main.m in Sources */,
 				DDBC50EA16687C0500B9AFBF /* AppDelegate.m in Sources */,
-				DDBC50F316687C0500B9AFBF /* ViewController.m in Sources */,
+				DDCDF93A1669DFDB00CCA28C /* RootViewController.m in Sources */,
+				DDCDF93E1669DFFA00CCA28C /* AppModel.m in Sources */,
+				DDCDF9701669F86C00CCA28C /* CameraViewController.m in Sources */,
+				DDCDF97C166A023800CCA28C /* CameraOverlayView.m in Sources */,
+				DDCDF989166A1ECD00CCA28C /* Sniper.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +355,6 @@
 				DDBC50E316687C0500B9AFBF /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DDBC50F416687C0500B9AFBF /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DDBC50F516687C0500B9AFBF /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 		DDBC510616687C0600B9AFBF /* InfoPlist.strings */ = {
@@ -377,6 +423,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sniper/Sniper-Prefix.pch";
 				INFOPLIST_FILE = "Sniper/Sniper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -388,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sniper/Sniper-Prefix.pch";
 				INFOPLIST_FILE = "Sniper/Sniper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -446,6 +494,7 @@
 				DDBC511016687C0600B9AFBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DDBC511116687C0600B9AFBF /* Build configuration list for PBXNativeTarget "SniperTests" */ = {
 			isa = XCConfigurationList;
@@ -454,8 +503,23 @@
 				DDBC511316687C0600B9AFBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DDCDF987166A1ECD00CCA28C /* Sniper.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DDCDF988166A1ECD00CCA28C /* Sniper.xcdatamodel */,
+			);
+			currentVersion = DDCDF988166A1ECD00CCA28C /* Sniper.xcdatamodel */;
+			name = Sniper.xcdatamodeld;
+			path = ../Sniper.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DDBC50CC16687C0500B9AFBF /* Project object */;
 }
