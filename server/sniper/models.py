@@ -24,12 +24,24 @@ class Group(models.Model):
 	is_started = models.BooleanField();
 	started_time = models.DateTimeField();
 
+	def __str__(self):
+		return '%s (started: %s)' % (self.name, str(self.is_started));
+
 class Player(models.Model):
 	user = models.ForeignKey(User);
 	group = models.ForeignKey(Group);
 	is_dead = models.BooleanField();
-	must_kill_player = models.ForeignKey('self');
 	#kills = models.IntegerField();
+
+	def __str__(self):
+		return '%s -- %s' % (self.user.name, self.group.name);
+
+class Mission(models.Model):
+	player = models.ForeignKey(Player, related_name='player');
+	must_kill_player = models.ForeignKey(Player, related_name='must_kill_player');
+
+	def __str__(self):
+		return '%s to kill %s' % (self.player.user.name, self.must_kill_player.user.name);
 
 #class KillShots(models.Model):
 #	user = models.ForeignKey(User);
