@@ -9,16 +9,23 @@
 #pragma once
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <QuartzCore/QuartzCore.h>
 #import "AppModel.h"
+#import "PhotoObject.h"
+#import "AFHTTPClient.h"
 
 @interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController *picker;
     int                      machineGunBulletsLeft;
+    NSMutableArray          *shots;
+    CGFloat                  zoom;
 }
 
+@property (readwrite) CGFloat zoom;
 @property (readwrite) int machineGunBulletsLeft;
+@property (nonatomic) NSMutableArray *shots;
 
 - (void)takePicture;
-- (void)unique;
 
 @end

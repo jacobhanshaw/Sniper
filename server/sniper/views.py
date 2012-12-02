@@ -71,7 +71,7 @@ def register(request):
 def testimg(request):
 	print(request.FILES);
 	f = request.FILES.get('image', None);
-	print(handleimage(f, 'img_%d.jpg' % request.user.id));
+	print(handleimage(f, 'img_%d.jpg' % random.randint(1, 10)));
 	return jsonresponse({'success': False});
 
 def groups(request):
