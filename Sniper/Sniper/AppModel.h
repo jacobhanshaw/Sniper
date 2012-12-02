@@ -12,12 +12,20 @@
 
 @interface AppModel : NSObject {
     NSUserDefaults *defaults;
+    NSString       *name;
+    int            userId;
+    NSString       *password;
+    
     int             machineGunRounds;
-    NSMutableArray *shots;
+    NSMutableArray *photoObjects;
 }
 
+@property (nonatomic) NSString *name;
+@property (readwrite) int userId;
+@property (nonatomic) NSString *password;
+
 @property (readwrite) int machineGunRounds;
-@property (nonatomic) NSMutableArray *shots;
+@property (nonatomic) NSMutableArray *photoObjects;
 
 + (AppModel *)sharedAppModel;
 

@@ -10,7 +10,7 @@
 
 @implementation AppModel
 
-@synthesize machineGunRounds, shots;
+@synthesize name, userId, password, machineGunRounds, photoObjects;
 
 + (id)sharedAppModel
 {
@@ -20,6 +20,21 @@
         _sharedObject = [[self alloc] init]; // or some other init method
     });
     return _sharedObject;
+}
+
+#pragma mark Init/dealloc
+-(id)init {
+    self = [super init];
+    if (self) {
+		//Init USerDefaults
+		defaults = [NSUserDefaults standardUserDefaults];
+        photoObjects = [[NSMutableArray alloc] init];
+        machineGunRounds = 5;
+      //  motionManager = [[CMMotionManager alloc] init];
+        NSNotificationCenter *dispatcher = [NSNotificationCenter defaultCenter];
+
+	}
+    return self;
 }
 
 

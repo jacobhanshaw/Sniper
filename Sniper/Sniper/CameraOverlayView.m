@@ -38,21 +38,17 @@
 - (IBAction)zoom:(id)sender {
     UISlider *slider = (UISlider*)sender;
     CGFloat zoom =  1 + 4*slider.value;
+    self.delegate.zoom = zoom;
     self.picker.cameraViewTransform = CGAffineTransformScale(CGAffineTransformIdentity,zoom, zoom);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-   // [self takePicture];
-        [[RootViewController sharedRootViewController] play];
-}
-
-- (void) unique {
-    
+    [self takePicture];
 }
 
 - (void) takePicture {
     self.delegate.machineGunBulletsLeft = [AppModel sharedAppModel].machineGunRounds;
-    [[[AppModel sharedAppModel] shots] removeAllObjects];
+    [[self.delegate shots] removeAllObjects];
     [self.delegate takePicture];
 }
 
