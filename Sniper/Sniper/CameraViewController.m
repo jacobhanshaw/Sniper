@@ -147,18 +147,34 @@
                 
                 [imageData writeToURL:imageURL atomically:YES];
                 //upload HERE
+                
+                [self uploadImage:imageData withFileName: photo.mediaFileName];
             }
                failureBlock:^(NSError *error) {}
              ];
         }];
     }
     else{
-        
+       [self uploadImage:photo.photoData withFileName:photo.mediaFileName];
     }
     
     [[[AppModel sharedAppModel] photoObjects] addObject:photo];
     }
 
+}
+
+-(void) uploadImage:(NSData *)imageData withFileName:(NSString *)mediaFileName{
+    NSURL *url = [NSURL URLWithString:@"http://winrar.upl.cs.wisc.edu:9876"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:@"/testimg" parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:imageData name:@"image" fileName:mediaFileName mimeType:@"image/jpeg"];
+    }];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    //[operation setUploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+    //    NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+    //}];
+    [operation start];
 }
 
 - (NSMutableData*)dataWithEXIFUsingData:(NSData*)originalJPEGData {

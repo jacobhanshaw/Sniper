@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppModel.h"
 #import "PhotoObject.h"
+#import "AFHTTPClient.h"
 
 @interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController *picker;
