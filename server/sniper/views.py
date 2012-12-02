@@ -149,9 +149,9 @@ def mission(request):
 
 	group = Group.objects.get(id=groupid);
 	if not group.is_started:
-		return jsonresponse({'started': False});
+		return jsonresponse({'started': False, 'group': group.name});
 
-	result = {'started': True};
+	result = {'started': True, 'group': group.name};
 	player = Player.objects.get(user=request.user, group=group);
 	result['is_dead'] = player.is_dead;
 
@@ -223,3 +223,9 @@ def killshot(request):
 	# TODO Determine who the user is
 
 	return jsonresponse({'success': True});
+
+def killshothtml(request):
+	count = Killshot.objects.all().count();
+	shots = ['/static/media/killshot_%d.jpg' % (i + 1) for i in reversed(range(count))];
+	return render_to_response('killshots.html', {'killshots': shots});
+	
