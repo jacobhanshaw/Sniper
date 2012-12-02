@@ -1,5 +1,6 @@
 import json;
 import os.path;
+import random;
 from datetime import datetime;
 from django.http import HttpResponseRedirect, HttpResponse;
 from django.shortcuts import render_to_response;
@@ -8,7 +9,7 @@ from django.contrib import auth;
 from django.db.models import Count;
 from django.db import IntegrityError;
 from sniper.settings import MEDIA_ROOT;
-from sniper.models import Group, Player;
+from sniper.models import Group, Player, Mission, Killshot;
 
 
 def handleimage(f, newname):
@@ -149,14 +150,55 @@ def mission(request):
 	player = Player.objects.get(user=request.user, group=group);
 	result['is_dead'] = player.is_dead;
 
+	alive = Player.objects.filter(group=group, is_dead=False).count();
+	result['alive_count'] = alive;
+
 	if not player.is_dead:
-		# TODO Find mission object, etc.
-		pass;
+		missions = Mission.objects.filter(player=player);
+		if len(missions) > 0:
+			mission = missions[0];
+		else:
+			mission = None;
+
+		if (not mission) or (mission and mission.must_kill_player.is_dead):
+			if not mission:
+				mission = Mission();
+				mission.player = player;
+
+			# Determine the list of people who are playing the game and
+			# still alive
+			possible = Player.objects.filter(group=group, is_dead=False);
+			possible_not_me = list();
+
+			for x in possible:
+				if x.user == request.user:
+					print('found me');
+				else:
+					possible_not_me.append(x);
+
+			# New mission
+			print(possible_not_me);
+			if len(possible_not_me) > 0:
+				mission.must_kill_player = random.choice(possible_not_me);
+				mission.save();
+			else:
+				mission = None;
+			
+		# TODO Find mission object
+		# TODO Are the any killshots for me?
+
+		d = {};
+		if mission:
+			p = mission.must_kill_player;
+			d['id'] = p.user.id;
+			d['name'] = p.user.first_name + ' ' + p.user.last_name;
+
+		result['mission'] = d;
 		
 	return jsonresponse(result);
 	
 def killshot(request):
-	groupid = request.GET.get('id', 0);
+	groupid = request.POST.get('id', 0);
 	if groupid == 0:
 		return jsonresponse({'error': 'No group with that id'});
 
@@ -164,6 +206,17 @@ def killshot(request):
 	if not group.is_started:
 		return jsonresponse({'started': False});
 
-	# TODO Create new killshot
-		
+	player = Player.objects.get(user=request.user, group=group);
+
+	killshot = Killshot();
+	killshot.user = request.user;
+	killshot.group = group;
+	killshot.killplayer = -1;
+	killshot.save();
+
+	f = request.FILES.get('image', None);
+	loc = handleimage(f, 'killshot_%d.jpg' % killshot.id);
+	
+	# TODO Determine who the user is
+
 	return jsonresponse({'success': True});

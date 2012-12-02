@@ -43,6 +43,8 @@ class Mission(models.Model):
 	def __str__(self):
 		return '%s to kill %s' % (self.player.user.username, self.must_kill_player.user.username);
 
-#class KillShots(models.Model):
-#	user = models.ForeignKey(User);
-#	group = models.ForeignKey(Group);
+class Killshot(models.Model):
+	user = models.ForeignKey(User);
+	group = models.ForeignKey(Group);
+	time = models.DateTimeField(auto_now_add=True);
+	killplayer = models.IntegerField();
