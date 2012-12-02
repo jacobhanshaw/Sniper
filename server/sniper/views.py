@@ -52,12 +52,17 @@ def logout(request):
 	return jsonresponse({'success': True});
 	
 def register(request):
-	# TODO Finish this
+	username = request.POST.get('username', '');
+	firstname = request.POST.get('firstname', '');
+	lastname = request.POST.get('lastname', '');
+	password = request.POST.get('password', '');
 	
 	try:
-		user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword');
+		user = User.objects.create_user(username, 'lennon@thebeatles.com', password);
+		user.first_name = firstname;
+		user.last_name = lastname;
 		user.save();
-		return jsonresponse({'success': True});
+		return jsonresponse({'id': user.id, 'success': True});
 		
 	except IntegrityError:
 		# Username or email has already been taken
@@ -177,15 +182,11 @@ def mission(request):
 					possible_not_me.append(x);
 
 			# New mission
-			print(possible_not_me);
 			if len(possible_not_me) > 0:
 				mission.must_kill_player = random.choice(possible_not_me);
 				mission.save();
 			else:
 				mission = None;
-			
-		# TODO Find mission object
-		# TODO Are the any killshots for me?
 
 		d = {};
 		if mission:
@@ -194,6 +195,8 @@ def mission(request):
 			d['name'] = p.user.first_name + ' ' + p.user.last_name;
 
 		result['mission'] = d;
+		
+		# TODO Are the any killshots for me?
 		
 	return jsonresponse(result);
 	
