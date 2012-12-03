@@ -8,17 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppModel.h"
-#import "CameraViewController.h"
+#import "MissionViewController.h"
 #import "AFJSONRequestOperation.h"
 #import "LogInViewController.h"
 
 @interface RootViewController : UIViewController {
     
-    UIButton *startGame;
-    
 }
-
-@property(nonatomic) IBOutlet UIButton *startGame;
 
 + (RootViewController *)sharedRootViewController;
 

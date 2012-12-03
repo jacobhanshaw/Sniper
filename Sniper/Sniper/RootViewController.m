@@ -11,8 +11,6 @@
 
 @implementation RootViewController
 
-@synthesize startGame;
-
 + (id)sharedRootViewController
 {
     static dispatch_once_t pred = 0;
@@ -38,9 +36,6 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
-    [self.startGame setTitle:@"SHOOT HER!" forState:UIControlStateNormal];
-    [self.startGame addTarget:self action:@selector(startGameSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -48,28 +43,16 @@
         LogInViewController *login = [[LogInViewController alloc] init];
         [self presentViewController:login animated:YES completion:nil];
     }
+    else{
+    MissionViewController *missionView = [[MissionViewController alloc] init];
+    [self presentViewController:missionView animated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
--(void) startGameSelected:(id)sender{
- /*
-    NSURL *url = [NSURL URLWithString:@"http://winrar.upl.cs.wisc.edu:9876/groups"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"Name: %@", [JSON valueForKeyPath:@"name"]);
-    } failure:nil];
-    
-    [operation start]; */
-    
-    CameraViewController *cameraView = [[CameraViewController alloc] init];
-    [self presentViewController:cameraView animated:YES completion:nil];
 }
 
 @end

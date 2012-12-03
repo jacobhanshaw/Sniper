@@ -9,7 +9,7 @@
 #pragma once
 
 #import <UIKit/UIKit.h>
-#import "CameraViewController.h"
+#import "MissionViewController.h"
 #import "AppModel.h"
 
 @interface CameraOverlayView : UIView {
@@ -18,11 +18,11 @@
     IBOutlet UISlider *zoomLevelSlider;
     BOOL               sliderIsInverted;
     
-    CameraViewController *delegate;
+    MissionViewController *delegate;
     UIImagePickerController *picker;
 }
 
-@property (nonatomic) CameraViewController *delegate;
+@property (nonatomic) MissionViewController *delegate;
 @property (nonatomic) UIImagePickerController *picker;
 
 - (void)update;

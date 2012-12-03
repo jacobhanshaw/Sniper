@@ -16,6 +16,11 @@
     int            userId;
     NSString       *password;
     
+    NSString       *targetName;
+    NSURL          *targetImageLocation;
+    int            missionNumber;
+    int            targetsLeft;
+    
     int             machineGunRounds;
     NSMutableArray *photoObjects;
 }
@@ -23,6 +28,11 @@
 @property (nonatomic) NSString *name;
 @property (readwrite) int userId;
 @property (nonatomic) NSString *password;
+
+@property (nonatomic) NSString       *targetName;
+@property (nonatomic) NSURL          *targetImageLocation;
+@property (readwrite) int            missionNumber;
+@property (readwrite) int            targetsLeft;
 
 @property (readwrite) int machineGunRounds;
 @property (nonatomic) NSMutableArray *photoObjects;

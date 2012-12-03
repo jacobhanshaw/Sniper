@@ -10,7 +10,7 @@
 
 @implementation AppModel
 
-@synthesize name, userId, password, machineGunRounds, photoObjects;
+@synthesize name, userId, password, machineGunRounds, photoObjects, targetName, targetImageLocation, missionNumber, targetsLeft;
 
 + (id)sharedAppModel
 {
@@ -29,7 +29,7 @@
 		//Init USerDefaults
 		defaults = [NSUserDefaults standardUserDefaults];
         photoObjects = [[NSMutableArray alloc] init];
-        machineGunRounds = 5;
+        machineGunRounds = 0;
       //  motionManager = [[CMMotionManager alloc] init];
         NSNotificationCenter *dispatcher = [NSNotificationCenter defaultCenter];
 
@@ -42,7 +42,7 @@
 
 -(void)initUserDefaults{
     defaults = [NSUserDefaults standardUserDefaults];
-    machineGunRounds = 5;
+    machineGunRounds = 0;
 }
 
 -(void)saveUserDefaults {

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "AppModel.h"
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
+#import "AFJSONRequestOperation.h"
 
 @interface LogInViewController : UIViewController <UITextFieldDelegate> {
     
     IBOutlet UITextField *nameTextField;
     IBOutlet UITextField *passwordTextField;
     IBOutlet UIButton *continueButton;
+    NSTimer *timer;
 }
 
 @property (nonatomic) IBOutlet UITextField *nameTextField;
