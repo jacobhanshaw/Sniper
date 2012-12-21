@@ -87,7 +87,7 @@
     NSDictionary *mission = [[NSDictionary alloc] init];
     mission = [JSON valueForKeyPath:@"mission"];
     [AppModel sharedAppModel].targetName = [mission valueForKeyPath:@"name"];
-    NSString *imageLocation = [NSString stringWithFormat:@"winrar.upl.cs.wisc.edu:9876/static/media/img_%@.jpg", [mission valueForKeyPath:@"id"]];
+    NSString *imageLocation = [NSString stringWithFormat:@"http://winrar.upl.cs.wisc.edu:9876/static/media/img_%@.jpg", [mission valueForKeyPath:@"id"]];
    // [AppModel sharedAppModel].missionNumber = [[mission valueForKey:@""] intValue];
     [AppModel sharedAppModel].targetsLeft = [[JSON valueForKeyPath:@"alive_count"] intValue];
     
