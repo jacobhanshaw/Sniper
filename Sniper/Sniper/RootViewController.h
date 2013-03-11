@@ -7,15 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppModel.h"
-#import "MissionViewController.h"
-#import "AFJSONRequestOperation.h"
-#import "LogInViewController.h"
+#import "HorizontalTableView.h"
 
-@interface RootViewController : UIViewController {
+@interface RootViewController : UITabBarController<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITableViewDataSource, UITableViewDelegate> {
+    HorizontalTableView *targetTableView;
+    UIImagePickerController *picker;
     
+    int                      machineGunBulletsLeft;
+    NSMutableArray          *shots;
+    CGFloat                  zoom;
 }
 
+@property (readwrite) CGFloat zoom;
+@property (readwrite) int machineGunBulletsLeft;
+@property (nonatomic) NSMutableArray *shots;
+
+- (void)takePicture;
 + (RootViewController *)sharedRootViewController;
 
 @end

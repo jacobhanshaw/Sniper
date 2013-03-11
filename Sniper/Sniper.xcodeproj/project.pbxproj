@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD5166AA166A6ADE00BA9EC8 /* pingtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */; };
+		DD4AAF6F16D7C1A000773F58 /* targetReticle.png in Resources */ = {isa = PBXBuildFile; fileRef = DD4AAF6E16D7C1A000773F58 /* targetReticle.png */; };
 		DD5166B2166A935500BA9EC8 /* PhotoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5166B1166A935500BA9EC8 /* PhotoObject.m */; };
 		DD5166B4166AA24400BA9EC8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5166B3166AA24400BA9EC8 /* ImageIO.framework */; };
 		DD5166DB166AA69500BA9EC8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5166DA166AA69500BA9EC8 /* MobileCoreServices.framework */; };
@@ -33,6 +33,7 @@
 		DDBC510016687C0600B9AFBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50DB16687C0500B9AFBF /* Foundation.framework */; };
 		DDBC510816687C0600B9AFBF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDBC510616687C0600B9AFBF /* InfoPlist.strings */; };
 		DDBC510B16687C0600B9AFBF /* SniperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBC510A16687C0600B9AFBF /* SniperTests.m */; };
+		DDC30E3516EDB82600A005B7 /* HorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */; };
 		DDC5D20B166C141A00D39E3E /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D209166C141A00D39E3E /* MissionViewController.m */; };
 		DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC5D20A166C141A00D39E3E /* MissionViewController.xib */; };
 		DDC5D213166C2DA400D39E3E /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC5D212166C2DA400D39E3E /* player.png */; };
@@ -51,7 +52,6 @@
 		DDCDF9631669F48800CCA28C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */; };
 		DDCDF97C166A023800CCA28C /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF97B166A023800CCA28C /* CameraOverlayView.m */; };
 		DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */; };
-		DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF981166A0C1400CCA28C /* targetReticle.png */; };
 		DDCDF989166A1ECD00CCA28C /* Sniper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF987166A1ECD00CCA28C /* Sniper.xcdatamodeld */; };
 		DDCDF98B166A1F0500CCA28C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF98A166A1F0400CCA28C /* CoreData.framework */; };
 		DDCDFA01166A4A5000CCA28C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDFA00166A4A5000CCA28C /* AVFoundation.framework */; };
@@ -70,25 +70,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pingtone.wav; path = ../../../trunk/iPhoneClient/pingtone.wav; sourceTree = "<group>"; };
-		DD5166B0166A935500BA9EC8 /* PhotoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoObject.h; sourceTree = "<group>"; };
-		DD5166B1166A935500BA9EC8 /* PhotoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoObject.m; sourceTree = "<group>"; };
+		DD4AAF6E16D7C1A000773F58 /* targetReticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = targetReticle.png; sourceTree = "<group>"; };
+		DD5166B0166A935500BA9EC8 /* PhotoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoObject.h; path = Sniper/PhotoObject.h; sourceTree = "<group>"; };
+		DD5166B1166A935500BA9EC8 /* PhotoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoObject.m; path = Sniper/PhotoObject.m; sourceTree = "<group>"; };
 		DD5166B3166AA24400BA9EC8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		DD5166DA166AA69500BA9EC8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DD5166DC166AA6B600BA9EC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DD5166E7166ADC1300BA9EC8 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		DD5166E8166ADC1300BA9EC8 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		DD5166E9166ADC1300BA9EC8 /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
-		DD516708166B0DA200BA9EC8 /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
-		DD516709166B0DA200BA9EC8 /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Scale.m"; sourceTree = "<group>"; };
-		DD51670B166B0E7300BA9EC8 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		DD51670C166B0E7300BA9EC8 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		DD51670E166B0EA600BA9EC8 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
-		DD51670F166B0EA600BA9EC8 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
-		DD516710166B0EA600BA9EC8 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		DD516711166B0EA600BA9EC8 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		DD516712166B0EA600BA9EC8 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		DD516713166B0EA600BA9EC8 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		DD516708166B0DA200BA9EC8 /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Scale.h"; path = "Sniper/UIImage+Scale.h"; sourceTree = "<group>"; };
+		DD516709166B0DA200BA9EC8 /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Scale.m"; path = "Sniper/UIImage+Scale.m"; sourceTree = "<group>"; };
+		DD51670B166B0E7300BA9EC8 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Sniper/UIImage+Resize.m"; sourceTree = "<group>"; };
+		DD51670C166B0E7300BA9EC8 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Sniper/UIImage+Resize.h"; sourceTree = "<group>"; };
+		DD51670E166B0EA600BA9EC8 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+fixOrientation.h"; path = "Sniper/UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		DD51670F166B0EA600BA9EC8 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+fixOrientation.m"; path = "Sniper/UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		DD516710166B0EA600BA9EC8 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "Sniper/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		DD516711166B0EA600BA9EC8 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Sniper/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		DD516712166B0EA600BA9EC8 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Sniper/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		DD516713166B0EA600BA9EC8 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Sniper/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		DDBC50D516687C0500B9AFBF /* Sniper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sniper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBC50D916687C0500B9AFBF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDBC50DB16687C0500B9AFBF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +108,8 @@
 		DDBC510716687C0600B9AFBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDBC510916687C0600B9AFBF /* SniperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SniperTests.h; sourceTree = "<group>"; };
 		DDBC510A16687C0600B9AFBF /* SniperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SniperTests.m; sourceTree = "<group>"; };
+		DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalTableView.h; sourceTree = "<group>"; };
+		DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalTableView.m; sourceTree = "<group>"; };
 		DDC5D208166C141A00D39E3E /* MissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
 		DDC5D209166C141A00D39E3E /* MissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionViewController.m; sourceTree = "<group>"; };
 		DDC5D20A166C141A00D39E3E /* MissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionViewController.xib; sourceTree = "<group>"; };
@@ -140,7 +142,6 @@
 		DDCDF97A166A023800CCA28C /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
 		DDCDF97B166A023800CCA28C /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
 		DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
-		DDCDF981166A0C1400CCA28C /* targetReticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = targetReticle.png; path = ../../../targetReticle.png; sourceTree = "<group>"; };
 		DDCDF988166A1ECD00CCA28C /* Sniper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sniper.xcdatamodel; sourceTree = "<group>"; };
 		DDCDF98A166A1F0400CCA28C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DDCDFA00166A4A5000CCA28C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -183,7 +184,7 @@
 		DDBC50CA16687C0500B9AFBF = {
 			isa = PBXGroup;
 			children = (
-				DDC5D219166C3F7D00D39E3E /* AFNetworking */,
+				DDC30D3E16EC141700A005B7 /* External Libraries */,
 				DDBC50DF16687C0500B9AFBF /* Sniper */,
 				DDBC510316687C0600B9AFBF /* SniperTests */,
 				DDBC50D816687C0500B9AFBF /* Frameworks */,
@@ -222,13 +223,10 @@
 		DDBC50DF16687C0500B9AFBF /* Sniper */ = {
 			isa = PBXGroup;
 			children = (
-				DDC5D212166C2DA400D39E3E /* player.png */,
-				DD5166A9166A6ADE00BA9EC8 /* pingtone.wav */,
+				DDC30E3216EDB7C200A005B7 /* Classes */,
+				DDC30E3116EDB79D00A005B7 /* View Controllers */,
 				DDCDF96D1669F84A00CCA28C /* Camera */,
 				DDCDF95F1669F3A500CCA28C /* Core */,
-				DD5166E7166ADC1300BA9EC8 /* LogInViewController.h */,
-				DD5166E8166ADC1300BA9EC8 /* LogInViewController.m */,
-				DD5166E9166ADC1300BA9EC8 /* LogInViewController.xib */,
 				DDBC50E016687C0500B9AFBF /* Supporting Files */,
 			);
 			path = Sniper;
@@ -241,10 +239,11 @@
 				DDBC50E216687C0500B9AFBF /* InfoPlist.strings */,
 				DDBC50E516687C0500B9AFBF /* main.m */,
 				DDBC50E716687C0500B9AFBF /* Sniper-Prefix.pch */,
-				DDCDF981166A0C1400CCA28C /* targetReticle.png */,
+				DD4AAF6E16D7C1A000773F58 /* targetReticle.png */,
 				DDBC50EB16687C0500B9AFBF /* Default.png */,
 				DDBC50ED16687C0500B9AFBF /* Default@2x.png */,
 				DDBC50EF16687C0500B9AFBF /* Default-568h@2x.png */,
+				DDC5D212166C2DA400D39E3E /* player.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -266,6 +265,48 @@
 				DDBC510616687C0600B9AFBF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDC30D3E16EC141700A005B7 /* External Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
+				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
+				DD51670E166B0EA600BA9EC8 /* UIImage+fixOrientation.h */,
+				DD51670F166B0EA600BA9EC8 /* UIImage+fixOrientation.m */,
+				DD516710166B0EA600BA9EC8 /* UIImage+Alpha.h */,
+				DD516711166B0EA600BA9EC8 /* UIImage+Alpha.m */,
+				DD516712166B0EA600BA9EC8 /* UIImage+RoundedCorner.h */,
+				DD516713166B0EA600BA9EC8 /* UIImage+RoundedCorner.m */,
+				DD516708166B0DA200BA9EC8 /* UIImage+Scale.h */,
+				DD516709166B0DA200BA9EC8 /* UIImage+Scale.m */,
+				DD51670C166B0E7300BA9EC8 /* UIImage+Resize.h */,
+				DD51670B166B0E7300BA9EC8 /* UIImage+Resize.m */,
+				DDC5D219166C3F7D00D39E3E /* AFNetworking */,
+			);
+			name = "External Libraries";
+			sourceTree = "<group>";
+		};
+		DDC30E3116EDB79D00A005B7 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD5166E7166ADC1300BA9EC8 /* LogInViewController.h */,
+				DD5166E8166ADC1300BA9EC8 /* LogInViewController.m */,
+				DD5166E9166ADC1300BA9EC8 /* LogInViewController.xib */,
+				DDC5D208166C141A00D39E3E /* MissionViewController.h */,
+				DDC5D209166C141A00D39E3E /* MissionViewController.m */,
+				DDC5D20A166C141A00D39E3E /* MissionViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DDC30E3216EDB7C200A005B7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */,
+				DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		DDC5D219166C3F7D00D39E3E /* AFNetworking */ = {
@@ -312,24 +353,9 @@
 		DDCDF96D1669F84A00CCA28C /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				DDC5D208166C141A00D39E3E /* MissionViewController.h */,
-				DDC5D209166C141A00D39E3E /* MissionViewController.m */,
-				DDC5D20A166C141A00D39E3E /* MissionViewController.xib */,
 				DDCDF97A166A023800CCA28C /* CameraOverlayView.h */,
 				DDCDF97B166A023800CCA28C /* CameraOverlayView.m */,
 				DDCDF97F166A040300CCA28C /* CameraOverlayView.xib */,
-				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
-				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
-				DD51670E166B0EA600BA9EC8 /* UIImage+fixOrientation.h */,
-				DD51670F166B0EA600BA9EC8 /* UIImage+fixOrientation.m */,
-				DD516710166B0EA600BA9EC8 /* UIImage+Alpha.h */,
-				DD516711166B0EA600BA9EC8 /* UIImage+Alpha.m */,
-				DD516712166B0EA600BA9EC8 /* UIImage+RoundedCorner.h */,
-				DD516713166B0EA600BA9EC8 /* UIImage+RoundedCorner.m */,
-				DD516708166B0DA200BA9EC8 /* UIImage+Scale.h */,
-				DD516709166B0DA200BA9EC8 /* UIImage+Scale.m */,
-				DD51670C166B0E7300BA9EC8 /* UIImage+Resize.h */,
-				DD51670B166B0E7300BA9EC8 /* UIImage+Resize.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -411,11 +437,10 @@
 				DDBC50F016687C0500B9AFBF /* Default-568h@2x.png in Resources */,
 				DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */,
 				DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */,
-				DDCDF982166A0C1400CCA28C /* targetReticle.png in Resources */,
-				DD5166AA166A6ADE00BA9EC8 /* pingtone.wav in Resources */,
 				DD5166EB166ADC1300BA9EC8 /* LogInViewController.xib in Resources */,
 				DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */,
 				DDC5D213166C2DA400D39E3E /* player.png in Resources */,
+				DD4AAF6F16D7C1A000773F58 /* targetReticle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +498,7 @@
 				DDC5D233166C3F7D00D39E3E /* AFURLConnectionOperation.m in Sources */,
 				DDC5D234166C3F7D00D39E3E /* AFXMLRequestOperation.m in Sources */,
 				DDC5D235166C3F7D00D39E3E /* UIImageView+AFNetworking.m in Sources */,
+				DDC30E3516EDB82600A005B7 /* HorizontalTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

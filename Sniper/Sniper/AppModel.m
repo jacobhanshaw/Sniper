@@ -31,7 +31,7 @@
         photoObjects = [[NSMutableArray alloc] init];
         machineGunRounds = 0;
       //  motionManager = [[CMMotionManager alloc] init];
-        NSNotificationCenter *dispatcher = [NSNotificationCenter defaultCenter];
+     //   NSNotificationCenter *dispatcher = [NSNotificationCenter defaultCenter];
 
 	}
     return self;
