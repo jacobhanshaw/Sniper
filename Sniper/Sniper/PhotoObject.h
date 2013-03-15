@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface PhotoObject : NSObject {
-    UIImage *image;
-    NSData *photoData;
+    UIImage  *image;
+    NSData   *photoData;
     NSString *mediaFileName;
-    NSURL   *imageURL;
+    NSURL    *imageURL;
 }
 
 @property (nonatomic) UIImage *image;

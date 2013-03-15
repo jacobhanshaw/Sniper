@@ -13,6 +13,18 @@
 #import "LogInViewController.h"
 #import "CameraOverlayView.h"
 
+#import "GamesViewController.h"
+#import "TargetsViewController.h"
+#import "EmptyViewController.h"
+#import "ArmoryViewController.h"
+#import "SettingsViewController.h"
+
+#define GamesViewControllerIndex    0
+#define TargetsViewControllerIndex  1
+#define EmptyViewControllerIndex    2
+#define ArmoryViewControllerIndex   3
+#define SettingsViewControllerIndex 4
+
 @implementation RootViewController
 
 //ERROR: MOVE TO MODEL
@@ -23,7 +35,7 @@
     static dispatch_once_t pred = 0;
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
-        _sharedObject = [[self alloc] initWithFrame:[UIScreen mainScreen].bounds];//[UIScreen mainScreen].bounds]; // or some other init method
+        _sharedObject = [[self alloc] initWithFrame:[UIScreen mainScreen].bounds];
     });
     return _sharedObject;
 }
@@ -32,8 +44,13 @@
     self = [super init];
     if (self) {
         self.view.frame = frame;
-      //  NSArray* controllers = [NSArray arrayWithObjects:nc1, nc2, nc3, nil];
-      //  self.viewControllers = controllers;
+        GamesViewController *games = [[GamesViewController alloc] init];
+        TargetsViewController *targets = [[TargetsViewController alloc] init];
+        EmptyViewController *empty = [[EmptyViewController alloc] init];
+        ArmoryViewController *armory = [[ArmoryViewController alloc] init];
+        SettingsViewController *settings = [[SettingsViewController alloc] init];
+        NSArray* controllers = [NSArray arrayWithObjects:games,targets,empty,armory,settings, nil];
+        self.viewControllers = controllers;
     }
     return self;
 }
@@ -43,21 +60,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-    targetTableView = [[HorizontalTableView alloc] initWithFrame:CGRectMake(20, 100, 280, 100)];
+ //   [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+   /* targetTableView = [[HorizontalTableView alloc] initWithFrame:CGRectMake(20, 100, 280, 100)];
     targetTableView.delegate = self;
     targetTableView.dataSource = self;
-    [self.view addSubview:targetTableView];
+    [self.view addSubview:targetTableView];  */
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *buttonImage = [UIImage imageNamed:@"targetReticle.png"];
     UIImage *highlightImage = [UIImage imageNamed:@"targetReticle.png"];
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+    //ERROR: SHOULD BE BUTTON SIZE
+    //button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+    button.frame = CGRectMake(0.0, 0.0, 40, 40);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
     [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
     
-    CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
+    //ERROR: RETURN TO WAS BEFORE
+   // CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
+    CGFloat heightDifference = button.frame.size.height - self.tabBar.frame.size.height;
     if (heightDifference < 0)
         button.center = self.tabBar.center;
     else
@@ -72,27 +93,32 @@
     [self.view addSubview:button];
     
     picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.showsCameraControls = NO;
+        
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CameraOverlayView"
+                                                      owner:nil
+                                                    options:nil];
+        if([nibs count]){
+            id nib = [nibs objectAtIndex:0];
+            if([nib isKindOfClass:[CameraOverlayView class]]){
+                CameraOverlayView *view = (CameraOverlayView*)nib;
+                view.delegate = self;
+                view.picker = picker;
+                [view update];
+                picker.cameraOverlayView = view;
+            }
+        }
+    }
+    else
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     //   picker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    picker.showsCameraControls = NO;
     picker.wantsFullScreenLayout = YES;
     picker.delegate = self;
     //ERROR: FIX:
    // [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(unique) name: @"VolumeButtonPressed" object: nil];
-    
-    NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CameraOverlayView"
-                                                  owner:nil
-                                                options:nil];
-    if([nibs count]){
-        id nib = [nibs objectAtIndex:0];
-        if([nib isKindOfClass:[CameraOverlayView class]]){
-            CameraOverlayView *view = (CameraOverlayView*)nib;
-            view.delegate = self;
-            view.picker = picker;
-            [view update];
-            picker.cameraOverlayView = view;
-        }
-    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -137,7 +163,6 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"This is row: %d", indexPath.row];
-    cell.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
     return cell;
 }
 

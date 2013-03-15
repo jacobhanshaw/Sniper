@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD32D3BA16F1031200E6C5A2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3B816F1031200E6C5A2 /* SettingsViewController.m */; };
+		DD32D3BB16F1031200E6C5A2 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3B916F1031200E6C5A2 /* SettingsViewController.xib */; };
+		DD32D3BF16F1033B00E6C5A2 /* ArmoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3BD16F1033B00E6C5A2 /* ArmoryViewController.m */; };
+		DD32D3C016F1033B00E6C5A2 /* ArmoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3BE16F1033B00E6C5A2 /* ArmoryViewController.xib */; };
+		DD32D3C416F1036500E6C5A2 /* GamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3C216F1036400E6C5A2 /* GamesViewController.m */; };
+		DD32D3C516F1036500E6C5A2 /* GamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3C316F1036400E6C5A2 /* GamesViewController.xib */; };
+		DD32D3C916F103A300E6C5A2 /* TargetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3C716F103A300E6C5A2 /* TargetsViewController.m */; };
+		DD32D3CA16F103A300E6C5A2 /* TargetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3C816F103A300E6C5A2 /* TargetsViewController.xib */; };
+		DD32D3CD16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3CC16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.m */; };
+		DD32D3D116F104B000E6C5A2 /* EmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3CF16F104B000E6C5A2 /* EmptyViewController.m */; };
+		DD32D3D216F104B000E6C5A2 /* EmptyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3D016F104B000E6C5A2 /* EmptyViewController.xib */; };
+		DD32D3E316F167D200E6C5A2 /* HorizontalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3E216F167D200E6C5A2 /* HorizontalTableViewCell.m */; };
 		DD4AAF6F16D7C1A000773F58 /* targetReticle.png in Resources */ = {isa = PBXBuildFile; fileRef = DD4AAF6E16D7C1A000773F58 /* targetReticle.png */; };
 		DD5166B2166A935500BA9EC8 /* PhotoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DD5166B1166A935500BA9EC8 /* PhotoObject.m */; };
 		DD5166B4166AA24400BA9EC8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5166B3166AA24400BA9EC8 /* ImageIO.framework */; };
@@ -33,6 +45,9 @@
 		DDBC510016687C0600B9AFBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBC50DB16687C0500B9AFBF /* Foundation.framework */; };
 		DDBC510816687C0600B9AFBF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDBC510616687C0600B9AFBF /* InfoPlist.strings */; };
 		DDBC510B16687C0600B9AFBF /* SniperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBC510A16687C0600B9AFBF /* SniperTests.m */; };
+		DDC01B4816F2D1E8005E80AB /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC01B4716F2D1E8005E80AB /* Target.m */; };
+		DDC01B4B16F2D2D7005E80AB /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC01B4A16F2D2D7005E80AB /* Game.m */; };
+		DDC01B4E16F2F49F005E80AB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC01B4D16F2F49F005E80AB /* Player.m */; };
 		DDC30E3516EDB82600A005B7 /* HorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */; };
 		DDC5D20B166C141A00D39E3E /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D209166C141A00D39E3E /* MissionViewController.m */; };
 		DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC5D20A166C141A00D39E3E /* MissionViewController.xib */; };
@@ -70,9 +85,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD32D3B716F1031200E6C5A2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		DD32D3B816F1031200E6C5A2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		DD32D3B916F1031200E6C5A2 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		DD32D3BC16F1033B00E6C5A2 /* ArmoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArmoryViewController.h; sourceTree = "<group>"; };
+		DD32D3BD16F1033B00E6C5A2 /* ArmoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArmoryViewController.m; sourceTree = "<group>"; };
+		DD32D3BE16F1033B00E6C5A2 /* ArmoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArmoryViewController.xib; sourceTree = "<group>"; };
+		DD32D3C116F1036400E6C5A2 /* GamesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesViewController.h; sourceTree = "<group>"; };
+		DD32D3C216F1036400E6C5A2 /* GamesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesViewController.m; sourceTree = "<group>"; };
+		DD32D3C316F1036400E6C5A2 /* GamesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesViewController.xib; sourceTree = "<group>"; };
+		DD32D3C616F103A300E6C5A2 /* TargetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetsViewController.h; sourceTree = "<group>"; };
+		DD32D3C716F103A300E6C5A2 /* TargetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetsViewController.m; sourceTree = "<group>"; };
+		DD32D3C816F103A300E6C5A2 /* TargetsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TargetsViewController.xib; sourceTree = "<group>"; };
+		DD32D3CB16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewOfHorizontalTableViews.h; sourceTree = "<group>"; };
+		DD32D3CC16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewOfHorizontalTableViews.m; sourceTree = "<group>"; };
+		DD32D3CE16F104B000E6C5A2 /* EmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyViewController.h; sourceTree = "<group>"; };
+		DD32D3CF16F104B000E6C5A2 /* EmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyViewController.m; sourceTree = "<group>"; };
+		DD32D3D016F104B000E6C5A2 /* EmptyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyViewController.xib; sourceTree = "<group>"; };
+		DD32D3E116F167D200E6C5A2 /* HorizontalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalTableViewCell.h; sourceTree = "<group>"; };
+		DD32D3E216F167D200E6C5A2 /* HorizontalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalTableViewCell.m; sourceTree = "<group>"; };
 		DD4AAF6E16D7C1A000773F58 /* targetReticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = targetReticle.png; sourceTree = "<group>"; };
-		DD5166B0166A935500BA9EC8 /* PhotoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoObject.h; path = Sniper/PhotoObject.h; sourceTree = "<group>"; };
-		DD5166B1166A935500BA9EC8 /* PhotoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoObject.m; path = Sniper/PhotoObject.m; sourceTree = "<group>"; };
+		DD5166B0166A935500BA9EC8 /* PhotoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoObject.h; sourceTree = "<group>"; };
+		DD5166B1166A935500BA9EC8 /* PhotoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoObject.m; sourceTree = "<group>"; };
 		DD5166B3166AA24400BA9EC8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		DD5166DA166AA69500BA9EC8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DD5166DC166AA6B600BA9EC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -108,6 +142,12 @@
 		DDBC510716687C0600B9AFBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDBC510916687C0600B9AFBF /* SniperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SniperTests.h; sourceTree = "<group>"; };
 		DDBC510A16687C0600B9AFBF /* SniperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SniperTests.m; sourceTree = "<group>"; };
+		DDC01B4616F2D1E8005E80AB /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		DDC01B4716F2D1E8005E80AB /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		DDC01B4916F2D2D7005E80AB /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		DDC01B4A16F2D2D7005E80AB /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		DDC01B4C16F2F49F005E80AB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		DDC01B4D16F2F49F005E80AB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalTableView.h; sourceTree = "<group>"; };
 		DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalTableView.m; sourceTree = "<group>"; };
 		DDC5D208166C141A00D39E3E /* MissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
@@ -181,6 +221,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD32D3B516F102D800E6C5A2 /* Tab Bar View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD32D3C116F1036400E6C5A2 /* GamesViewController.h */,
+				DD32D3C216F1036400E6C5A2 /* GamesViewController.m */,
+				DD32D3C316F1036400E6C5A2 /* GamesViewController.xib */,
+				DD32D3C616F103A300E6C5A2 /* TargetsViewController.h */,
+				DD32D3C716F103A300E6C5A2 /* TargetsViewController.m */,
+				DD32D3C816F103A300E6C5A2 /* TargetsViewController.xib */,
+				DD32D3CE16F104B000E6C5A2 /* EmptyViewController.h */,
+				DD32D3CF16F104B000E6C5A2 /* EmptyViewController.m */,
+				DD32D3D016F104B000E6C5A2 /* EmptyViewController.xib */,
+				DD32D3BC16F1033B00E6C5A2 /* ArmoryViewController.h */,
+				DD32D3BD16F1033B00E6C5A2 /* ArmoryViewController.m */,
+				DD32D3BE16F1033B00E6C5A2 /* ArmoryViewController.xib */,
+				DD32D3B716F1031200E6C5A2 /* SettingsViewController.h */,
+				DD32D3B816F1031200E6C5A2 /* SettingsViewController.m */,
+				DD32D3B916F1031200E6C5A2 /* SettingsViewController.xib */,
+			);
+			name = "Tab Bar View Controllers";
+			sourceTree = "<group>";
+		};
 		DDBC50CA16687C0500B9AFBF = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +285,8 @@
 		DDBC50DF16687C0500B9AFBF /* Sniper */ = {
 			isa = PBXGroup;
 			children = (
-				DDC30E3216EDB7C200A005B7 /* Classes */,
+				DDC01B4416F2D1C6005E80AB /* Classes */,
+				DD32D3B516F102D800E6C5A2 /* Tab Bar View Controllers */,
 				DDC30E3116EDB79D00A005B7 /* View Controllers */,
 				DDCDF96D1669F84A00CCA28C /* Camera */,
 				DDCDF95F1669F3A500CCA28C /* Core */,
@@ -267,11 +330,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DDC01B4416F2D1C6005E80AB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DDC30E3216EDB7C200A005B7 /* Horizontal TableView Classes */,
+				DDC01B4616F2D1E8005E80AB /* Target.h */,
+				DDC01B4716F2D1E8005E80AB /* Target.m */,
+				DDC01B4C16F2F49F005E80AB /* Player.h */,
+				DDC01B4D16F2F49F005E80AB /* Player.m */,
+				DDC01B4916F2D2D7005E80AB /* Game.h */,
+				DDC01B4A16F2D2D7005E80AB /* Game.m */,
+				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
+				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		DDC30D3E16EC141700A005B7 /* External Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
-				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
 				DD51670E166B0EA600BA9EC8 /* UIImage+fixOrientation.h */,
 				DD51670F166B0EA600BA9EC8 /* UIImage+fixOrientation.m */,
 				DD516710166B0EA600BA9EC8 /* UIImage+Alpha.h */,
@@ -300,13 +377,17 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		DDC30E3216EDB7C200A005B7 /* Classes */ = {
+		DDC30E3216EDB7C200A005B7 /* Horizontal TableView Classes */ = {
 			isa = PBXGroup;
 			children = (
 				DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */,
 				DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */,
+				DD32D3E116F167D200E6C5A2 /* HorizontalTableViewCell.h */,
+				DD32D3E216F167D200E6C5A2 /* HorizontalTableViewCell.m */,
+				DD32D3CB16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.h */,
+				DD32D3CC16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.m */,
 			);
-			name = Classes;
+			name = "Horizontal TableView Classes";
 			sourceTree = "<group>";
 		};
 		DDC5D219166C3F7D00D39E3E /* AFNetworking */ = {
@@ -441,6 +522,11 @@
 				DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */,
 				DDC5D213166C2DA400D39E3E /* player.png in Resources */,
 				DD4AAF6F16D7C1A000773F58 /* targetReticle.png in Resources */,
+				DD32D3BB16F1031200E6C5A2 /* SettingsViewController.xib in Resources */,
+				DD32D3C016F1033B00E6C5A2 /* ArmoryViewController.xib in Resources */,
+				DD32D3C516F1036500E6C5A2 /* GamesViewController.xib in Resources */,
+				DD32D3CA16F103A300E6C5A2 /* TargetsViewController.xib in Resources */,
+				DD32D3D216F104B000E6C5A2 /* EmptyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +585,16 @@
 				DDC5D234166C3F7D00D39E3E /* AFXMLRequestOperation.m in Sources */,
 				DDC5D235166C3F7D00D39E3E /* UIImageView+AFNetworking.m in Sources */,
 				DDC30E3516EDB82600A005B7 /* HorizontalTableView.m in Sources */,
+				DD32D3BA16F1031200E6C5A2 /* SettingsViewController.m in Sources */,
+				DD32D3BF16F1033B00E6C5A2 /* ArmoryViewController.m in Sources */,
+				DD32D3C416F1036500E6C5A2 /* GamesViewController.m in Sources */,
+				DD32D3C916F103A300E6C5A2 /* TargetsViewController.m in Sources */,
+				DD32D3CD16F1046B00E6C5A2 /* TableViewOfHorizontalTableViews.m in Sources */,
+				DD32D3D116F104B000E6C5A2 /* EmptyViewController.m in Sources */,
+				DD32D3E316F167D200E6C5A2 /* HorizontalTableViewCell.m in Sources */,
+				DDC01B4816F2D1E8005E80AB /* Target.m in Sources */,
+				DDC01B4B16F2D2D7005E80AB /* Game.m in Sources */,
+				DDC01B4E16F2F49F005E80AB /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

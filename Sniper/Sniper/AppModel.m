@@ -10,7 +10,7 @@
 
 @implementation AppModel
 
-@synthesize name, userId, password, machineGunRounds, photoObjects, targetName, targetImageLocation, missionNumber, targetsLeft;
+@synthesize name, userId, password, machineGunRounds, photoObjects, targetName, targetImageLocation, missionNumber, targetsLeft, targets;
 
 + (id)sharedAppModel
 {

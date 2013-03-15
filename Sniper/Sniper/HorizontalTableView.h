@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HorizontalTableView : UITableView {
+#define ROWHEIGHT 100
 
+@interface HorizontalTableView : UITableView <UITableViewDataSource> {
+    NSMutableArray *data;
 }
+
+@property (nonatomic) NSMutableArray *data;
 
 @end

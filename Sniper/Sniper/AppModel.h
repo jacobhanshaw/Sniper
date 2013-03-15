@@ -6,36 +6,28 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#pragma once
-
 #import <Foundation/Foundation.h>
+#import "Game.h"
 
 @interface AppModel : NSObject {
-    NSUserDefaults *defaults;
-    NSString       *name;
-    int            userId;
-    NSString       *password;
     
-    NSString       *targetName;
-    NSURL          *targetImageLocation;
-    int            missionNumber;
-    int            targetsLeft;
+    NSUserDefaults *defaults;
     
     int             machineGunRounds;
     NSMutableArray *photoObjects;
+    NSMutableArray *targets;
+    
+    Game *currentGame;
+    
 }
 
-@property (nonatomic) NSString *name;
-@property (readwrite) int userId;
-@property (nonatomic) NSString *password;
-
-@property (nonatomic) NSString       *targetName;
-@property (nonatomic) NSURL          *targetImageLocation;
-@property (readwrite) int            missionNumber;
-@property (readwrite) int            targetsLeft;
+@property (nonatomic) NSUserDefaults *defaults;
 
 @property (readwrite) int machineGunRounds;
 @property (nonatomic) NSMutableArray *photoObjects;
+@property (nonatomic) NSMutableArray *targets;
+
+@property (nonatomic) Game *currentGame;
 
 + (AppModel *)sharedAppModel;
 

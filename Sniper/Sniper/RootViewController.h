@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "HorizontalTableView.h"
 
+typedef enum {
+    GAMESINDEX,
+    TARGETSINDEX,
+    EMPTYINDEX,
+    ARMORYINDEX,
+    SETTINGSINDEX,
+    NUMOFINDEXES
+} TabBarIndex;
+
 @interface RootViewController : UITabBarController<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITableViewDataSource, UITableViewDelegate> {
     HorizontalTableView *targetTableView;
     UIImagePickerController *picker;

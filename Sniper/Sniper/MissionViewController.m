@@ -35,7 +35,7 @@
 	// Do any additional setup after loading the view.
     
     picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     //   picker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     picker.showsCameraControls = NO;
     picker.wantsFullScreenLayout = YES;
