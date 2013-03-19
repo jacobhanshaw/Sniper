@@ -17,14 +17,14 @@ typedef enum {
     
     GameType        type;
     int             gameId;
-    int             totalTargetsLeft;
     NSMutableArray *currentTargets;
-    
+    NSMutableArray *allTargets;
+
 }
 
 @property (readwrite)     GameType        type;
 @property (readwrite)     int             gameId;
-@property (readwrite)     int             totalTargetsLeft;
 @property (nonatomic)     NSMutableArray *currentTargets;
+@property (nonatomic)     NSMutableArray *allTargets;
 
 @end

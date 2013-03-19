@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Jacob Hanshaw. All rights reserved.
 //
 
-#import "HorizontalTableViewCell.h"
+#import "TargetCell.h"
 
-@implementation HorizontalTableViewCell
+@implementation TargetCell
+
+@synthesize targetImageView, targetNameLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -16,10 +18,10 @@
     if (self) {
         // Initialization code
         targetImageView = [[UIImageView alloc] initWithFrame:self.frame];
-        targetName      = [[UILabel     alloc] initWithFrame:CGRectMake(0, self.frame.size.height-LABELHEIGHT, self.frame.size.width, self.frame.size.height)];
+        targetNameLabel = [[UILabel     alloc] initWithFrame:CGRectMake(0, self.frame.size.height-LABELHEIGHT, self.frame.size.width, self.frame.size.height)];
         
-        targetName.textAlignment =  UITextAlignmentCenter;
-        targetName.textColor     = [UIColor whiteColor];
+        targetNameLabel.textAlignment =  UITextAlignmentCenter;
+        targetNameLabel.textColor     = [UIColor whiteColor];
         
         self.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
     }

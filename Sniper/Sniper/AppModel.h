@@ -21,8 +21,6 @@
     
 }
 
-@property (nonatomic) NSUserDefaults *defaults;
-
 @property (readwrite) int machineGunRounds;
 @property (nonatomic) NSMutableArray *photoObjects;
 @property (nonatomic) NSMutableArray *targets;

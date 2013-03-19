@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Target.h"
 
 #define LABELHEIGHT 20
 
-@interface HorizontalTableViewCell : UITableViewCell {
+@interface TargetCell : UITableViewCell {
     UIImageView * targetImageView;
-    UILabel *     targetName;
+    UILabel *     targetNameLabel;
 }
+
+@property(nonatomic)    UIImageView * targetImageView;
+@property(nonatomic)    UILabel *     targetNameLabel;
 
 @end

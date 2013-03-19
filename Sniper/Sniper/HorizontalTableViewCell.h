@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HorizontalTableViewCell : UITableViewCell
+@interface HorizontalTableViewCell : UITableViewCell <UITableViewDataSource, UITableViewDelegate> {
+        UITableView *tableView;
+        NSMutableArray *data;
+}
 
 @end

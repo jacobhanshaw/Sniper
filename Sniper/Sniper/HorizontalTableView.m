@@ -7,6 +7,8 @@
 //
 
 #import "HorizontalTableView.h"
+#import "TargetCell.h"
+#import "Target.h"
 
 @implementation HorizontalTableView
 
@@ -32,38 +34,26 @@
     }
     return self;
 }
-/*
+
 #pragma mark TableView DataSource Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ArticleCell";
+    static NSString *CellIdentifier = @"TargetCell";
     
-    __block HorizontalTableViewCell *cell = (HorizontalTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TargetCell *cell = (TargetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
     {
-        cell = [[HorizontalTableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     }
     
-    __block NSDictionary *currentArticle = [self.articles objectAtIndex:indexPath.row];
-    
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_async(concurrentQueue, ^{
-        UIImage *image = nil;
-        image = [UIImage imageNamed:[currentArticle objectForKey:@"ImageName"]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [cell.thumbnail setImage:image];
-        });
-    });
-    
-    cell.titleLabel.text = [currentArticle objectForKey:@"Title"];
+    [cell.targetImageView setImage:((Target *)[data objectAtIndex:indexPath.row]).image];
+    cell.targetNameLabel.text = ((Target *)[data objectAtIndex:indexPath.row]).name;
     
     return cell;
 }
-*/
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

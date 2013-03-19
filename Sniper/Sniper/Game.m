@@ -10,6 +10,6 @@
 
 @implementation Game
 
-@synthesize type, gameId, totalTargetsLeft, currentTargets;
+@synthesize type, gameId, currentTargets, allTargets;
 
 @end
