@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface Target : NSObject {
-    int      targetId;
-    UIImage  *image;
-    NSString *name;
+    int           targetId;
+    UIImageView  *imageView;
+    NSString     *name;
 }
 
-@property(readwrite)     int       targetId;
-@property(nonatomic)     UIImage  *image;
-@property(nonatomic)     NSString *name;
+@property(readwrite)     int           targetId;
+@property(nonatomic)     UIImageView  *imageView;
+@property(nonatomic)     NSString     *name;
 
 @end

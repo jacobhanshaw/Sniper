@@ -10,6 +10,6 @@
 
 @implementation Target
 
-@synthesize targetId, image, name;
+@synthesize targetId, imageView, name;
 
 @end

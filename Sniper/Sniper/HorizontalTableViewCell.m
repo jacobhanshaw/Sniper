@@ -38,7 +38,7 @@
         cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     }
     
-    [cell.targetImageView setImage:((Target *)[data objectAtIndex:indexPath.row]).image];
+    cell.targetImageView = ((Target *)[data objectAtIndex:indexPath.row]).imageView;
     cell.targetNameLabel.text = ((Target *)[data objectAtIndex:indexPath.row]).name;
     
     return cell;

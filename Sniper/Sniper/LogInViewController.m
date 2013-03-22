@@ -7,6 +7,8 @@
 //
 
 #import "LogInViewController.h"
+#import "Target.h"
+#import "AFNetworking.h"
 
 @implementation LogInViewController
 
@@ -47,15 +49,15 @@
 - (IBAction)continueButtonPressed:(id)sender {
     [nameTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
-    [AppModel sharedAppModel].name = nameTextField.text;
-    [AppModel sharedAppModel].password = passwordTextField.text;
+    [AppModel sharedAppModel].user.name = nameTextField.text;
+    [AppModel sharedAppModel].user.password = passwordTextField.text;
     
     NSURL *url = [NSURL URLWithString:@"http://winrar.upl.cs.wisc.edu:9876"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:[AppModel sharedAppModel].name forKey:@"username"];
-    [parameters setObject:[AppModel sharedAppModel].password forKey:@"password"];
+    [parameters setObject:[AppModel sharedAppModel].user.name forKey:@"username"];
+    [parameters setObject:[AppModel sharedAppModel].user.password forKey:@"password"];
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"/login" parameters:parameters];
     
@@ -86,17 +88,19 @@
     
     NSDictionary *mission = [[NSDictionary alloc] init];
     mission = [JSON valueForKeyPath:@"mission"];
-    [AppModel sharedAppModel].targetName = [mission valueForKeyPath:@"name"];
+    
+    Target *currentTarget = [[Target alloc] init];
+    currentTarget.name = [mission valueForKeyPath:@"name"];
+    
+    
+    UIImage *image = [UIImage imageNamed:@"player.png"];
     NSString *imageLocation = [NSString stringWithFormat:@"http://winrar.upl.cs.wisc.edu:9876/static/media/img_%@.jpg", [mission valueForKeyPath:@"id"]];
+    NSURL *imageURL = [NSURL URLWithString:imageLocation];
+    [currentTarget.imageView setImageWithURL:imageURL placeholderImage:image];
+    [[AppModel sharedAppModel].currentGame.currentTargets addObject:currentTarget];
    // [AppModel sharedAppModel].missionNumber = [[mission valueForKey:@""] intValue];
-    [AppModel sharedAppModel].targetsLeft = [[JSON valueForKeyPath:@"alive_count"] intValue];
+   // [AppModel sharedAppModel].targetsLeft = [[JSON valueForKeyPath:@"alive_count"] intValue];
     
-    NSLog(@"MISSION TARGET: %@ IMAGE LOCATION: %@ TARGETS LEFT: %d", [AppModel sharedAppModel].targetName, imageLocation, [AppModel sharedAppModel].targetsLeft);
-    
-    [AppModel sharedAppModel].targetImageLocation = [[NSURL alloc] initWithString:imageLocation];
-//    [AppModel sharedAppModel].targetImageLocation = [NSURL URLWithString:imageLocation];
-    
-    NSLog(@"%@", [AppModel sharedAppModel].targetImageLocation);
     
     [timer invalidate];
     [self dismissViewControllerAnimated:YES completion:nil];

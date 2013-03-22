@@ -10,7 +10,7 @@
 
 @implementation AppModel
 
-@synthesize machineGunRounds, photoObjects,  targets, currentGame;
+@synthesize machineGunRounds, photoObjects,  targets, currentGame, user;
 
 + (id)sharedAppModel
 {

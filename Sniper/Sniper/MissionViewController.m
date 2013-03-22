@@ -13,6 +13,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+fixOrientation.h"
 #import <ImageIO/ImageIO.h>
+#import "Target.h"
 
 @implementation MissionViewController
 
@@ -50,7 +51,7 @@
         id nib = [nibs objectAtIndex:0];
         if([nib isKindOfClass:[CameraOverlayView class]]){
             CameraOverlayView *view = (CameraOverlayView*)nib;
-            view.delegate = self;
+           // view.delegate = self;
             view.picker = picker;
             [view update];
             picker.cameraOverlayView = view;
@@ -59,18 +60,15 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    lbl_targetName.text = [AppModel sharedAppModel].targetName;
-    NSString *string = [NSString stringWithFormat:@"%d", [AppModel sharedAppModel].targetsLeft];
+    lbl_targetName.text = ((Target *)[[AppModel sharedAppModel].currentGame.currentTargets objectAtIndex:0]).name;
+    NSString *string = [NSString stringWithFormat:@"%d", [AppModel sharedAppModel].currentGame.currentTargets.count];
     lbl_numberTargetsLeft.text = string;
     missionDescriptionTextBox.text = @"You are to find and assassinate the target. Get the mission done quickly and quietly.";
-    UIImage *image = [UIImage imageNamed:@"player.png"];
-    [targetImageView setImageWithURL:[AppModel sharedAppModel].targetImageLocation placeholderImage:image];
+    targetImageView =((Target *)[[AppModel sharedAppModel].currentGame.currentTargets objectAtIndex:0]).imageView;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    UIImage *image = [UIImage imageNamed:@"player.png"];
-    NSLog(@"%@", [AppModel sharedAppModel].targetImageLocation);
-    [targetImageView setImageWithURL:[AppModel sharedAppModel].targetImageLocation placeholderImage:image];
+    targetImageView =((Target *)[[AppModel sharedAppModel].currentGame.currentTargets objectAtIndex:0]).imageView;
    // [self presentViewController:picker animated:YES completion:nil];
 }
 

@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "Game.h"
+#import "Player.h"
+
+#define COREPAGE   "http://www.jacobhanshaw.com"
+#define MEDIAEXT   "/media/"
+#define MISSIONEXT "/mission/"
+#define GAMESEXT   "/games/"
+#define GAMEEXT    "/game/"
+#define PLAYEREXT  "/player/"
+#define TARGETEXT  "/target/"
 
 @interface AppModel : NSObject {
     
@@ -18,6 +27,7 @@
     NSMutableArray *targets;
     
     Game *currentGame;
+    Player *user;
     
 }
 
@@ -26,6 +36,7 @@
 @property (nonatomic) NSMutableArray *targets;
 
 @property (nonatomic) Game *currentGame;
+@property (nonatomic) Player *user;
 
 + (AppModel *)sharedAppModel;
 

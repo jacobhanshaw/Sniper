@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GamesViewController : UIViewController
+@interface GamesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    __weak IBOutlet UITableView *gamesTableView;
+    
+}
 
 @end
