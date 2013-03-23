@@ -122,6 +122,7 @@
 		DD516711166B0EA600BA9EC8 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Sniper/UIImage+Alpha.m"; sourceTree = "<group>"; };
 		DD516712166B0EA600BA9EC8 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Sniper/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		DD516713166B0EA600BA9EC8 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Sniper/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		DD9C438116FD3D5500AC498A /* ControlVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlVariables.h; sourceTree = "<group>"; };
 		DDBC50D516687C0500B9AFBF /* Sniper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sniper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBC50D916687C0500B9AFBF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDBC50DB16687C0500B9AFBF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -383,6 +384,7 @@
 		DDC30E3216EDB7C200A005B7 /* Horizontal TableView Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DD9C438116FD3D5500AC498A /* ControlVariables.h */,
 				DDD8981016F90759004586CD /* HorizontalTableViewCell.h */,
 				DDD8981116F90759004586CD /* HorizontalTableViewCell.m */,
 				DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */,

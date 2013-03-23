@@ -44,7 +44,7 @@
         }
     }*/
     //gamesTableView = [[HorizontalTableView alloc] init];
-    gamesTableView = [[HorizontalTableView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
+    gamesTableView = [[HorizontalTableView alloc]initWithFrame:CGRectMake(0, 80, 280, 200)];
     [self.view addSubview:gamesTableView];
 }
 /*

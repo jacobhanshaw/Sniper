@@ -7,25 +7,33 @@
 //
 
 #import "TargetCell.h"
+#import "ControlVariables.h"
 
 @implementation TargetCell
 
 @synthesize targetImageView, targetNameLabel;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        targetImageView = [[UIImageView alloc] initWithFrame:self.frame];
-        targetNameLabel = [[UILabel     alloc] initWithFrame:CGRectMake(0, self.frame.size.height-LABELHEIGHT, self.frame.size.width, self.frame.size.height)];
+        targetImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kTargetCellHorizontalInnerPadding, kTargetCellVerticalInnerPadding, kCellWidth - kTargetCellHorizontalInnerPadding * 2, kCellHeight - kTargetCellVerticalInnerPadding * 2)];
+        targetImageView.opaque = YES;
+        [self.contentView addSubview:targetImageView];
+        
+        
+        targetNameLabel = [[UILabel     alloc] initWithFrame:CGRectMake(0, targetImageView.frame.size.height * 0.632, targetImageView.frame.size.width, targetImageView.frame.size.height * 0.37)];
+        
+        targetImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         targetNameLabel.textAlignment   =  UITextAlignmentCenter;
-        targetNameLabel.textColor       = [UIColor redColor];
-        targetNameLabel.backgroundColor = [UIColor clearColor];
+        targetNameLabel.textColor       =  kTargetCellTextColor;
+        targetNameLabel.backgroundColor =  [UIColor clearColor];
         
-        [self addSubview:targetNameLabel];
-        [self addSubview:targetImageView];
+        [targetImageView addSubview:targetNameLabel];
+        
+        self.backgroundColor = kTargetCellBackgroundColor;
         
         self.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
     }

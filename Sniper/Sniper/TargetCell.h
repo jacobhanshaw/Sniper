@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Target.h"
 
-#define LABELHEIGHT 20
-
 @interface TargetCell : UITableViewCell {
     UIImageView * targetImageView;
     UILabel *     targetNameLabel;

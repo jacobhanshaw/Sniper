@@ -9,6 +9,7 @@
 #import "HorizontalTableView.h"
 #import "TargetCell.h"
 #import "Target.h"
+#import "ControlVariables.h"
 
 @implementation HorizontalTableView
 
@@ -19,19 +20,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.frame = CGRectMake(frame.origin.x, frame.origin.y, kCellHeight, kTableLength);
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-        [self setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
+        [self setFrame:CGRectMake(kRowHorizontalPadding * 0.5, kRowVerticalPadding * 0.5, kTableLength - kRowHorizontalPadding, kCellHeight)];
         
-        self.rowHeight = ROWHEIGHT;
-        self.backgroundColor = [UIColor clearColor];
+        self.rowHeight = kCellWidth;
+        self.backgroundColor = kHorizontalTableBackgroundColor;
         
-        self.bounces = NO;
         self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         self.separatorColor = [UIColor clearColor];
+        
         self.dataSource = self;
         self.delegate = self;
+      //  [self addSubview:self.horizontalTableView];
     }
     return self;
 }
@@ -46,12 +49,8 @@
     
     if (cell == nil)
     {
-        cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, kCellWidth, kCellHeight)];
     }
-   /* UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell == nil){
-        cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
-    }*/
     
    // cell.targetImageView = ((Target *)[data objectAtIndex:indexPath.row]).imageView;
    // cell.targetNameLabel.text = ((Target *)[data objectAtIndex:indexPath.row]).name;
@@ -63,7 +62,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2; //[data count];
+    return 20; //[data count];
 }
 
 /*
