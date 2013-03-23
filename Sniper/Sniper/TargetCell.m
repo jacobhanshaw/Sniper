@@ -20,8 +20,12 @@
         targetImageView = [[UIImageView alloc] initWithFrame:self.frame];
         targetNameLabel = [[UILabel     alloc] initWithFrame:CGRectMake(0, self.frame.size.height-LABELHEIGHT, self.frame.size.width, self.frame.size.height)];
         
-        targetNameLabel.textAlignment =  UITextAlignmentCenter;
-        targetNameLabel.textColor     = [UIColor whiteColor];
+        targetNameLabel.textAlignment   =  UITextAlignmentCenter;
+        targetNameLabel.textColor       = [UIColor redColor];
+        targetNameLabel.backgroundColor = [UIColor clearColor];
+        
+        [self addSubview:targetNameLabel];
+        [self addSubview:targetImageView];
         
         self.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
     }

@@ -10,7 +10,7 @@
 
 #define ROWHEIGHT 100
 
-@interface HorizontalTableView : UITableView <UITableViewDataSource> {
+@interface HorizontalTableView : UITableView <UITableViewDataSource, UITableViewDelegate> {
     NSMutableArray *data;
 }
 

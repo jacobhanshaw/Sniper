@@ -7,12 +7,15 @@
 //
 
 #import "GamesViewController.h"
+#import "HorizontalTableViewCell.h"
 
 @interface GamesViewController ()
 
 @end
 
 @implementation GamesViewController
+
+@synthesize reusableCells;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +30,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    /*
+    if (!self.reusableCells)
+    {
+        
+        self.reusableCells = [NSMutableArray array];
+        
+        for (int i = 0; i < 2; i++)
+        {
+            HorizontalTableViewCell *cell = [[HorizontalTableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
+            
+            [self.reusableCells addObject:cell];
+        }
+    }*/
+    //gamesTableView = [[HorizontalTableView alloc] init];
+    gamesTableView = [[HorizontalTableView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
+    [self.view addSubview:gamesTableView];
 }
-
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -40,15 +59,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"Row: %d", indexPath.row];
-    
+    HorizontalTableViewCell *cell = [self.reusableCells objectAtIndex:indexPath.section];
     return cell;
 }
 
@@ -58,7 +69,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
+*/
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

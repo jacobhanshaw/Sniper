@@ -31,6 +31,7 @@
         self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         self.separatorColor = [UIColor clearColor];
         self.dataSource = self;
+        self.delegate = self;
     }
     return self;
 }
@@ -40,18 +41,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TargetCell";
-    
+   
     TargetCell *cell = (TargetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
     {
         cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     }
+   /* UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil){
+        cell = [[TargetCell alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
+    }*/
     
-    cell.targetImageView = ((Target *)[data objectAtIndex:indexPath.row]).imageView;
-    cell.targetNameLabel.text = ((Target *)[data objectAtIndex:indexPath.row]).name;
+   // cell.targetImageView = ((Target *)[data objectAtIndex:indexPath.row]).imageView;
+   // cell.targetNameLabel.text = ((Target *)[data objectAtIndex:indexPath.row]).name;
+    
+    cell.targetImageView.image = [UIImage imageNamed:@"player.png"];
+    cell.targetNameLabel.text = @"HELLO";
     
     return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 2; //[data count];
 }
 
 /*

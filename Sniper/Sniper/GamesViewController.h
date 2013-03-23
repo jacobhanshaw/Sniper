@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HorizontalTableView.h"
 
 @interface GamesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
-    __weak IBOutlet UITableView *gamesTableView;
+   // __weak IBOutlet UITableView *gamesTableView;
+    HorizontalTableView *gamesTableView;
+    NSMutableArray *reusableCells;
     
 }
+
+@property(nonatomic) NSMutableArray *reusableCells;
 
 @end
