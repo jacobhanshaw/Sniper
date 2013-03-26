@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD1AFD3D16FE9D990058429F /* TargetScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1AFD3C16FE9D990058429F /* TargetScrollView.m */; };
 		DD32D3BA16F1031200E6C5A2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3B816F1031200E6C5A2 /* SettingsViewController.m */; };
 		DD32D3BB16F1031200E6C5A2 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32D3B916F1031200E6C5A2 /* SettingsViewController.xib */; };
 		DD32D3BF16F1033B00E6C5A2 /* ArmoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD32D3BD16F1033B00E6C5A2 /* ArmoryViewController.m */; };
@@ -86,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD1AFD3B16FE9D990058429F /* TargetScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetScrollView.h; sourceTree = "<group>"; };
+		DD1AFD3C16FE9D990058429F /* TargetScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetScrollView.m; sourceTree = "<group>"; };
 		DD32D3B716F1031200E6C5A2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		DD32D3B816F1031200E6C5A2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		DD32D3B916F1031200E6C5A2 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				DDC01B4A16F2D2D7005E80AB /* Game.m */,
 				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
 				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
+				DD1AFD3B16FE9D990058429F /* TargetScrollView.h */,
+				DD1AFD3C16FE9D990058429F /* TargetScrollView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -603,6 +608,7 @@
 				DDC01B4E16F2F49F005E80AB /* Player.m in Sources */,
 				DDD8980A16F8F5DA004586CD /* Logger.m in Sources */,
 				DDD8981216F9075A004586CD /* HorizontalTableViewCell.m in Sources */,
+				DD1AFD3D16FE9D990058429F /* TargetScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
