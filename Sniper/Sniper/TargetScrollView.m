@@ -23,20 +23,24 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.frame = frame;
         self.scrollEnabled = YES;
         self.showsHorizontalScrollIndicator = NO;
-        self.backgroundColor = [UIColor blackColor]; //clearColor
+        self.backgroundColor = [UIColor whiteColor]; //clearColor
         self.bounces = NO;
+       // self.delegate = self;
     }
     return self;
 }
 
-- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) interactable
+- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) interactable target:(id) caller
 {
     int spacing = SPACEBETWEENTARGETS; //page spacing
     int margin =  SPACEBETWEENTARGETS/2; //side margins
     
-    for (int i = 0; i <= targets.count; i++) {
+    data = targets;
+    
+    for (int i = 0; i < data.count; i++) {
         float x = i * (self.frame.size.height+spacing) + margin;
         
         UIButton *targetButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -47,46 +51,46 @@
         
         [targetButton setBackgroundImage:((Target *)[data objectAtIndex:i]).imageView.image forState:UIControlStateNormal];
         [targetButton setBackgroundImage:((Target *)[data objectAtIndex:i]).imageView.image forState:UIControlStateHighlighted];
-        [targetButton addTarget:self action:@selector(targetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [targetButton addTarget:caller action:@selector(targetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         targetButton.tag = i;
         [self addSubview:targetButton];
         
-        //add page number labels
-        UILabel *label =  [[UILabel alloc] initWithFrame: CGRectMake(x, self.frame.size.height * (2/3), self.frame.size.height, self.frame.size.height * (1/3))];
-        label.text = [NSString stringWithFormat:@"%d", i];
+        UILabel *label =  [[UILabel alloc] initWithFrame: CGRectMake(0, targetButton.frame.size.height * .667, targetButton.frame.size.width, targetButton.frame.size.height * .333)];
+        label.text = ((Target *)[data objectAtIndex:i]).name;
         label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor grayColor];
+        label.textColor = [UIColor redColor];
         label.textAlignment = UITextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:13];
         
         [targetButton addSubview:label];
     }
-    //pageScrollerWidth = ((data.count-1) * (self.frame.size.height+spacing) + margin + (margin +self.frame.size.height))-320;
     [self setContentSize:CGSizeMake(data.count * (self.frame.size.height+spacing), self.frame.size.height)];
-    
-    /*  if(currentIndex > 4 && currentIndex <= [pages count]-6)
-     [pageScroller setContentOffset:CGPointMake(currentIndex * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];
-     else if (currentIndex <= 4)
-     [pageScroller setContentOffset:CGPointMake(0, 0) animated:YES];
-     else
-     [[pageScroller setContentOffset:CGPointMake(([pages count]-5) * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];*/
 }
-
+/* //I made below to evenly align left side of scrollview to left, but it doesn't look good. Need to align to center and enlarge target or do something else
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     if((int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS) >= (self.frame.size.height+SPACEBETWEENTARGETS)/2){
-        [self setContentOffset:CGPointMake(((int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS) + 1) * (self.frame.size.height+SPACEBETWEENTARGETS),0) animated:YES];
+        if((self.contentOffset.x + ((int)(self.frame.size.height+SPACEBETWEENTARGETS) - (int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS))) +self.frame.size.width <= self.contentSize.width){
+        [self setContentOffset:CGPointMake(self.contentOffset.x + ((int)(self.frame.size.height+SPACEBETWEENTARGETS) - (int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS)),0) animated:YES];
+        }
     }
     else{
-        [self setContentOffset:CGPointMake((int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS) * (self.frame.size.height+SPACEBETWEENTARGETS),0) animated:YES];
+        [self setContentOffset:CGPointMake(self.contentOffset.x - (int)self.contentOffset.x%(int)(self.frame.size.height+SPACEBETWEENTARGETS),0) animated:YES];
     }
-   /* if(self.contentOffset.x > 4 self.c && self.contentOffset.x <= ([data count]-6) * ((self.frame.size.height+SPACEBETWEENTARGETS)))
-        [self setContentOffset:CGPointMake(currentIndex * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];
-    else if (currentIndex <= 4)
-        [self setContentOffset:CGPointMake(0, 0) animated:YES];
-    else
-        [[pageScroller setContentOffset:CGPointMake(([pages count]-5) * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];*/
-}
 
+}
+ 
+ //Center Code from CUNA
+ 
+ if(currentIndex > 4 && currentIndex <= [pages count]-6)
+ [pageScroller setContentOffset:CGPointMake(currentIndex * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];
+ else if (currentIndex <= 4)
+ [pageScroller setContentOffset:CGPointMake(0, 0) animated:YES];
+ else
+ [pageScroller setContentOffset:CGPointMake(([pages count]-5) * (currentSelectedPageIcon.frame.size.width + SPACEBETWEENPAGESINBOTTOMBAR) - ([[UIScreen mainScreen] bounds].size.width/2 - (currentSelectedPageIcon.frame.size.width/2) - (SPACEBETWEENPAGESINBOTTOMBAR/2)), 0) animated:YES];
+
+ 
+*/
 /*
 -(void)refreshCurrentSpeed
 {

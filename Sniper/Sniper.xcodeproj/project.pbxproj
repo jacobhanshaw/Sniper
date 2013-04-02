@@ -49,6 +49,7 @@
 		DDC01B4B16F2D2D7005E80AB /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC01B4A16F2D2D7005E80AB /* Game.m */; };
 		DDC01B4E16F2F49F005E80AB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC01B4D16F2F49F005E80AB /* Player.m */; };
 		DDC30E3516EDB82600A005B7 /* HorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */; };
+		DDC3767A17066A5F00AA94BA /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC3767917066A5F00AA94BA /* GameCell.m */; };
 		DDC5D20B166C141A00D39E3E /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D209166C141A00D39E3E /* MissionViewController.m */; };
 		DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC5D20A166C141A00D39E3E /* MissionViewController.xib */; };
 		DDC5D213166C2DA400D39E3E /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC5D212166C2DA400D39E3E /* player.png */; };
@@ -153,6 +154,8 @@
 		DDC01B4D16F2F49F005E80AB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		DDC30E3316EDB82600A005B7 /* HorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalTableView.h; sourceTree = "<group>"; };
 		DDC30E3416EDB82600A005B7 /* HorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalTableView.m; sourceTree = "<group>"; };
+		DDC3767817066A5F00AA94BA /* GameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCell.h; sourceTree = "<group>"; };
+		DDC3767917066A5F00AA94BA /* GameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCell.m; sourceTree = "<group>"; };
 		DDC5D208166C141A00D39E3E /* MissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
 		DDC5D209166C141A00D39E3E /* MissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionViewController.m; sourceTree = "<group>"; };
 		DDC5D20A166C141A00D39E3E /* MissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionViewController.xib; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				DDC01B4D16F2F49F005E80AB /* Player.m */,
 				DDC01B4916F2D2D7005E80AB /* Game.h */,
 				DDC01B4A16F2D2D7005E80AB /* Game.m */,
+				DDC3767817066A5F00AA94BA /* GameCell.h */,
+				DDC3767917066A5F00AA94BA /* GameCell.m */,
 				DD5166B0166A935500BA9EC8 /* PhotoObject.h */,
 				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
 				DD1AFD3B16FE9D990058429F /* TargetScrollView.h */,
@@ -609,6 +614,7 @@
 				DDD8980A16F8F5DA004586CD /* Logger.m in Sources */,
 				DDD8981216F9075A004586CD /* HorizontalTableViewCell.m in Sources */,
 				DD1AFD3D16FE9D990058429F /* TargetScrollView.m in Sources */,
+				DDC3767A17066A5F00AA94BA /* GameCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

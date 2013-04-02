@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TargetScrollView : UIScrollView {
+@interface TargetScrollView : UIScrollView <UIScrollViewDelegate>{
     NSMutableArray *data;
 }
 
 @property (nonatomic) NSMutableArray *data;
+
+- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) interactable target:(id) caller;
 
 @end

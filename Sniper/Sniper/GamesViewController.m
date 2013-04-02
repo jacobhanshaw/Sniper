@@ -8,6 +8,7 @@
 
 #import "GamesViewController.h"
 #import "HorizontalTableViewCell.h"
+#import "Target.h"
 
 @interface GamesViewController ()
 
@@ -44,9 +45,26 @@
         }
     }*/
     //gamesTableView = [[HorizontalTableView alloc] init];
-    gamesTableView = [[HorizontalTableView alloc]initWithFrame:CGRectMake(0, 80, 280, 200)];
-    [self.view addSubview:gamesTableView];
+    gamesScrollView = [[TargetScrollView alloc] initWithFrame:CGRectMake(20, 80, 280, 80)];
+    NSMutableArray *targets = [[NSMutableArray alloc] init];
+    for(int i = 0; i < 20; ++i){
+        Target *targetA = [[Target alloc] init];
+        targetA.imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"player.png"]];
+        targetA.name = [NSString stringWithFormat:@"Hello %c", ('A' + i)];
+        [targets addObject:targetA];
+    }
+    
+    [gamesScrollView loadPageScroller:targets interactable:YES target:self];
+  //  gamesTableView = [[HorizontalTableView alloc]initWithFrame:CGRectMake(0, 80, 280, 200)];
+ //   [self.view addSubview:gamesTableView];
+    [self.view addSubview:gamesScrollView];
 }
+
+- (IBAction)targetButtonPressed:(id) sender{
+    UIButton *button = (UIButton *)sender;
+    NSLog(@"Clicked target at index: %d", button.tag);
+}
+
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
