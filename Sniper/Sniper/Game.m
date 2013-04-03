@@ -10,6 +10,15 @@
 
 @implementation Game
 
-@synthesize type, gameId, currentTargets, allTargets;
+@synthesize name, type, gameId, currentTargets, allTargets;
+
+
+NSString *stringWithGameType(GameType input) {
+    NSArray *arr = @[
+                     @"Assassins",           
+                     @"Error"
+                     ];
+    return (NSString *)[arr objectAtIndex:input];
+}
 
 @end

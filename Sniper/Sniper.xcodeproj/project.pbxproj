@@ -62,6 +62,7 @@
 		DDC5D233166C3F7D00D39E3E /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D228166C3F7D00D39E3E /* AFURLConnectionOperation.m */; };
 		DDC5D234166C3F7D00D39E3E /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D22A166C3F7D00D39E3E /* AFXMLRequestOperation.m */; };
 		DDC5D235166C3F7D00D39E3E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D22C166C3F7D00D39E3E /* UIImageView+AFNetworking.m */; };
+		DDC722F0170C128900D269B7 /* ExtraTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC722EF170C128900D269B7 /* ExtraTagButton.m */; };
 		DDCDF93A1669DFDB00CCA28C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF9381669DFDB00CCA28C /* RootViewController.m */; };
 		DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF9391669DFDB00CCA28C /* RootViewController.xib */; };
 		DDCDF93E1669DFFA00CCA28C /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF93D1669DFFA00CCA28C /* AppModel.m */; };
@@ -179,6 +180,8 @@
 		DDC5D22A166C3F7D00D39E3E /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		DDC5D22B166C3F7D00D39E3E /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		DDC5D22C166C3F7D00D39E3E /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		DDC722EE170C128900D269B7 /* ExtraTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraTagButton.h; sourceTree = "<group>"; };
+		DDC722EF170C128900D269B7 /* ExtraTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraTagButton.m; sourceTree = "<group>"; };
 		DDCDF9371669DFDB00CCA28C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		DDCDF9381669DFDB00CCA28C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		DDCDF9391669DFDB00CCA28C /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				DD5166B1166A935500BA9EC8 /* PhotoObject.m */,
 				DD1AFD3B16FE9D990058429F /* TargetScrollView.h */,
 				DD1AFD3C16FE9D990058429F /* TargetScrollView.m */,
+				DDC722EE170C128900D269B7 /* ExtraTagButton.h */,
+				DDC722EF170C128900D269B7 /* ExtraTagButton.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 				DDD8981216F9075A004586CD /* HorizontalTableViewCell.m in Sources */,
 				DD1AFD3D16FE9D990058429F /* TargetScrollView.m in Sources */,
 				DDC3767A17066A5F00AA94BA /* GameCell.m in Sources */,
+				DDC722F0170C128900D269B7 /* ExtraTagButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@ typedef enum {
 
 @interface Game : NSObject {
     
+    NSString       *name;
     GameType        type;
     int             gameId;
     NSMutableArray *currentTargets;
@@ -22,9 +23,12 @@ typedef enum {
 
 }
 
+@property (nonatomic)     NSString       *name;
 @property (readwrite)     GameType        type;
 @property (readwrite)     int             gameId;
 @property (nonatomic)     NSMutableArray *currentTargets;
 @property (nonatomic)     NSMutableArray *allTargets;
+
+NSString *stringWithGameType(GameType input);
 
 @end

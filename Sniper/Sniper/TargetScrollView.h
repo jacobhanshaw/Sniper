@@ -10,10 +10,11 @@
 
 @interface TargetScrollView : UIScrollView <UIScrollViewDelegate>{
     NSMutableArray *data;
+    BOOL           interactable;
 }
 
 @property (nonatomic) NSMutableArray *data;
 
-- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) interactable target:(id) caller;
+- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) inputInteractable target:(id) caller section:(int) section row:(int) row;
 
 @end

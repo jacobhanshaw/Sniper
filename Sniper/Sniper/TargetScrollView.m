@@ -8,6 +8,7 @@
 
 #import "TargetScrollView.h"
 #import "Target.h"
+#import "ExtraTagButton.h"
 
 #define SPACEBETWEENTARGETS       0
 //#define NORMALTARGETWIDTH        80
@@ -33,26 +34,28 @@
     return self;
 }
 
-- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) interactable target:(id) caller
+- (void)loadPageScroller:(NSMutableArray *)targets interactable:(BOOL) inputInteractable target:(id) caller section:(int) section row:(int) row
 {
     int spacing = SPACEBETWEENTARGETS; //page spacing
     int margin =  SPACEBETWEENTARGETS/2; //side margins
     
     data = targets;
+    interactable = inputInteractable;
     
     for (int i = 0; i < data.count; i++) {
         float x = i * (self.frame.size.height+spacing) + margin;
         
-        UIButton *targetButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        ExtraTagButton *targetButton = [[ExtraTagButton alloc] initWithFrame:CGRectMake(x, 0, self.frame.size.height, self.frame.size.height)];
         targetButton.userInteractionEnabled = interactable;
         
-        targetButton.frame = CGRectMake(x, 0, self.frame.size.height, self.frame.size.height);
         targetButton.backgroundColor = [UIColor blackColor]; //clearColor
         
         [targetButton setBackgroundImage:((Target *)[data objectAtIndex:i]).imageView.image forState:UIControlStateNormal];
         [targetButton setBackgroundImage:((Target *)[data objectAtIndex:i]).imageView.image forState:UIControlStateHighlighted];
         [targetButton addTarget:caller action:@selector(targetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         targetButton.tag = i;
+        targetButton.section = section;
+        targetButton.row = row;
         [self addSubview:targetButton];
         
         UILabel *label =  [[UILabel alloc] initWithFrame: CGRectMake(0, targetButton.frame.size.height * .667, targetButton.frame.size.width, targetButton.frame.size.height * .333)];
@@ -66,6 +69,7 @@
     }
     [self setContentSize:CGSizeMake(data.count * (self.frame.size.height+spacing), self.frame.size.height)];
 }
+
 /* //I made below to evenly align left side of scrollview to left, but it doesn't look good. Need to align to center and enlarge target or do something else
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     

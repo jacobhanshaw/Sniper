@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HorizontalTableView.h"
-#import "TargetScrollView.h"
+//#import "HorizontalTableView.h"
+//#import "TargetScrollView.h"
 
 @interface GamesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
    // __weak IBOutlet UITableView *gamesTableView;
-    HorizontalTableView *gamesTableView;
-    TargetScrollView *gamesScrollView;
-    NSMutableArray *reusableCells;
+    NSMutableArray *games;
+    UITableView    *gamesTableView;
+    //TargetScrollView *gamesScrollView;
+    //NSMutableArray *reusableCells;
     
 }
 
-@property(nonatomic) NSMutableArray *reusableCells;
+//@property(nonatomic) NSMutableArray *reusableCells;
 
 @end
