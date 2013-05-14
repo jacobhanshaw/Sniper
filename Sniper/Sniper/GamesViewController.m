@@ -13,7 +13,7 @@
 #import "GameCell.h"
 #import "ExtraTagButton.h"
 
-#define CELLHEIGHT 160
+#define CELLHEIGHT 120
 
 @interface GamesViewController ()
 

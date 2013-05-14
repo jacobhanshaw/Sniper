@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "RootViewController.h"
+#import "RootTabBarController.h"
 
 @implementation AppDelegate
 
@@ -25,9 +25,9 @@
     [[AppModel sharedAppModel] loadUserDefaults];
     
     if([self.window respondsToSelector:@selector(setRootViewController:)])
-        [self.window setRootViewController:[RootViewController sharedRootViewController]];
+        [self.window setRootViewController:[RootTabBarController sharedRootViewController]];
     else
-        [self.window addSubview:[RootViewController sharedRootViewController].view];
+        [self.window addSubview:[RootTabBarController sharedRootViewController].view];
     
     return YES;
 }

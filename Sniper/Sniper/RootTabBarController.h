@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "HorizontalTableView.h"
 
+#define CENTER_BUTTON_WIDTH 70
+#define CENTER_BUTTON_HEIGHT 70
+
 typedef enum {
-    GAMESINDEX,
-    TARGETSINDEX,
-    EMPTYINDEX,
-    ARMORYINDEX,
-    SETTINGSINDEX,
-    NUMOFINDEXES
+    GAMES_TAB_INDEX,
+    TARGETS_TAB_INDEX,
+    EMPTY_TAB_INDEX,
+    ARMORY_TAB_INDEX,
+    SETTINGS_TAB_INDEX,
+    NUM_OF_INDEXES
 } TabBarIndex;
 
-@interface RootViewController : UITabBarController<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITableViewDataSource, UITableViewDelegate> {
+@interface RootTabBarController : UITabBarController<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITableViewDataSource, UITableViewDelegate> {
     HorizontalTableView *targetTableView;
     UIImagePickerController *picker;
     
@@ -32,6 +35,6 @@ typedef enum {
 @property (nonatomic) NSMutableArray *shots;
 
 - (void)takePicture;
-+ (RootViewController *)sharedRootViewController;
++ (RootTabBarController *)sharedRootViewController;
 
 @end

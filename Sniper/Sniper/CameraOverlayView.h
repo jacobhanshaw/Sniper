@@ -9,7 +9,7 @@
 #pragma once
 
 #import <UIKit/UIKit.h>
-#import "RootViewController.h"
+#import "RootTabBarController.h"
 #import "AppModel.h"
 
 @interface CameraOverlayView : UIView {
@@ -18,11 +18,11 @@
     IBOutlet UISlider *zoomLevelSlider;
     BOOL               sliderIsInverted;
     
-    RootViewController *delegate;
+    RootTabBarController *delegate;
     UIImagePickerController *picker;
 }
 
-@property (nonatomic) RootViewController *delegate;
+@property (nonatomic) RootTabBarController *delegate;
 @property (nonatomic) UIImagePickerController *picker;
 
 - (void)update;

@@ -8,7 +8,7 @@
 
 #import "MissionViewController.h"
 #import "CameraOverlayView.h"
-#import "RootViewController.h"
+#import "RootTabBarController.h"
 #import "UIImage+Scale.h"
 #import "UIImage+Resize.h"
 #import "UIImage+fixOrientation.h"

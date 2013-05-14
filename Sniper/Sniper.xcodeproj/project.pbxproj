@@ -63,8 +63,8 @@
 		DDC5D234166C3F7D00D39E3E /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D22A166C3F7D00D39E3E /* AFXMLRequestOperation.m */; };
 		DDC5D235166C3F7D00D39E3E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC5D22C166C3F7D00D39E3E /* UIImageView+AFNetworking.m */; };
 		DDC722F0170C128900D269B7 /* ExtraTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC722EF170C128900D269B7 /* ExtraTagButton.m */; };
-		DDCDF93A1669DFDB00CCA28C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF9381669DFDB00CCA28C /* RootViewController.m */; };
-		DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF9391669DFDB00CCA28C /* RootViewController.xib */; };
+		DDCDF93A1669DFDB00CCA28C /* RootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF9381669DFDB00CCA28C /* RootTabBarController.m */; };
+		DDCDF93B1669DFDB00CCA28C /* RootTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDCDF9391669DFDB00CCA28C /* RootTabBarController.xib */; };
 		DDCDF93E1669DFFA00CCA28C /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF93D1669DFFA00CCA28C /* AppModel.m */; };
 		DDCDF9631669F48800CCA28C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */; };
 		DDCDF97C166A023800CCA28C /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCDF97B166A023800CCA28C /* CameraOverlayView.m */; };
@@ -182,9 +182,9 @@
 		DDC5D22C166C3F7D00D39E3E /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		DDC722EE170C128900D269B7 /* ExtraTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraTagButton.h; sourceTree = "<group>"; };
 		DDC722EF170C128900D269B7 /* ExtraTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraTagButton.m; sourceTree = "<group>"; };
-		DDCDF9371669DFDB00CCA28C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		DDCDF9381669DFDB00CCA28C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		DDCDF9391669DFDB00CCA28C /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		DDCDF9371669DFDB00CCA28C /* RootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarController.h; sourceTree = "<group>"; };
+		DDCDF9381669DFDB00CCA28C /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
+		DDCDF9391669DFDB00CCA28C /* RootTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarController.xib; sourceTree = "<group>"; };
 		DDCDF93C1669DFFA00CCA28C /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		DDCDF93D1669DFFA00CCA28C /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		DDCDF9621669F48800CCA28C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -298,10 +298,8 @@
 		DDBC50DF16687C0500B9AFBF /* Sniper */ = {
 			isa = PBXGroup;
 			children = (
-				DDC01B4416F2D1C6005E80AB /* Classes */,
-				DD32D3B516F102D800E6C5A2 /* Tab Bar View Controllers */,
 				DDC30E3116EDB79D00A005B7 /* View Controllers */,
-				DDCDF96D1669F84A00CCA28C /* Camera */,
+				DDC01B4416F2D1C6005E80AB /* Classes */,
 				DDCDF95F1669F3A500CCA28C /* Core */,
 				DDBC50E016687C0500B9AFBF /* Supporting Files */,
 			);
@@ -386,12 +384,14 @@
 		DDC30E3116EDB79D00A005B7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DD32D3B516F102D800E6C5A2 /* Tab Bar View Controllers */,
 				DD5166E7166ADC1300BA9EC8 /* LogInViewController.h */,
 				DD5166E8166ADC1300BA9EC8 /* LogInViewController.m */,
 				DD5166E9166ADC1300BA9EC8 /* LogInViewController.xib */,
 				DDC5D208166C141A00D39E3E /* MissionViewController.h */,
 				DDC5D209166C141A00D39E3E /* MissionViewController.m */,
 				DDC5D20A166C141A00D39E3E /* MissionViewController.xib */,
+				DDCDF96D1669F84A00CCA28C /* Camera */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -446,9 +446,9 @@
 				DDCDF93D1669DFFA00CCA28C /* AppModel.m */,
 				DDD8980816F8F5DA004586CD /* Logger.h */,
 				DDD8980916F8F5DA004586CD /* Logger.m */,
-				DDCDF9371669DFDB00CCA28C /* RootViewController.h */,
-				DDCDF9381669DFDB00CCA28C /* RootViewController.m */,
-				DDCDF9391669DFDB00CCA28C /* RootViewController.xib */,
+				DDCDF9371669DFDB00CCA28C /* RootTabBarController.h */,
+				DDCDF9381669DFDB00CCA28C /* RootTabBarController.m */,
+				DDCDF9391669DFDB00CCA28C /* RootTabBarController.xib */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -538,7 +538,7 @@
 				DDBC50EC16687C0500B9AFBF /* Default.png in Resources */,
 				DDBC50EE16687C0500B9AFBF /* Default@2x.png in Resources */,
 				DDBC50F016687C0500B9AFBF /* Default-568h@2x.png in Resources */,
-				DDCDF93B1669DFDB00CCA28C /* RootViewController.xib in Resources */,
+				DDCDF93B1669DFDB00CCA28C /* RootTabBarController.xib in Resources */,
 				DDCDF980166A040300CCA28C /* CameraOverlayView.xib in Resources */,
 				DD5166EB166ADC1300BA9EC8 /* LogInViewController.xib in Resources */,
 				DDC5D20C166C141A00D39E3E /* MissionViewController.xib in Resources */,
@@ -585,7 +585,7 @@
 			files = (
 				DDBC50E616687C0500B9AFBF /* main.m in Sources */,
 				DDBC50EA16687C0500B9AFBF /* AppDelegate.m in Sources */,
-				DDCDF93A1669DFDB00CCA28C /* RootViewController.m in Sources */,
+				DDCDF93A1669DFDB00CCA28C /* RootTabBarController.m in Sources */,
 				DDCDF93E1669DFFA00CCA28C /* AppModel.m in Sources */,
 				DDCDF97C166A023800CCA28C /* CameraOverlayView.m in Sources */,
 				DDCDF989166A1ECD00CCA28C /* Sniper.xcdatamodeld in Sources */,
