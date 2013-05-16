@@ -384,6 +384,9 @@
 		DDC30E3116EDB79D00A005B7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDCDF9371669DFDB00CCA28C /* RootTabBarController.h */,
+				DDCDF9381669DFDB00CCA28C /* RootTabBarController.m */,
+				DDCDF9391669DFDB00CCA28C /* RootTabBarController.xib */,
 				DD32D3B516F102D800E6C5A2 /* Tab Bar View Controllers */,
 				DD5166E7166ADC1300BA9EC8 /* LogInViewController.h */,
 				DD5166E8166ADC1300BA9EC8 /* LogInViewController.m */,
@@ -446,9 +449,6 @@
 				DDCDF93D1669DFFA00CCA28C /* AppModel.m */,
 				DDD8980816F8F5DA004586CD /* Logger.h */,
 				DDD8980916F8F5DA004586CD /* Logger.m */,
-				DDCDF9371669DFDB00CCA28C /* RootTabBarController.h */,
-				DDCDF9381669DFDB00CCA28C /* RootTabBarController.m */,
-				DDCDF9391669DFDB00CCA28C /* RootTabBarController.xib */,
 			);
 			name = Core;
 			sourceTree = "<group>";
