@@ -9,9 +9,7 @@
 #import "MissionViewController.h"
 #import "CameraOverlayView.h"
 #import "RootTabBarController.h"
-#import "UIImage+Scale.h"
-#import "UIImage+Resize.h"
-#import "UIImage+fixOrientation.h"
+
 #import <ImageIO/ImageIO.h>
 #import "Target.h"
 
@@ -93,20 +91,6 @@
     for(NSDictionary *info in [self shots]){
         PhotoObject *photo = [[PhotoObject alloc] init];
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        
-        if(image.size.height > image.size.width){
-            if(image.size.height > 856)
-                image = [image scaleToSize:CGSizeMake(image.size.width*(856/image.size.height), 856)];
-            if(image.size.width > 640)
-                image = [image scaleToSize:CGSizeMake(640, image.size.height*(640/image.size.width))];
-        }
-        else
-        {
-            if(image.size.width > 856)
-                image = [image scaleToSize:CGSizeMake(856, image.size.height*(856/image.size.width))];
-            if(image.size.height > 640)
-                image = [image scaleToSize:CGSizeMake(image.size.width*(640/image.size.height), 640)];
-        }
         
         photo.image = image;
         

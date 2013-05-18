@@ -51,6 +51,8 @@ const int kHaarOptions =  CV_HAAR_FIND_BIGGEST_OBJECT | CV_HAAR_DO_ROUGH_SEARCH;
 @synthesize videoOutput = _videoOutput;
 @synthesize videoPreviewLayer = _videoPreviewLayer;
 
+@synthesize stillImage;
+
 @dynamic showDebugInfo;
 @dynamic torchOn;
 
@@ -633,4 +635,5 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         _fpsLabel.text = [NSString stringWithFormat:@"FPS: %0.1f", _fps];
     }
 }
+
 @end

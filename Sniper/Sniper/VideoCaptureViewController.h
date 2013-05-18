@@ -62,6 +62,12 @@
 @property (nonatomic, assign) NSString * const qualityPreset;
 @property (nonatomic, assign) BOOL captureGrayscale;
 
+@property (retain) AVCaptureStillImageOutput *stillImageOutput;
+@property (nonatomic, retain) UIImage *stillImage;
+
+- (void)addStillImageOutput;
+- (void)captureStillImage;
+
 - (CGAffineTransform)affineTransformForVideoFrame:(CGRect)videoFrame orientation:(AVCaptureVideoOrientation)videoOrientation;
 
 @end

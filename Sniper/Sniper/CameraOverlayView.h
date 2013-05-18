@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#pragma once
-
 #import <UIKit/UIKit.h>
+
 #import "RootTabBarController.h"
+
 #import "AppModel.h"
 
 @interface CameraOverlayView : UIView {
