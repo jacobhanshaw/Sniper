@@ -6,17 +6,14 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context=".MainActivity" >
+    tools:context=".GamesHome" >
 
-   <FrameLayout
-        android:id="@+id/camera_preview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:paddingBottom="65dp" >
-    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
     
-   <fragment android:name="com.sniper.Toolbar"
+    <fragment android:name="com.sniper.Toolbar"
         android:id="@+id/toolbar_fragment"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

@@ -11,6 +11,10 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,6 +28,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sniper.GamesHome"
+            android:label="@string/title_activity_games_home" >
+        </activity>
+        <activity
+            android:name="com.sniper.ArmoryHome"
+            android:label="@string/title_activity_armory_home" >
         </activity>
     </application>
 

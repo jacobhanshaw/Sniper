@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false" >
+    <Button 
+          android:id="@+id/game_button"
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="43dp"
+           android:layout_gravity="bottom"
+          android:layout_marginLeft="0dp"
+          android:layout_marginRight="-4dp"/>
+
+      <Button
+          android:id="@+id/armory_button"
+          android:layout_width="match_parent"
+          android:layout_height="43dp"
+          android:layout_gravity="bottom"
+          android:layout_weight="1"
+          android:layout_marginLeft="-4dp"
+          android:layout_marginRight="-4dp" />
+      
+      <com.sniper.HomeButton 
+          android:id="@+id/home_button"
+           android:layout_weight=".9"
+           android:layout_width="match_parent"
+           android:layout_height="65dp"
+           android:layout_gravity="bottom"
+          android:layout_marginLeft="-4dp"
+          android:layout_marginRight="-4dp"/>
+
+      <Button 
+          android:id="@+id/leaders_button"
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="43dp"
+           android:layout_gravity="bottom"
+          android:layout_marginLeft="-4dp"
+          android:layout_marginRight="-4dp"/>
+      
+      <Button 
+          android:id="@+id/settings_button"
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="43dp"
+           android:layout_gravity="bottom"
+          android:layout_marginLeft="-4dp"
+          android:layout_marginRight="0dp"/>
+
+</LinearLayout>
