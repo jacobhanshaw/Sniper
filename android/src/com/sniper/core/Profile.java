@@ -1,6 +1,5 @@
 package com.sniper.core;
 
-public class Profile 
-{
-	public String name;
+public class Profile {
+
 }
