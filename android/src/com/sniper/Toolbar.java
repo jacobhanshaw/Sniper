@@ -2,6 +2,7 @@ package com.sniper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,13 +15,39 @@ public class Toolbar extends Fragment{
 			Bundle savedInstanceState) {
 		    // Inflate the layout for this fragment
 			
-			View v = inflater.inflate(R.layout.activity_toolbar,
-			        container, false);
+			View v;
+			if(getResources().getConfiguration().orientation == 
+					Configuration.ORIENTATION_PORTRAIT){
+				v = inflater.inflate(R.layout.activity_toolbar,
+				        container, false);
+			}
+			else{
+				v = inflater.inflate(R.layout.activity_toolbar_landscape,
+				        container, false);
+			}
+			
 
 			LinkButton(v, R.id.game_button, GamesHome.class);
-			LinkButton(v, R.id.home_button, MainActivity.class);
+			//LinkButton(v, R.id.home_button, MainActivity.class);
 			LinkButton(v, R.id.armory_button, ArmoryHome.class);
 			
+			Button button = (Button)v.findViewById(R.id.home_button);
+	        button.setOnClickListener(new View.OnClickListener() {
+	            @Override
+	            public void onClick(View v) {
+	            	Activity activity = getActivity();
+	            	
+	            	if(MainActivity.class.isInstance(activity)){
+	            		
+	            	}
+	            	else{
+		            	Intent intent = new Intent(activity, MainActivity.class);
+		            	startActivity(intent);	            		
+	            	}
+	            	
+	            }
+	        });
+						
 		    return v;
 		}
 		

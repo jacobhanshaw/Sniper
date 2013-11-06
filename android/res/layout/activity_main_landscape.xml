@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_centerVertical="true"
-	    android:paddingBottom="65dp">
+	    android:paddingRight="65dp">
 	   <FrameLayout
 	        android:id="@+id/camera_preview"
 	        android:layout_width="fill_parent"
@@ -56,8 +56,8 @@
 	        </Button>
 	    </RelativeLayout>
     </FrameLayout>
-    
-   <fragment android:name="com.sniper.Toolbar"
+
+    <fragment android:name="com.sniper.Toolbar"
         android:id="@+id/toolbar_fragment"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"

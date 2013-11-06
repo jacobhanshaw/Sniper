@@ -46,7 +46,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 		mCamera.startPreview();
     }
     
-    private PictureCallback mPicture = new PictureCallback() {
+    private static PictureCallback mPicture = new PictureCallback() {
 
 	    @Override
 	    public void onPictureTaken(byte[] data, android.hardware.Camera camera) {

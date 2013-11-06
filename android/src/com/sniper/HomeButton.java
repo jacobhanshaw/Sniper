@@ -1,5 +1,6 @@
 package com.sniper;
 
+import android.R.color;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.*;
@@ -32,6 +33,8 @@ public class HomeButton extends Button{
         int pad = dpToPx(3.5);
                
         //canvas.drawColor(Color.WHITE, Mode.SRC_OVER);  
+        //canvas.drawColor(Color.BLACK, Mode.SRC_OVER);  
+    	paint.setAlpha(255);
         paint.setColor(Color.WHITE);
         RectF rect;
         if(this.isPressed()){
@@ -42,14 +45,25 @@ public class HomeButton extends Button{
         }
     	canvas.drawRect(rect, paint);
     	
+//    	paint.setColor(Color.BLACK);
+//        //RectF rect;
+//        if(this.isPressed()){
+//        	rect = new RectF(0, 0, this.getWidth(), this.getHeight());
+//        }
+//        else{
+//        	rect = new RectF(pad, pad, this.getWidth()-pad, this.getHeight()-pad);
+//        }
+//    	canvas.drawRect(rect, paint);
+    	
 
         if(this.isPressed())
         {
         	paint.setColor(Color.rgb(172, 224, 244));
             DrawShape(canvas, 0, true); 
         }
-
+        
         paint.setColor(0xffd5d5d5);
+        //paint.setColor(0xff404040);
         if(this.isPressed()){
         	paint.setColor(Color.rgb(76, 190, 232));        	
         }

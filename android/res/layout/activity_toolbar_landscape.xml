@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+      
+      <Button 
+          android:id="@+id/settings_button"
+           android:layout_width="43dp"
+           android:layout_height="match_parent"
+           android:layout_gravity="right"
+          android:layout_weight="1"
+          android:layout_marginBottom="-4dp"
+          android:layout_marginTop="0dp"/>
+      
+      <Button 
+          android:id="@+id/leaders_button"
+           android:layout_width="43dp"
+           android:layout_height="match_parent"
+           android:layout_gravity="right"
+          android:layout_weight="1"
+          android:layout_marginBottom="-4dp"
+          android:layout_marginTop="-4dp"/>
+      
+      <Button 
+          android:id="@+id/home_button"
+           android:layout_weight=".9"
+          android:background="@drawable/cbutton_landscape"
+           android:layout_height="match_parent"
+           android:layout_width="62dp"
+           android:layout_gravity="right"
+          android:layout_marginBottom="-4dp"
+          android:layout_marginTop="-3dp"/>
+
+      <Button
+          android:id="@+id/armory_button"
+          android:layout_width="43dp"
+           android:layout_height="match_parent"
+           android:layout_gravity="right"
+          android:layout_weight="1"
+          android:layout_marginBottom="-4dp"
+          android:layout_marginTop="-3dp" />
+      
+    <Button 
+          android:id="@+id/game_button"
+           android:layout_weight="1"
+           android:layout_width="43dp"
+           android:layout_height="match_parent"
+           android:layout_gravity="right"
+          android:layout_marginBottom="0dp"
+          android:layout_marginTop="-4dp"/>
+
+</LinearLayout>
