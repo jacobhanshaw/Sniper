@@ -1,11 +1,8 @@
 package com.sniper;
 
-import android.app.Activity;
 import android.content.res.Configuration;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Display;
 import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
