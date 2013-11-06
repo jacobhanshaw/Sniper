@@ -6,12 +6,22 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:background="@color/black"
     tools:context=".GamesHome" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingLeft="0dp"
+	    android:paddingRight="0dp"
+	    android:paddingTop="0dp"
+        android:paddingBottom="65dp">
+	    <ListView
+	        android:id="@+id/games_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        />
+    </RelativeLayout>
     
     <fragment android:name="com.sniper.Toolbar"
         android:id="@+id/toolbar_fragment"

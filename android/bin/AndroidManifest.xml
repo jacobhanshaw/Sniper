@@ -30,10 +30,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.sniper.GamesHome"
             android:label="@string/title_activity_games_home" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.sniper.ArmoryHome"
             android:label="@string/title_activity_armory_home" >
         </activity>

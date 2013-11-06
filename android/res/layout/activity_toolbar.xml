@@ -21,14 +21,15 @@
           android:layout_marginLeft="-4dp"
           android:layout_marginRight="-4dp" />
       
-      <com.sniper.HomeButton 
+      <Button 
           android:id="@+id/home_button"
            android:layout_weight=".9"
+          android:background="@drawable/cbutton"
            android:layout_width="match_parent"
-           android:layout_height="65dp"
+           android:layout_height="62dp"
            android:layout_gravity="bottom"
           android:layout_marginLeft="-4dp"
-          android:layout_marginRight="-4dp"/>
+          android:layout_marginRight="-3dp"/>
 
       <Button 
           android:id="@+id/leaders_button"
