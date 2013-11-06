@@ -17,10 +17,19 @@
 	    android:paddingRight="0dp"
 	    android:paddingTop="0dp"
         android:paddingBottom="65dp">
+        <TextView 
+            android:id="@+id/mygamesheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:text="My Games:"/>
 	    <ListView
 	        android:id="@+id/games_list"
+	        android:layout_below="@+id/mygamesheading"
 	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
+	        android:layout_height="fill_parent"
 	        />
     </RelativeLayout>
     
