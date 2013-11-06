@@ -1,5 +1,7 @@
 package com.sniper;
 
+import com.sniper.core.Camera;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -38,7 +40,7 @@ public class Toolbar extends Fragment{
 	            	Activity activity = getActivity();
 	            	
 	            	if(MainActivity.class.isInstance(activity)){
-	            		
+	            		Camera.TakePicture();
 	            	}
 	            	else{
 		            	Intent intent = new Intent(activity, MainActivity.class);

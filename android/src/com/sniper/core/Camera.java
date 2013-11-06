@@ -26,7 +26,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	private static final int MEDIA_TYPE_VIDEO = 2;
 	
 	private SurfaceHolder mHolder;
-    public android.hardware.Camera mCamera;
+    public static android.hardware.Camera mCamera;
     private WindowManager mWindowManager;
 
     public Camera(Context context) {
@@ -41,7 +41,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         mHolder.addCallback(this);
     }
         
-    public void TakePicture(){
+    public static void TakePicture(){
     	mCamera.takePicture(null, null, mPicture);
 		mCamera.startPreview();
     }
