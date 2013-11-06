@@ -1,29 +1,25 @@
 package com.sniper;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.widget.FrameLayout;
 
+import com.parse.ParseObject;
 import com.sniper.core.Camera;
 
 public class MainActivity extends FragmentActivity {
 	private Camera camera;
-	private static final int SELECT_PHOTO = 100;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//camera = new Camera(this);
-		//FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-	    //preview.addView(camera);	
-	    
-	    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	    intent.setType("image/*");
-	    startActivityForResult(intent, SELECT_PHOTO);
+		camera = new Camera(this);
+		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+	    preview.addView(camera);	
 	}
 
 	@Override
