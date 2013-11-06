@@ -22,6 +22,8 @@ import android.view.WindowManager;
 
 public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	private static final String TAG = "Camera Error";
+	public static Context context;
+	
 	protected static final int MEDIA_TYPE_IMAGE = 1;
 	private static final int MEDIA_TYPE_VIDEO = 2;
 	
@@ -31,6 +33,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 
     public Camera(Context context) {
         super(context);
+        Camera.context = context;
         
         RefreshCamera();
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
