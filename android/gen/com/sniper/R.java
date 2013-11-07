@@ -39,38 +39,44 @@ public final class R {
         public static final int target_image=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000b;
-        public static final int armory_button=0x7f090007;
-        public static final int camera_preview=0x7f090002;
-        public static final int game_button=0x7f090006;
+        public static final int action_settings=0x7f09000e;
+        public static final int armory_button=0x7f09000a;
+        public static final int button1=0x7f090004;
+        public static final int camera_preview=0x7f090005;
+        public static final int editText1=0x7f090002;
+        public static final int editText2=0x7f090003;
+        public static final int game_button=0x7f090009;
         public static final int games_list=0x7f090001;
-        public static final int home_button=0x7f090008;
-        public static final int leaders_button=0x7f090009;
-        public static final int name_button=0x7f090003;
-        public static final int settings_button=0x7f09000a;
-        public static final int target_image=0x7f090004;
+        public static final int home_button=0x7f09000b;
+        public static final int leaders_button=0x7f09000c;
+        public static final int name_button=0x7f090006;
+        public static final int settings_button=0x7f09000d;
+        public static final int target_image=0x7f090007;
         public static final int toolbar_fragment=0x7f090000;
-        public static final int weapon_button=0x7f090005;
+        public static final int weapon_button=0x7f090008;
     }
     public static final class layout {
         public static final int activity_armory_home=0x7f030000;
         public static final int activity_games_home=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_main_landscape=0x7f030003;
-        public static final int activity_toolbar=0x7f030004;
-        public static final int activity_toolbar_landscape=0x7f030005;
-        public static final int list_item=0x7f030006;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_main_landscape=0x7f030004;
+        public static final int activity_toolbar=0x7f030005;
+        public static final int activity_toolbar_landscape=0x7f030006;
+        public static final int list_item=0x7f030007;
     }
     public static final class menu {
-        public static final int armory_home=0x7f080000;
-        public static final int games_home=0x7f080001;
-        public static final int main=0x7f080002;
+        public static final int activity_login=0x7f080000;
+        public static final int armory_home=0x7f080001;
+        public static final int games_home=0x7f080002;
+        public static final int main=0x7f080003;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int hello_world=0x7f060002;
         public static final int targetName=0x7f060005;
+        public static final int title_activity_activity_login=0x7f060006;
         public static final int title_activity_armory_home=0x7f060004;
         public static final int title_activity_games_home=0x7f060003;
     }

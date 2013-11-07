@@ -7,5 +7,6 @@
     <string name="title_activity_games_home">GamesHome</string>
     <string name="title_activity_armory_home">ArmoryHome</string>
     <string name="targetName">Chelsey Denton</string>
+    <string name="title_activity_activity_login">ActivityLogin</string>
 
 </resources>

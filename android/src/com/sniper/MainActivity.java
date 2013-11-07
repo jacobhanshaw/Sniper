@@ -1,15 +1,14 @@
 package com.sniper;
 
-import android.app.Activity;
 import android.content.res.Configuration;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Display;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.parse.ParseUser;
 import com.sniper.core.Camera;
 
 public class MainActivity extends FragmentActivity {
@@ -19,6 +18,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.v("Debug", ParseUser.getCurrentUser().getEmail().toString());
 		
 		if(getResources().getConfiguration().orientation == 
 				Configuration.ORIENTATION_PORTRAIT){

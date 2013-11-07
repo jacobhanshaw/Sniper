@@ -1,5 +1,5 @@
 package com.sniper.core;
 
-public class PlayerClassic {
+public class PlayerClassic extends Player {
 
 }

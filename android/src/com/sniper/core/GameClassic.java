@@ -1,5 +1,5 @@
 package com.sniper.core;
 
-public class GameClassic {
+public class GameClassic extends Game {
 
 }
