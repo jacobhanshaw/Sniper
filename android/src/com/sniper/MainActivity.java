@@ -3,10 +3,7 @@ package com.sniper;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-<<<<<<< HEAD
 import android.util.Log;
-=======
->>>>>>> e19bb3adec8ac8641810535b9b96ea7a98354001
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
