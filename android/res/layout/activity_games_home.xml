@@ -15,9 +15,25 @@
 	    android:layout_height="match_parent"
 	    android:paddingLeft="0dp"
 	    android:paddingRight="0dp"
-	    android:paddingTop="0dp"
+	    android:paddingTop="10dp"
         android:paddingBottom="65dp">
+        <Button 
+            android:id="@+id/createGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:text="Create New Game"
+            />
+        <Button 
+            android:textColor="#ffffffff"
+            android:layout_below="@+id/createGame"
+            android:id="@+id/joinGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join Another Game"
+            />"
         <TextView 
+            android:layout_below="@+id/joinGame"
             android:id="@+id/mygamesheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
