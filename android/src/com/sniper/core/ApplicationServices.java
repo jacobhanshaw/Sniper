@@ -1,21 +1,18 @@
 package com.sniper.core;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
 
 public class ApplicationServices
 {
-        
         private static ApplicationServices instance = null;
 
         private AmazonS3Client s3Client;
-        private final static String baseBucketName = "sniper";
-        private final static String killBucketName = "kill";
+        private final String baseBucketName = "sniper";
+        private final String killBucketName = "kill";
         
         protected ApplicationServices()
         {
@@ -29,35 +26,30 @@ public class ApplicationServices
                 return instance;
         }
 
-        public String uploadUserPhoto(File photo, String name)
-        {
-                String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
-                return uploadImageToBucket(photo, name, bucket);
+        public void uploadUserPhoto(File photo, String name, Method completionMethod)
+        {        		
+        		String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
+                uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
-        public String uploadKillPhoto(File photo, String name)
+        public void uploadKillPhoto(File photo, String name, Method completionMethod)
         {
                 String bucket = baseBucketName + killBucketName;
-                return uploadImageToBucket(photo, name, bucket);
+                uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
-        private String uploadImageToBucket(File photo, String name, String bucket)
+        private void uploadImageToBucket(File photo, String name, String bucket, Method completionMethod)
         {
-                if(!s3Client.doesBucketExist(bucket))
-                {
-                        s3Client.createBucket(bucket);
-                        s3Client.setBucketAcl(bucket, CannedAccessControlList.PublicRead);
-                }
-                
-                // Bucket, filename, file
-                PutObjectRequest por = new PutObjectRequest(bucket, name, photo);  
-                por.withCannedAcl(CannedAccessControlList.PublicRead);
-                s3Client.putObject(por);
-                
-                ResponseHeaderOverrides override = new ResponseHeaderOverrides();
-                override.setContentType( "image/jpeg" );
-                
-                return "http://s3.amazonaws.com/" + bucket + "/" + name;
+    		AWSFileUploadObject awsObject = new AWSFileUploadObject();
+    		awsObject.s3Client = s3Client;
+    		awsObject.file = photo;
+    		awsObject.bucket = bucket;
+    		awsObject.name = name;
+    		awsObject.postExecute = completionMethod;
+    		
+    		AWSRequest request = new AWSRequest();
+    	    
+    	    request.execute(awsObject);
         }
 
 }

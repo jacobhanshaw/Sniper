@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.sniper.CrosshairsView;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -18,6 +17,8 @@ import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
+
+import com.sniper.CrosshairsView;
 
 
 public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
@@ -69,8 +70,25 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	        } catch (IOException e) {
 	            Log.d(TAG, "Error accessing file: " + e.getMessage());
 	        }
+	        
+	        Method method = null;
+			try
+			{
+				method = Camera.class.getMethod("receiveResponse");
+			} catch (NoSuchMethodException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	        ApplicationServices.getInstance().uploadKillPhoto(pictureFile, "test", method);
 	    }
 	};
+	
+	public static void receiveResponse(String response)
+	{
+		
+	}
 	
 	/** Create a File for saving an image or video */
 	private static File getOutputMediaFile(int type){
