@@ -3,10 +3,15 @@ package com.sniper;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+>>>>>>> e19bb3adec8ac8641810535b9b96ea7a98354001
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.parse.ParseUser;
 import com.sniper.core.Camera;
@@ -14,6 +19,7 @@ import com.sniper.core.Camera;
 public class MainActivity extends FragmentActivity {
 	private Camera camera;
 	//private static final int SELECT_PHOTO = 100;
+	String[] targetNames = {};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
