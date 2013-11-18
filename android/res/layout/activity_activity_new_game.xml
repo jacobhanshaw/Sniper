@@ -1,0 +1,197 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ActivityNewGame" >
+
+    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingLeft="0dp"
+	    android:paddingRight="0dp"
+	    android:paddingTop="10dp"
+        android:paddingBottom="65dp">
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+	    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="vertical">
+		    
+		    <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20dp"
+	            android:paddingLeft="10dp"
+	            android:paddingTop="10dp"
+	            android:paddingBottom="-5dp"
+	            android:text="Game Name:"/>
+		    <EditText
+		        android:text="your title"
+		        android:textColor="#ffffffff"
+		        android:layout_width="match_parent"
+		        android:id="@+id/GameName"
+	            android:textSize="20dp"
+		        android:layout_height="wrap_content"
+		        android:paddingLeft="5dp"
+		        android:paddingTop="3dp"/>
+		    
+		    <CheckBox
+		        android:textColor="#ffffffff"
+		        android:id="@+id/SafeInside"
+		        android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Safe Inside"
+	            android:padding="10dp"
+	            android:checked="true"
+		        />	
+		    <CheckBox
+		        android:textColor="#ffffffff"
+		        android:id="@+id/Public"
+		        android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Public"
+	            android:padding="10dp"
+	            android:checked="true"
+		        />
+		    <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20dp"
+	            android:paddingLeft="10dp"
+	            android:paddingTop="10dp"
+	            android:paddingBottom="-5dp"
+	            android:text="Start Time:"/>
+		    <LinearLayout 
+	            android:orientation="horizontal"
+	            android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		        android:paddingLeft="5dp"
+		        android:paddingTop="3dp"
+	            >
+	            <Button 
+	                android:id="@+id/changeStartDate"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:drawableRight="@drawable/cropped_edit"
+	                />            
+		        <TextView 
+		            android:id="@+id/startdate"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="#ffffffff"
+		            android:paddingLeft="5dp"
+		            android:textSize="20dp"
+		            android:text="11/18/2013"/>
+		        <Space
+			        android:layout_width="20dp"
+			        android:layout_height="wrap_content" />
+		        <Button 
+		            android:id="@+id/btnChangeTime"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:drawableRight="@drawable/cropped_edit"
+	                />  
+	            <TextView 
+		            android:id="@+id/tvTime"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="#ffffffff"
+		            android:paddingLeft="5dp"
+		            android:textSize="20dp"/>
+	        </LinearLayout>
+		 
+		    
+		    <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20dp"
+	            android:paddingLeft="10dp"
+	            android:paddingTop="10dp"
+	            android:paddingBottom="-5dp"
+	            android:text="End Time:"/>
+		    <LinearLayout 
+	            android:orientation="horizontal"
+	            android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		        android:paddingLeft="5dp"
+		        android:paddingTop="3dp"
+	            >
+	            <Button 
+	                android:id="@+id/changeEndDate"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:drawableRight="@drawable/cropped_edit"
+	                />            
+		        <TextView 
+		            android:id="@+id/enddate"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="#ffffffff"
+		            android:paddingLeft="5dp"
+		            android:textSize="20dp"
+		            android:text="11/18/2013"/>
+		        <Space
+			        android:layout_width="20dp"
+			        android:layout_height="wrap_content" />
+		        <Button 
+		            android:id="@+id/btnChangeEndTime"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:drawableRight="@drawable/cropped_edit"
+	                />  
+	            <TextView 
+		            android:id="@+id/endTime"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="#ffffffff"
+		            android:paddingLeft="5dp"
+		            android:textSize="20dp"/>
+	        </LinearLayout>
+	        
+		    <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20dp"
+	            android:paddingLeft="10dp"
+	            android:paddingTop="10dp"
+	            android:paddingBottom="-5dp"
+	            android:text="House Rules:"/>
+
+		    <EditText
+		        android:id="@+id/houserules"
+		        android:layout_width="match_parent"
+		        android:layout_height="160dp"
+		        android:background="#ff222222"
+		        android:paddingLeft="5dp"
+		        android:paddingTop="3dp"
+		        android:textColor="@color/white"
+		        android:textSize="20dp" />
+
+		    <Space
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_marginTop="20dp" />	    
+	        <Button
+	            android:textColor="#ffffffff"
+	            android:onClick="CreateGame"
+	            android:text="Create Game"
+	            android:layout_width="fill_parent"
+            	android:layout_height="wrap_content"/>
+	    </LinearLayout>
+		</ScrollView>       
+    </RelativeLayout>
+    
+    <fragment android:name="com.sniper.Toolbar"
+        android:id="@+id/toolbar_fragment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -57,9 +57,9 @@ public class Toolbar extends Fragment{
 		            		int duration = Toast.LENGTH_SHORT;
 		            		Toast toast = Toast.makeText(Camera.context, text, duration);
 		            		toast.setGravity(Gravity.CENTER, 0, 0);
-		            		toast.show();	            			
+		            		toast.show();	
+		            		return;            			
 	            		}
-	            		return;
 	            	}
 	            	
 	            	Intent intent = new Intent(activity, link);

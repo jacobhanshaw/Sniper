@@ -1,14 +1,20 @@
 package com.sniper;
 
+import com.sniper.core.Camera;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ActivityGamesHome extends FragmentActivity {
 
@@ -35,6 +41,7 @@ public class ActivityGamesHome extends FragmentActivity {
 			}
 			});
 		adapter.notifyDataSetChanged();
+		
 	}
 
 	@Override
@@ -43,7 +50,11 @@ public class ActivityGamesHome extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.games_home, menu);
 		return true;
 	}
-	
+		
+	public void onNewGameClick(View v) {
+    	Intent intent = new Intent(this, ActivityNewGame.class);
+    	startActivity(intent);
+    }
 //	public void onListItemClick(ListView l, View v, int position, long id) {
 //		ListView listView = (ListView) findViewById(R.id.games_list);
 //		listView.setSelection(position);

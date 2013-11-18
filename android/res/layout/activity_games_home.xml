@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffffff"
             android:text="Create New Game"
+            android:onClick="onNewGameClick"
             />
         <Button 
             android:textColor="#ffffffff"

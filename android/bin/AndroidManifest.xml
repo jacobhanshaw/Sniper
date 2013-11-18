@@ -38,22 +38,23 @@
         </activity>
         <activity
             android:name="com.sniper.ActivityLogin"
-            android:label="@string/title_activity_activity_login" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_activity_login"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.sniper.ActivityLeadersHome"
-            android:label="@string/title_activity_activity_leaders_home" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_activity_leaders_home"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.sniper.ActivitySettingsHome"
-            android:label="@string/title_activity_activity_settings_home" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_activity_settings_home"
+            android:screenOrientation="portrait" >
         </activity>
 
         <service android:name="com.parse.PushService" />
@@ -64,6 +65,17 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.sniper.ActivityNewGame"
+            android:label="@string/title_activity_activity_new_game" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.phone.SelectDateActivity"
+            android:label="Date Selection"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SelectDate" />
     </application>
 
 </manifest>
