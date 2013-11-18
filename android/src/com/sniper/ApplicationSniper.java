@@ -20,6 +20,7 @@ public class ApplicationSniper extends Application {
 		// Optionally enable public read access.
 		// defaultACL.setPublicReadAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);
+		
 		PushService.setDefaultPushCallback(this, MainActivity.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 	}

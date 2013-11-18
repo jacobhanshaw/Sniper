@@ -16,7 +16,6 @@ public class Player {
 	
 	public Player() {
 		
-		createParseObject();
 	}
 	
 	private void createParseObject() {
@@ -33,6 +32,8 @@ public class Player {
 		m_poPlayer.put("alive", m_bAlive+"");
 		m_poPlayer.put("role", m_sRole);
 		ArrayList<ParseObject> alParseArsenal = new ArrayList<ParseObject>();
+		m_poPlayer.saveInBackground();
+		m_sObjectId = m_poPlayer.getObjectId();
 	}
 
 	

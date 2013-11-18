@@ -17,5 +17,6 @@ public class DbContract {
 		public static final String SAFE_INSIDE = "safeInside";
 		public static final String MODERATOR = "moderator";
 		public static final String LOCATION_OBJECTS = "locationObjects";
+		public static final String IS_PUBLIC = "isPublic";
 	}
 }

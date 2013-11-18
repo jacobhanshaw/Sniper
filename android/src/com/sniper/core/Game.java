@@ -13,8 +13,10 @@ public class Game {
 	private ArrayList<Player> m_alPlayers, m_alTargets;
 	private Date m_dStartTime, m_dEndTime;
 	private ArrayList<String> m_alHouseRules;
-	private boolean m_bSafeInside;
+	private boolean m_bSafeInside, m_bIsPublic;
 	private Player m_pModerator;
+	
+
 	private int m_iPoints;
 	private ArrayList<GpsLocation> m_alLocationObjects;
 	
@@ -27,9 +29,12 @@ public class Game {
 		game.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
 		game.put(DbContract.Game.NAME, m_sName);
 		
+		game.put(DbContract.Game.START_TIME, m_dStartTime.getTime());
+		game.put(DbContract.Game.END_TIME, m_dEndTime.getTime());
+		
 		ArrayList<ParseObject> m_alPlayersParse = new ArrayList<ParseObject>();
 		for(int i = 0; i < m_alPlayers.size(); i++) {
-			m_alPlayersParse.add(m_alPlayers.get(i).getM_poPlayer());
+			m_alPlayersParse.add(new ParseObject(m_alPlayers.get(i).getM_sObjectId()));
 		}
 		game.put(DbContract.Game.PLAYERS, m_alPlayersParse);
 		//TODO: Convert other objects to ParseObjects
@@ -38,6 +43,7 @@ public class Game {
 		game.put(DbContract.Game.SAFE_INSIDE, m_bSafeInside);
 		game.put(DbContract.Game.MODERATOR, m_pModerator);
 		game.put(DbContract.Game.LOCATION_OBJECTS, m_alLocationObjects);
+		game.put(DbContract.Game.IS_PUBLIC, m_bIsPublic);
 	}
 
 	
@@ -196,5 +202,19 @@ public class Game {
 	 */
 	public void setM_alLocationObjects(ArrayList<GpsLocation> m_alLocationObjects) {
 		this.m_alLocationObjects = m_alLocationObjects;
+	}
+	
+	/**
+	 * @return the m_bIsPublic
+	 */
+	public boolean isM_bIsPublic() {
+		return m_bIsPublic;
+	}
+
+	/**
+	 * @param m_bIsPublic the m_bIsPublic to set
+	 */
+	public void setM_bIsPublic(boolean m_bIsPublic) {
+		this.m_bIsPublic = m_bIsPublic;
 	}
 }
