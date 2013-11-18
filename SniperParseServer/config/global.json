@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Sniper": {
+            "applicationId": "NiXxI3aBRsW4xv1Og9p1jada5qOV9ldWAVHFXUgo", 
+            "masterKey": "T0lWVPPe5eQ40de8xVux7Gw6qf2Q1U5YWAalxzTH"
+        }, 
+        "_default": {
+            "link": "Sniper"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.12"
+    }
+}

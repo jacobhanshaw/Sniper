@@ -45,7 +45,7 @@ public class ActivityMain extends FragmentActivity
 		super.onCreate(savedInstanceState);
 		ParseAnalytics.trackAppOpened(getIntent());
 
-		Log.v("Debug", ParseUser.getCurrentUser().getEmail().toString());
+		//Log.v("Debug", ParseUser.getCurrentUser().getEmail().toString());
 
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
 		{
