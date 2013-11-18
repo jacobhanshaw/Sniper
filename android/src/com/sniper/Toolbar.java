@@ -32,37 +32,18 @@ public class Toolbar extends Fragment{
 			}
 			
 
-			LinkButton(v, R.id.game_button, GamesHome.class);
-			//LinkButton(v, R.id.home_button, MainActivity.class);
-			LinkButton(v, R.id.armory_button, ArmoryHome.class);
-			
-			Button button = (Button)v.findViewById(R.id.home_button);
-	        button.setOnClickListener(new View.OnClickListener() {
-	            @Override
-	            public void onClick(View v) {
-	            	Activity activity = getActivity();
-	            	
-	            	if(MainActivity.class.isInstance(activity)){
-	            		Camera.TakePicture();
-	            		
-	            		CharSequence text = "You just tried to shoot Chelsey";
-	            		int duration = Toast.LENGTH_SHORT;
-	            		Toast toast = Toast.makeText(Camera.context, text, duration);
-	            		toast.setGravity(Gravity.CENTER, 0, 0);
-	            		toast.show();
-	            	}
-	            	else{
-		            	Intent intent = new Intent(activity, MainActivity.class);
-		            	startActivity(intent);	            		
-	            	}
-	            	
-	            }
-	        });
-						
+			LinkButton(v, R.id.game_button, ActivityGamesHome.class);
+			LinkButton(v, R.id.armory_button, ActivityArmoryHome.class);
+			LinkButton(v, R.id.home_button, ActivityMain.class, true);
+			LinkButton(v, R.id.leaders_button, ActivityLeadersHome.class);
+			LinkButton(v, R.id.settings_button, ActivitySettingsHome.class);
+				
 		    return v;
 		}
-		
 		private void LinkButton(View v, int id, final Class<?> link){
+			LinkButton(v, id, link, false);			
+		}
+		private void LinkButton(View v, int id, final Class<?> link, final boolean isHome){
 			Button button = (Button)v.findViewById(id);
 	        button.setOnClickListener(new View.OnClickListener() {
 	            @Override
@@ -70,6 +51,14 @@ public class Toolbar extends Fragment{
 	            	Activity activity = getActivity();
 	            	
 	            	if(link.isInstance(activity)){
+	            		if(isHome){
+	            			Camera.TakePicture();		            		
+		            		CharSequence text = "You just tried to shoot Chelsey";
+		            		int duration = Toast.LENGTH_SHORT;
+		            		Toast toast = Toast.makeText(Camera.context, text, duration);
+		            		toast.setGravity(Gravity.CENTER, 0, 0);
+		            		toast.show();	            			
+	            		}
 	            		return;
 	            	}
 	            	

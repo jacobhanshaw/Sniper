@@ -8,7 +8,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:background="@color/black"
-    tools:context=".GamesHome" >
+    tools:context=".ActivityGamesHome" >
 
     <RelativeLayout 
 	    android:layout_width="match_parent"
@@ -46,6 +46,7 @@
 	        android:layout_below="@+id/mygamesheading"
 	        android:layout_width="match_parent"
 	        android:layout_height="fill_parent"
+	        android:choiceMode="singleChoice"	        
 	        />
     </RelativeLayout>
     

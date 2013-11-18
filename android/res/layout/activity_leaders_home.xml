@@ -1,31 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
     android:background="@color/black"
-    tools:context=".ActivityArmoryHome" >
-
-   <RelativeLayout 
+    tools:context=".ActivityLeadersHome" >
+    
+    <RelativeLayout 
         android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_centerVertical="true"
         android:paddingBottom="65dp">
         <TextView 
-            android:id="@+id/shootableheading"
+            android:id="@+id/leadersheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#ffffffff"
             android:textSize="20dp"
             android:padding="10dp"
-            android:text="Shoot With:"/>
+            android:text="Leaders:"/>
 	    <ListView
-	        android:id="@+id/shootable_list"
-	        android:layout_below="@+id/shootableheading"
+	        android:id="@+id/leaders_list"
+	        android:layout_below="@+id/leadersheading"
 	        android:layout_width="match_parent"
 	        android:layout_height="fill_parent"
 	        android:choiceMode="singleChoice"	        

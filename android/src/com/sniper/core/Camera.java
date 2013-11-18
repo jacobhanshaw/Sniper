@@ -18,6 +18,8 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
 
+import com.parse.ParseUser;
+import com.sniper.ActivityLogin;
 import com.sniper.CrosshairsView;
 
 
@@ -34,15 +36,15 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 
     public Camera(Context context) {
         super(context);
+        Log.d("camera", "end super");
         Camera.context = context;
         
         RefreshCamera();
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         
-        // Install a SurfaceHolder.Callback so we get notified when the
-        // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
+        Log.d("camera", "done");
     }
         
     public static void TakePicture(){
@@ -81,6 +83,9 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 				e.printStackTrace();
 			}
 	        
+			// don't need a million testing copies on aws
+			//String title = ParseUser.getCurrentUser().getUsername()+"_";
+			//title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 	        ApplicationServices.getInstance().uploadKillPhoto(pictureFile, "test", method);
 	    }
 	};
@@ -136,7 +141,6 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     public void surfaceCreated(SurfaceHolder holder) {
     	RefreshCamera();
     	setWillNotDraw(false);
-    	
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();

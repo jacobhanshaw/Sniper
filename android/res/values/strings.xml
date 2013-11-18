@@ -4,9 +4,11 @@
     <string name="app_name">Sniper</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_games_home">GamesHome</string>
-    <string name="title_activity_armory_home">ArmoryHome</string>
+    <string name="title_activity_games_home">Games</string>
+    <string name="title_activity_armory_home">Armory</string>
     <string name="targetName">Chelsey Denton</string>
-    <string name="title_activity_activity_login">ActivityLogin</string>
+    <string name="title_activity_activity_login">Sniper</string>
+    <string name="title_activity_activity_leaders_home">Leaders</string>
+    <string name="title_activity_activity_settings_home">Settings</string>
 
 </resources>

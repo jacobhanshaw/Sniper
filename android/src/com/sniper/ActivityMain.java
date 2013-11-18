@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,13 +18,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
 
-public class MainActivity extends FragmentActivity
+public class ActivityMain extends FragmentActivity
 {
 	private Camera camera;
 	// private static final int SELECT_PHOTO = 100;
@@ -52,7 +54,6 @@ public class MainActivity extends FragmentActivity
 		{
 			setContentView(R.layout.activity_main_landscape);
 		}
-		// setContentView(R.layout.activity_main);
 
 		camera = new Camera(this);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -65,6 +66,7 @@ public class MainActivity extends FragmentActivity
 		// intent.setType("image/*");
 		// startActivityForResult(intent, SELECT_PHOTO)
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

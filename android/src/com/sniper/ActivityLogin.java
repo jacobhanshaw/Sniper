@@ -18,7 +18,6 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class ActivityLogin extends Activity {
-
 	private Dialog progressDialog;
 	
 	@Override
@@ -40,8 +39,7 @@ public void login(View v) {
 		ParseUser.logInInBackground(sEmail, sPassword, new LogInCallback() {
 			  public void done(ParseUser user, ParseException e) {
 			    if (user != null) {
-			    	success();	    	
-			      
+			    	success();	    				      
 			    } else {
 			    	Log.e("Debug", "Sign In Error: " + e.getMessage());
 			    }
@@ -51,7 +49,7 @@ public void login(View v) {
 			
 	}
 	private void success() {
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, ActivityMain.class);
 		startActivity(intent);
 	}
 	

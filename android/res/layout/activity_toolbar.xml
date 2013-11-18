@@ -19,7 +19,8 @@
           android:layout_gravity="bottom"
           android:layout_weight="1"
           android:layout_marginLeft="-4dp"
-          android:layout_marginRight="-4dp" />
+          android:layout_marginRight="-4dp" 
+          android:drawableTop="@drawable/armory_icon"/>
       
       <Button 
           android:id="@+id/home_button"
@@ -29,7 +30,8 @@
            android:layout_height="62dp"
            android:layout_gravity="bottom"
           android:layout_marginLeft="-4dp"
-          android:layout_marginRight="-3dp"/>
+          android:layout_marginRight="-3dp"
+          android:drawableTop="@drawable/scope"/>
 
       <Button 
           android:id="@+id/leaders_button"
@@ -38,7 +40,8 @@
            android:layout_height="43dp"
            android:layout_gravity="bottom"
           android:layout_marginLeft="-4dp"
-          android:layout_marginRight="-4dp"/>
+          android:layout_marginRight="-4dp"
+          android:drawableTop="@drawable/leader_icon"/>
       
       <Button 
           android:id="@+id/settings_button"
@@ -47,6 +50,7 @@
            android:layout_height="43dp"
            android:layout_gravity="bottom"
           android:layout_marginLeft="-4dp"
-          android:layout_marginRight="0dp"/>
+          android:layout_marginRight="0dp"
+          android:drawableTop="@drawable/settings_gear"/>
 
 </LinearLayout>

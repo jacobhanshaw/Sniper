@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
+        android:text="Chelsey@sniper.com"
         android:ems="10" >
 
         <requestFocus />
@@ -28,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
         android:ems="10"
+        android:text="chelsey"
         android:inputType="textPassword" />
 
     <Button

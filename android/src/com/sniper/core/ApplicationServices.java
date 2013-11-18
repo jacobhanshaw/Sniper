@@ -27,8 +27,8 @@ public class ApplicationServices
         }
 
         public void uploadUserPhoto(File photo, String name, Method completionMethod)
-        {        		
-        		String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
+        {                        
+                        String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
                 uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
@@ -40,16 +40,16 @@ public class ApplicationServices
         
         private void uploadImageToBucket(File photo, String name, String bucket, Method completionMethod)
         {
-    		AWSFileUploadObject awsObject = new AWSFileUploadObject();
-    		awsObject.s3Client = s3Client;
-    		awsObject.file = photo;
-    		awsObject.bucket = bucket;
-    		awsObject.name = name;
-    		awsObject.postExecute = completionMethod;
-    		
-    		AWSRequest request = new AWSRequest();
-    	    
-    	    request.execute(awsObject);
+                    AWSFileUploadObject awsObject = new AWSFileUploadObject();
+                    awsObject.s3Client = s3Client;
+                    awsObject.file = photo;
+                    awsObject.bucket = bucket;
+                    awsObject.name = name;
+                    awsObject.postExecute = completionMethod;
+                    
+                    AWSRequest request = new AWSRequest();
+                
+                request.execute(awsObject);
         }
 
 }
