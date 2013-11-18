@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>74803201-A1BA-4E67-8F67-7688883D9376</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Sniper</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F25AB2B7-DF37-4DD5-BF82-EB84A2554F79</key>
+		<string>https://github.com/jacobhanshaw/Sniper.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Sniper/Sniper.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F25AB2B7-DF37-4DD5-BF82-EB84A2554F79</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jacobhanshaw/Sniper.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F25AB2B7-DF37-4DD5-BF82-EB84A2554F79</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F25AB2B7-DF37-4DD5-BF82-EB84A2554F79</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Sniper</string>
+		</dict>
+	</array>
+</dict>
+</plist>
