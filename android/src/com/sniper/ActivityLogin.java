@@ -27,8 +27,8 @@ public class ActivityLogin extends Activity {
 	}
 	
 public void login(View v) {
-	success();	
-	/*
+	//success();	
+	
 		//Pull Field Info
 		EditText tEmail = (EditText) findViewById(R.id.editText1);
 		EditText tPassword = (EditText) findViewById(R.id.editText2);
@@ -47,7 +47,7 @@ public void login(View v) {
 			    ActivityLogin.this.progressDialog.dismiss();
 			  }
 			});
-			*/
+			
 	}
 	private void success() {
 		Intent intent = new Intent(this, ActivityMain.class);
