@@ -93,6 +93,7 @@
             android:text="Main Picture:"/>
         <ImageView
 	        android:contentDescription=""
+	        android:onClick="ChangePicture"
 	        android:id="@+id/user_image"
 	        android:layout_height="160dp"
 	        android:layout_width="160dp"

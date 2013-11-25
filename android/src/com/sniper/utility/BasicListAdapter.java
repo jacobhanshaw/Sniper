@@ -11,10 +11,11 @@ import android.widget.TextView;
 import com.sniper.R;
 
 public class BasicListAdapter extends ArrayAdapter<String> {
-	private final Context context;
-	private final String[] values;
-	private int firstPosition;
+	protected final Context context;
+	protected final String[] values;
+	protected int firstPosition;
 	private View currentView;
+	protected int resource = R.layout.list_item;
 	
 	public static View lastRowView; // can be used after getView to edit inflated row
  
@@ -23,6 +24,14 @@ public class BasicListAdapter extends ArrayAdapter<String> {
 		this.context = context;
 		this.values = values;
 		this.firstPosition = firstPosition;
+	}
+	
+	public BasicListAdapter(Context context, String[] values, int firstPosition, int resource) {
+		super(context, R.layout.list_item, values);
+		this.context = context;
+		this.values = values;
+		this.firstPosition = firstPosition;
+		this.resource = resource;
 	}
 	
 	public void SelectView(View view){
@@ -48,7 +57,7 @@ public class BasicListAdapter extends ArrayAdapter<String> {
 		LayoutInflater inflater = (LayoutInflater) context
 			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
  
-		View rowView = inflater.inflate(R.layout.list_item, parent, false);
+		View rowView = inflater.inflate(resource, parent, false);
 		lastRowView = rowView;
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
 		textView.setText(values[position]);

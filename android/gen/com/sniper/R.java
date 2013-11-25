@@ -48,7 +48,7 @@ public final class R {
         public static final int GameName=0x7f090000;
         public static final int Public=0x7f090002;
         public static final int SafeInside=0x7f090001;
-        public static final int action_settings=0x7f090024;
+        public static final int action_settings=0x7f090025;
         public static final int armory_button=0x7f09001f;
         public static final int btnChangeEndTime=0x7f090009;
         public static final int btnChangeTime=0x7f090005;
@@ -67,7 +67,8 @@ public final class R {
         public static final int home_button=0x7f090020;
         public static final int houserules=0x7f09000b;
         public static final int joinGame=0x7f09000f;
-        public static final int label=0x7f090023;
+        public static final int label=0x7f090024;
+        public static final int leaderboardNumber=0x7f090023;
         public static final int leaders_button=0x7f090021;
         public static final int leaders_list=0x7f090013;
         public static final int leadersheading=0x7f090012;
@@ -95,7 +96,8 @@ public final class R {
         public static final int activity_settings_home=0x7f030008;
         public static final int activity_toolbar=0x7f030009;
         public static final int activity_toolbar_landscape=0x7f03000a;
-        public static final int list_item=0x7f03000b;
+        public static final int leaderboard_view=0x7f03000b;
+        public static final int list_item=0x7f03000c;
     }
     public static final class menu {
         public static final int activity_land_mines=0x7f080000;
