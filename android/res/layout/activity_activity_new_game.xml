@@ -37,8 +37,12 @@
 	            android:textSize="20dp"
 		        android:layout_height="wrap_content"
 		        android:paddingLeft="5dp"
-		        android:paddingTop="3dp"/>
-		    
+		        android:paddingTop="3dp"
+		        />
+		    <Space
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp" />	
 		    <CheckBox
 		        android:textColor="#ffffffff"
 		        android:id="@+id/SafeInside"

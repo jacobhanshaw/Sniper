@@ -68,14 +68,19 @@
 
         <activity
             android:name="com.sniper.ActivityNewGame"
-            android:label="@string/title_activity_activity_new_game" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_activity_new_game"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ui.phone.SelectDateActivity"
+            android:name="com.sniper.ui.phone.SelectDateActivity"
             android:label="Date Selection"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SelectDate" />
+        <activity
+            android:name="com.sniper.ActivityLandMines"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_activity_land_mines" >
+        </activity>
     </application>
 
 </manifest>

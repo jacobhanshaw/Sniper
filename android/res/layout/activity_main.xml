@@ -46,6 +46,7 @@
 	            >
 	            </ImageView>
 	        <Button
+	            android:onClick="showDialogButtonClick"
 	            android:id="@+id/weapon_button"
 	            android:text="Standard Bullets"
 	            android:textColor="#ffffffff"

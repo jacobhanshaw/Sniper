@@ -10,13 +10,13 @@
     android:background="@color/black"
     tools:context=".ActivityArmoryHome" >
 
-   <RelativeLayout 
+   <LinearLayout 
         android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_centerVertical="true"
+	    android:orientation="vertical"
         android:paddingBottom="65dp">
         <TextView 
-            android:id="@+id/shootableheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#ffffffff"
@@ -25,12 +25,30 @@
             android:text="Shoot With:"/>
 	    <ListView
 	        android:id="@+id/shootable_list"
-	        android:layout_below="@+id/shootableheading"
 	        android:layout_width="match_parent"
-	        android:layout_height="fill_parent"
+	        android:layout_height="wrap_content"
 	        android:choiceMode="singleChoice"	        
 	        />
-    </RelativeLayout>
+	    <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:paddingTop="20dp"
+            android:text="Other Weapons:"/>
+	    <Button 
+	        android:text="Landmines"
+	        android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textSize="20sp"
+		    android:gravity="left"
+		    android:textColor="#ffffffff"
+		    android:padding="10dp" 
+		    android:onClick="LandMinesClick"
+		    android:background="@drawable/list_selector" 
+	        />
+    </LinearLayout>
     
     <fragment android:name="com.sniper.Toolbar"
         android:id="@+id/toolbar_fragment"

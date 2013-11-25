@@ -1,37 +1,46 @@
 package com.sniper;
 
+import java.nio.channels.Selector;
+
+import com.sniper.utility.BasicListAdapter;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
-public class ActivityArmoryHome extends FragmentActivity {
-	String[] myStringArray = {"Standard Bullet", "Silencer", "Something else..."};
-	ArrayAdapter<String> adapter;
+public class ActivityArmoryHome extends FragmentActivity 
+	implements OnItemClickListener {
+	public static int selectedPosition = 0;
+	
+	public static String[] myStringArray = {"Standard Bullet", "Silencer", "Something else..."};
+	BasicListAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_armory_home);
 		
-		adapter = new ArrayAdapter<String>(this, 
-				//android.R.layout.simple_list_item_single_choice,
-		        R.layout.list_item,
-		        myStringArray);
+		adapter = new BasicListAdapter(this, myStringArray, selectedPosition);
 		ListView listView = (ListView) findViewById(R.id.shootable_list);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long id) {
-				
-			}
-			});
+		listView.setOnItemClickListener(this);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -41,5 +50,26 @@ public class ActivityArmoryHome extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.armory_home, menu);
 		return true;
 	}
+	
+	public void LandMinesClick(View view){
+		Intent intent = new Intent(this, ActivityLandMines.class);
+    	startActivity(intent);
+	}
+
+	private boolean first = true;
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int pos, long arg3) {
+		view.setSelected(true);
+		if(first){
+			ListView listView = (ListView) findViewById(R.id.shootable_list);
+			View v = listView.getChildAt(selectedPosition);
+			adapter.SelectView(v);
+			first = false;
+		}
+		selectedPosition = pos;
+		adapter.SelectView(view);
+	}
+	
+	
 
 }

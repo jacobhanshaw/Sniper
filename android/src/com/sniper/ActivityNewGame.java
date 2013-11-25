@@ -1,18 +1,30 @@
 package com.sniper;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import com.parse.ParseUser;
+import com.sniper.core.Game;
+import com.sniper.core.Player;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -21,17 +33,12 @@ public class ActivityNewGame extends FragmentActivity {
 	private TextView endDisplayTime;
 	private Button btnChangeTime;
 	private Button btnChangeEndTime;
- 
-	private int starthour;
-	private int startminute;
-	private int endhour;
-	private int endminute;
 	
+	private Date startDate, endDate;
+ 	
 	private TextView startDisplayDate, endDisplayDate;
 	private Button btnChangeStartDate, btnChangeEndDate;
-	private int startDay, startMonth, startYear;
-	private int endDay, endMonth, endYear;
- 
+	
 	static final int TIME_DIALOG_ID_Start = 999;
 	static final int TIME_DIALOG_ID_End = 998;
 	static final int DATE_DIALOG_ID_Start = 997;
@@ -42,12 +49,40 @@ public class ActivityNewGame extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_activity_new_game);
 		
+		startDate = new Date();
+		endDate = new Date();
+				
 		setCurrentTimeOnView();
 		addListenerOnButton();
 	}
 	
-	public void CreateGame(View v){
+	public void CreateGame(View v){		
+		Game game = new Game();
 		
+		EditText name = (EditText) findViewById(R.id.GameName);
+		game.setM_sName(name.getText().toString());
+		
+		EditText houseRules = (EditText) findViewById(R.id.houserules);
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(houseRules.getText().toString());
+		game.setM_alHouseRules(list);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		// add the person who created the game
+		game.setM_alPlayers(players);
+		
+		game.setM_dStartTime(startDate);
+		game.setM_dEndTime(endDate);
+		
+		CheckBox safe = (CheckBox)findViewById(R.id.SafeInside);
+		CheckBox publicGame = (CheckBox)findViewById(R.id.Public);		
+		game.setM_bIsPublic(publicGame.isChecked());
+		game.setM_bSafeInside(safe.isChecked());
+		
+		//set moderator
+		//targets? object id
+		
+		//create parse object
 	}
 
 	@Override
@@ -64,34 +99,22 @@ public class ActivityNewGame extends FragmentActivity {
 		endDisplayDate = (TextView) findViewById(R.id.enddate);
  
 		final Calendar c = Calendar.getInstance();
-		starthour = c.get(Calendar.HOUR_OF_DAY);
-		startminute = c.get(Calendar.MINUTE);
-		endhour = starthour;
-		endminute = startminute;
-		startDay = c.get(Calendar.DAY_OF_MONTH);
-		startMonth = c.get(Calendar.MONTH);
-		startYear = c.get(Calendar.YEAR);
-		endDay = startDay;
-		endMonth = startMonth;
-		endYear = startYear;
- 
-		// set current time into textview
-		startDisplayTime.setText(
-                    new StringBuilder().append(pad(starthour))
-                                       .append(":").append(pad(startminute))); 
+		c.add(c.DAY_OF_MONTH, 1);
+		startDate.setTime(c.getTimeInMillis());
+		c.add(c.DAY_OF_MONTH, 7);
+		endDate.setTime(c.getTimeInMillis());
+		 
+		startDisplayDate.setText(new SimpleDateFormat("MM/dd/yyyy")
+			.format(startDate));
 		
-		endDisplayTime.setText(
-                new StringBuilder().append(pad(endhour))
-                                   .append(":").append(pad(endminute)));
+		startDisplayTime.setText(new SimpleDateFormat("HH:mm")
+			.format(startDate));		
 		
-		startDisplayDate.setText(
-				new StringBuilder().append(pad(startMonth)).append("/")
-				.append(pad(startDay)).append("/").append(startYear));
-		
-		endDisplayDate.setText(
-				new StringBuilder().append(pad(endMonth)).append("/")
-				.append(pad(endDay)).append("/").append(endYear));
- 
+		endDisplayDate.setText(new SimpleDateFormat("MM/dd/yyyy")
+		.format(endDate));
+	
+		endDisplayTime.setText(new SimpleDateFormat("HH:mm")
+			.format(endDate));
 	}
 	private static String pad(int c) {
 		if (c >= 10)
@@ -144,20 +167,29 @@ public class ActivityNewGame extends FragmentActivity {
  
 	@Override
 	protected Dialog onCreateDialog(int id) {
+		final Calendar c = Calendar.getInstance();
 		switch (id) {
 		case TIME_DIALOG_ID_Start:
 			// set time picker as current time
+			c.setTime(startDate);
 			return new TimePickerDialog(this, 
-                    timePickerListener, starthour, startminute,false);
+                    timePickerListener, c.get(c.HOUR_OF_DAY), 
+                    c.get(c.MINUTE),false);
 		case TIME_DIALOG_ID_End:
+			c.setTime(endDate);
 			return new TimePickerDialog(this, 
-                    timePickerListenerEnd, endhour, endminute,false);
+                    timePickerListenerEnd, c.get(c.HOUR_OF_DAY), 
+                    c.get(c.MINUTE),false);
 		case DATE_DIALOG_ID_Start:
+			c.setTime(startDate);
 			return new DatePickerDialog(this,
-					startDatePickerListener, startYear, startMonth, startDay);
+					startDatePickerListener, c.get(c.YEAR), 
+					c.get(c.MONTH), c.get(c.DAY_OF_MONTH));
 		case DATE_DIALOG_ID_End:
+			c.setTime(endDate);
 			return new DatePickerDialog(this,
-					endDatePickerListener, endYear, endMonth, endDay); 
+					endDatePickerListener, c.get(c.YEAR), 
+					c.get(c.MONTH), c.get(c.DAY_OF_MONTH));
 		}
 		return null;
 	}
@@ -166,13 +198,14 @@ public class ActivityNewGame extends FragmentActivity {
             new DatePickerDialog.OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker arg0, int year, int month, int day) {
-			startYear = year;
-			startMonth= month;
-			startDay = day;
 			
-			startDisplayDate.setText(
-					new StringBuilder().append(pad(startMonth)).append("/")
-					.append(pad(startDay)).append("/").append(startYear));
+			Calendar c = Calendar.getInstance();
+			c.setTime(startDate);			
+			c.set(year, month, day);	
+			startDate.setTime(c.getTimeInMillis());
+			
+			startDisplayDate.setText(new SimpleDateFormat("MM/dd/yyyy")
+				.format(startDate));
 			
 		}
 	};
@@ -181,13 +214,14 @@ public class ActivityNewGame extends FragmentActivity {
             new DatePickerDialog.OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker arg0, int year, int month, int day) {
-			endYear = year;
-			endMonth= month;
-			endDay = day;
 			
-			endDisplayDate.setText(
-					new StringBuilder().append(pad(endMonth)).append("/")
-					.append(pad(endDay)).append("/").append(endYear));
+			Calendar c = Calendar.getInstance();
+			c.setTime(endDate);			
+			c.set(year, month, day);	
+			endDate.setTime(c.getTimeInMillis());
+			
+			endDisplayDate.setText(new SimpleDateFormat("MM/dd/yyyy")
+				.format(endDate));		
 			
 		}
 	};
@@ -195,27 +229,32 @@ public class ActivityNewGame extends FragmentActivity {
 	private TimePickerDialog.OnTimeSetListener timePickerListener = 
             new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int selectedHour,
-				int selectedMinute) {			
-			starthour = selectedHour;
-			startminute = selectedMinute;
- 
-			// set current time into textview
-			startDisplayTime.setText(new StringBuilder().append(pad(starthour))
-					.append(":").append(pad(startminute)));
+				int selectedMinute) {	
+			
+			Calendar c = Calendar.getInstance();
+			c.setTime(startDate);			
+			c.set(c.HOUR_OF_DAY, selectedHour);
+			c.set(c.MINUTE, selectedMinute);	
+			startDate.setTime(c.getTimeInMillis());
+			
+			startDisplayTime.setText(new SimpleDateFormat("HH:mm")
+				.format(startDate));
 		}
 	};
 
 	private TimePickerDialog.OnTimeSetListener timePickerListenerEnd = 
             new TimePickerDialog.OnTimeSetListener() {
 		public void onTimeSet(TimePicker view, int selectedHour,
-				int selectedMinute) {			
-				endhour = selectedHour;
-				endminute = selectedMinute;
-	 
-				// set current time into textview
-				endDisplayTime.setText(new StringBuilder().append(pad(endhour))
-						.append(":").append(pad(endminute)));	
+				int selectedMinute) {	
 			
+			Calendar c = Calendar.getInstance();
+			c.setTime(endDate);			
+			c.set(c.HOUR_OF_DAY, selectedHour);
+			c.set(c.MINUTE, selectedMinute);
+			endDate.setTime(c.getTimeInMillis());
+			
+			endDisplayTime.setText(new SimpleDateFormat("HH:mm")
+				.format(endDate));					
 		}
 	};
 }
