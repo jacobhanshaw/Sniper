@@ -8,14 +8,15 @@ Parse.Cloud.define("hello", function(request, response) {
 
 Parse.Cloud.beforeSave("Game", function(request, response) {
 
-        var startDate = new Date(request.object.get("m_dStartTime"));
+        var startDate = new Date(request.object.get("startTime"));
         var currentDate = new Date(); 
 
+        request.object.set("debugInfo", "Start Date is valid: " + (startDate instanceof Date));
 
         if(currentDate.timeNow() <= startDate)
         {
 
-        var players = shuffleArray(request.object.get("m_alPlayers"));
+        var players = shuffleArray(request.object.get("players"));
         var targets = new Array();
 
         for(var i = 0; i < players.length - 1; ++i)
@@ -23,7 +24,7 @@ Parse.Cloud.beforeSave("Game", function(request, response) {
 
         targets.push(players[players.length - 1] + "-" + players[0]);
 
-        request.object.set("m_alTargets", targets);
+        request.object.set("targets", targets);
 
         }
 
@@ -35,7 +36,7 @@ Parse.Cloud.afterSave("Game", function(request)
         if(!request.object.get("notifSent"))
         {
            request.object.set("notifSent", "sent");
-           setUpGameStartNotification(request.object.id, request.object.get("m_sName"), new Date(request.object.get("m_dStartTime")));
+           setUpGameStartNotification(request.object.id, request.object.get("name"), new Date(request.object.get("startTime")));
         }
 });
 

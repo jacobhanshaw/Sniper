@@ -2,38 +2,51 @@ package com.sniper.core;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import com.parse.ParseObject;
 
 public class Player {
 	
-	private String m_sName, m_sObjectId;
-	private ArrayList<String> m_alPhotos;
-	private boolean m_bAlive;
-	private String m_sRole;
-	private ArrayList<Weapon> m_alArsenal;
+	private String name, objectId;
+	private ArrayList<String> photos;
+	private boolean alive;
+	private String role;
+	private ArrayList<Weapon> arsenal;
 	
-	private ParseObject m_poPlayer;
+	private ParseObject player;
 	
 	public Player() {
 		
 	}
 	
+	//NEEDS FINISHED
+	public Player(ParseObject player)
+	{
+		
+	}
+	
+	public Player(JSONObject json)
+	{
+		
+	}
+	
 	private void createParseObject() {
-		m_poPlayer = new ParseObject("Player");
-		m_poPlayer.put("name", m_sName);
+		player = new ParseObject("Player");
+		player.put("name", name);
 		
 		ArrayList<ParseObject> alParsePhotos = new ArrayList<ParseObject>();
-		for(int i = 0; i < m_alPhotos.size(); i++) {
+		for(int i = 0; i < photos.size(); i++) {
 			ParseObject poURL = new ParseObject("URL");
-			poURL.put("url", m_alPhotos.get(i));
+			poURL.put("url", photos.get(i));
 			alParsePhotos.add(poURL);
 		}
-		m_poPlayer.put("photos", alParsePhotos);
-		m_poPlayer.put("alive", m_bAlive+"");
-		m_poPlayer.put("role", m_sRole);
+		player.put("photos", alParsePhotos);
+		player.put("alive", alive+"");
+		player.put("role", role);
 		ArrayList<ParseObject> alParseArsenal = new ArrayList<ParseObject>();
-		m_poPlayer.saveInBackground();
-		m_sObjectId = m_poPlayer.getObjectId();
+		player.saveInBackground();
+		objectId = player.getObjectId();
 	}
 
 	
@@ -41,101 +54,101 @@ public class Player {
 	 * Accessor Methods
 	 *************************************/
 	/**
-	 * @return the m_sName
+	 * @return the name
 	 */
-	public String getM_sName() {
-		return m_sName;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param m_sName the m_sName to set
+	 * @param name the name to set
 	 */
-	public void setM_sName(String m_sName) {
-		this.m_sName = m_sName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the m_sObjectId
+	 * @return the objectId
 	 */
-	public String getM_sObjectId() {
-		return m_sObjectId;
+	public String getObjectId() {
+		return objectId;
 	}
 
 	/**
-	 * @param m_sObjectId the m_sObjectId to set
+	 * @param objectId the objectId to set
 	 */
-	public void setM_sObjectId(String m_sObjectId) {
-		this.m_sObjectId = m_sObjectId;
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
 	}
 
 	/**
-	 * @return the m_alPhotos
+	 * @return the photos
 	 */
-	public ArrayList<String> getM_alPhotos() {
-		return m_alPhotos;
+	public ArrayList<String> getPhotos() {
+		return photos;
 	}
 
 	/**
-	 * @param m_alPhotos the m_alPhotos to set
+	 * @param photos the photos to set
 	 */
-	public void setM_alPhotos(ArrayList<String> m_alPhotos) {
-		this.m_alPhotos = m_alPhotos;
+	public void setPhotos(ArrayList<String> photos) {
+		this.photos = photos;
 	}
 
 	/**
-	 * @return the m_bAlive
+	 * @return the alive
 	 */
-	public boolean isM_bAlive() {
-		return m_bAlive;
+	public boolean isAlive() {
+		return alive;
 	}
 
 	/**
-	 * @param m_bAlive the m_bAlive to set
+	 * @param alive the alive to set
 	 */
-	public void setM_bAlive(boolean m_bAlive) {
-		this.m_bAlive = m_bAlive;
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	/**
-	 * @return the m_sRole
+	 * @return the role
 	 */
-	public String getM_sRole() {
-		return m_sRole;
+	public String getRole() {
+		return role;
 	}
 
 	/**
-	 * @param m_sRole the m_sRole to set
+	 * @param role the role to set
 	 */
-	public void setM_sRole(String m_sRole) {
-		this.m_sRole = m_sRole;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	/**
-	 * @return the m_alArsenal
+	 * @return the arsenal
 	 */
-	public ArrayList<Weapon> getM_alArsenal() {
-		return m_alArsenal;
+	public ArrayList<Weapon> getArsenal() {
+		return arsenal;
 	}
 
 	/**
-	 * @param m_alArsenal the m_alArsenal to set
+	 * @param arsenal the arsenal to set
 	 */
-	public void setM_alArsenal(ArrayList<Weapon> m_alArsenal) {
-		this.m_alArsenal = m_alArsenal;
+	public void setArsenal(ArrayList<Weapon> arsenal) {
+		this.arsenal = arsenal;
 	}
 
 	/**
-	 * @return the m_poPlayer
+	 * @return the player
 	 */
-	public ParseObject getM_poPlayer() {
-		return m_poPlayer;
+	public ParseObject getPlayer() {
+		return player;
 	}
 
 	/**
-	 * @param m_poPlayer the m_poPlayer to set
+	 * @param player the player to set
 	 */
-	public void setM_poPlayer(ParseObject m_poPlayer) {
-		this.m_poPlayer = m_poPlayer;
+	public void setPlayer(ParseObject player) {
+		this.player = player;
 	}
 	
 

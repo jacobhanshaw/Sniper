@@ -8,6 +8,7 @@ public class DbContract {
 	
 	public static abstract class Game implements BaseColumns {
 		public static final String NAME = "name";
+		public static final String DEBUGINFO = "debugInfo";
 		public static final String CREATOR = "createdBy";
 		public static final String PLAYERS = "players";
 		public static final String TARGETS = "targets";

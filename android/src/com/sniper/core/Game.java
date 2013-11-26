@@ -1,220 +1,285 @@
 package com.sniper.core;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.sniper.utility.DbContract;
 
 public class Game {
 
-	private String m_sName, m_sObjectId;
-	private ArrayList<Player> m_alPlayers, m_alTargets;
-	private Date m_dStartTime, m_dEndTime;
-	private ArrayList<String> m_alHouseRules;
-	private boolean m_bSafeInside, m_bIsPublic;
-	private Player m_pModerator;
+	private ParseObject game;
+	
+	private String name, houseRules, debugInfo;
+	private ArrayList<String> playerIds, targetIds;
+	private Date startTime, endTime;
+	private boolean safeInside, isPublic;
+	private String moderatorId;
 	
 
-	private int m_iPoints;
-	private ArrayList<GpsLocation> m_alLocationObjects;
+	private int points;
+	private ArrayList<GpsLocation> locationObjects;
 	
-	public Game() {
-		
+	
+	
+	public Game() 
+	{
+		createGameParseObject();
 	}
-	
-	private void createParseObject() {
-		ParseObject game = new ParseObject(Game.class.getSimpleName());
+		
+	private void createGameParseObject()
+	{
+		game = new ParseObject(Game.class.getSimpleName());
 		game.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
-		game.put(DbContract.Game.NAME, m_sName);
-		
-		game.put(DbContract.Game.START_TIME, m_dStartTime.getTime());
-		game.put(DbContract.Game.END_TIME, m_dEndTime.getTime());
-		
-		ArrayList<ParseObject> m_alPlayersParse = new ArrayList<ParseObject>();
-		for(int i = 0; i < m_alPlayers.size(); i++) {
-			m_alPlayersParse.add(new ParseObject(m_alPlayers.get(i).getM_sObjectId()));
-		}
-		game.put(DbContract.Game.PLAYERS, m_alPlayersParse);
-		//TODO: Convert other objects to ParseObjects
-		game.put(DbContract.Game.TARGETS, m_alTargets);
-		game.put(DbContract.Game.HOUSE_RULES, m_alHouseRules);
-		game.put(DbContract.Game.SAFE_INSIDE, m_bSafeInside);
-		game.put(DbContract.Game.MODERATOR, m_pModerator);
-		game.put(DbContract.Game.LOCATION_OBJECTS, m_alLocationObjects);
-		game.put(DbContract.Game.IS_PUBLIC, m_bIsPublic);
+		game.saveEventually( new SaveCallback() {
+			   public void done(ParseException e) {
+				     if (e != null) 
+				    	createGameParseObject();
+			   }
+		});
 	}
+	
+	private void pullParseObject() {
+		
+		game.fetchInBackground(new GetCallback<ParseObject>() {
+			  public void done(ParseObject gameObject, ParseException e) {
+			    if (e == null) 
+			    {
+			    	game = gameObject;
+			    	name = game.getString(DbContract.Game.NAME);
+			    	startTime = gameObject.getDate(DbContract.Game.START_TIME);
+			    	endTime = gameObject.getDate(DbContract.Game.END_TIME);
+			    	
+			    	playerIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.PLAYERS));
+			    	targetIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.TARGETS));
+			    	houseRules = gameObject.getString(DbContract.Game.HOUSE_RULES);
+					safeInside = gameObject.getBoolean(DbContract.Game.SAFE_INSIDE);
+					moderatorId = gameObject.getString(DbContract.Game.MODERATOR);
+					
+					
+					//NEED TO BE FINISHED
+					/*
+					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
+					game.put(DbContract.Game.IS_PUBLIC, isPublic);
+			    	*/
+			    	debugInfo = game.getString(DbContract.Game.DEBUGINFO);
+			    	if(!debugInfo.equals(""))
+			    		System.out.println("Error in " + Game.class.getSimpleName() + " pull method: " + debugInfo);
+			    }
+			    else 
+			    	pullParseObject();
+			  }
+			});
+	}
+	
+	private ArrayList<String> convertJSONStringArrayToArrayList(JSONArray jsonArray)
+	{
+		ArrayList<String> list = new ArrayList<String>();     
+		if (jsonArray != null) { 
+		   int len = jsonArray.length();
+		   for (int i=0;i<len;i++){ 
+		    try
+			{
+				list.add(jsonArray.get(i).toString());
+			} catch (JSONException e)
+			{
+				e.printStackTrace();
+			}
+		   } 
+		} 
+		
+		return list;
+	}
+	
+	private void pushParseObject() {
+		
+		game.fetchInBackground(new GetCallback<ParseObject>() {
+			  public void done(ParseObject gameObject, ParseException e) {
+			    if (e == null) 
+			    {
+					game.put(DbContract.Game.NAME, name);
+					game.put(DbContract.Game.START_TIME, startTime); //.getTime());
+					game.put(DbContract.Game.END_TIME, endTime); //.getTime());
+					
+			
+					game.put(DbContract.Game.PLAYERS, playerIds);
+					game.put(DbContract.Game.TARGETS, targetIds);
+					game.put(DbContract.Game.HOUSE_RULES, houseRules);
+					game.put(DbContract.Game.SAFE_INSIDE, safeInside);
+					game.put(DbContract.Game.MODERATOR, moderatorId);
+					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
+					game.put(DbContract.Game.IS_PUBLIC, isPublic);
+			    } 
+			    else 
+			    	pushParseObject();
+			  }
+			});
+	}
+
 
 	
 	/*************************************
 	 * Accessor Methods
 	 *************************************/
 	/**
-	 * @return the m_sName
+	 * @return the name
 	 */
-	public String getM_sName() {
-		return m_sName;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param m_sName the m_sName to set
+	 * @param name the name to set
 	 */
-	public void setM_sName(String m_sName) {
-		this.m_sName = m_sName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the m_sObjectId
+	 * @return the players
 	 */
-	public String getM_sObjectId() {
-		return m_sObjectId;
+	public ArrayList<String> getPlayers() {
+		return playerIds;
 	}
 
 	/**
-	 * @param m_sObjectId the m_sObjectId to set
+	 * @param players the players to set
 	 */
-	public void setM_sObjectId(String m_sObjectId) {
-		this.m_sObjectId = m_sObjectId;
+	public void setPlayers(ArrayList<String> playerIds) {
+		this.playerIds = playerIds;
 	}
 
 	/**
-	 * @return the m_alPlayers
+	 * @return the targets
 	 */
-	public ArrayList<Player> getM_alPlayers() {
-		return m_alPlayers;
+	public ArrayList<String> getTargetIds() {
+		return targetIds;
 	}
 
 	/**
-	 * @param m_alPlayers the m_alPlayers to set
+	 * @param targets the targets to set
 	 */
-	public void setM_alPlayers(ArrayList<Player> m_alPlayers) {
-		this.m_alPlayers = m_alPlayers;
+	public void setTargetIds(ArrayList<String> targetIds) {
+		this.targetIds = targetIds;
 	}
 
 	/**
-	 * @return the m_alTargets
+	 * @return the startTime
 	 */
-	public ArrayList<Player> getM_alTargets() {
-		return m_alTargets;
+	public Date getStartTime() {
+		return startTime;
 	}
 
 	/**
-	 * @param m_alTargets the m_alTargets to set
+	 * @param startTime the startTime to set
 	 */
-	public void setM_alTargets(ArrayList<Player> m_alTargets) {
-		this.m_alTargets = m_alTargets;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
 	/**
-	 * @return the m_dStartTime
+	 * @return the endTime
 	 */
-	public Date getM_dStartTime() {
-		return m_dStartTime;
+	public Date getEndTime() {
+		return endTime;
 	}
 
 	/**
-	 * @param m_dStartTime the m_dStartTime to set
+	 * @param endTime the endTime to set
 	 */
-	public void setM_dStartTime(Date m_dStartTime) {
-		this.m_dStartTime = m_dStartTime;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	/**
-	 * @return the m_dEndTime
+	 * @return the houseRules
 	 */
-	public Date getM_dEndTime() {
-		return m_dEndTime;
+	public String getHouseRules() {
+		return houseRules;
 	}
 
 	/**
-	 * @param m_dEndTime the m_dEndTime to set
+	 * @param houseRules the houseRules to set
 	 */
-	public void setM_dEndTime(Date m_dEndTime) {
-		this.m_dEndTime = m_dEndTime;
+	public void setHouseRules(String houseRules) {
+		this.houseRules = houseRules;
 	}
 
 	/**
-	 * @return the m_alHouseRules
+	 * @return the safeInside
 	 */
-	public ArrayList<String> getM_alHouseRules() {
-		return m_alHouseRules;
+	public boolean isSafeInside() {
+		return safeInside;
 	}
 
 	/**
-	 * @param m_alHouseRules the m_alHouseRules to set
+	 * @param safeInside the safeInside to set
 	 */
-	public void setM_alHouseRules(ArrayList<String> m_alHouseRules) {
-		this.m_alHouseRules = m_alHouseRules;
+	public void setSafeInside(boolean safeInside) {
+		this.safeInside = safeInside;
 	}
 
 	/**
-	 * @return the m_bSafeInside
+	 * @return the moderator
 	 */
-	public boolean isM_bSafeInside() {
-		return m_bSafeInside;
+	public String getModeratorId() {
+		return moderatorId;
 	}
 
 	/**
-	 * @param m_bSafeInside the m_bSafeInside to set
+	 * @param moderator the moderator to set
 	 */
-	public void setM_bSafeInside(boolean m_bSafeInside) {
-		this.m_bSafeInside = m_bSafeInside;
+	public void setModeratorId(String moderatorId) {
+		this.moderatorId = moderatorId;
 	}
 
 	/**
-	 * @return the m_pModerator
+	 * @return the points
 	 */
-	public Player getM_pModerator() {
-		return m_pModerator;
+	public int getPoints() {
+		return points;
 	}
 
 	/**
-	 * @param m_pModerator the m_pModerator to set
+	 * @param points the points to set
 	 */
-	public void setM_pModerator(Player m_pModerator) {
-		this.m_pModerator = m_pModerator;
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	/**
-	 * @return the m_iPoints
+	 * @return the locationObjects
 	 */
-	public int getM_iPoints() {
-		return m_iPoints;
+	public ArrayList<GpsLocation> getLocationObjects() {
+		return locationObjects;
 	}
 
 	/**
-	 * @param m_iPoints the m_iPoints to set
+	 * @param locationObjects the locationObjects to set
 	 */
-	public void setM_iPoints(int m_iPoints) {
-		this.m_iPoints = m_iPoints;
-	}
-
-	/**
-	 * @return the m_alLocationObjects
-	 */
-	public ArrayList<GpsLocation> getM_alLocationObjects() {
-		return m_alLocationObjects;
-	}
-
-	/**
-	 * @param m_alLocationObjects the m_alLocationObjects to set
-	 */
-	public void setM_alLocationObjects(ArrayList<GpsLocation> m_alLocationObjects) {
-		this.m_alLocationObjects = m_alLocationObjects;
+	public void setLocationObjects(ArrayList<GpsLocation> locationObjects) {
+		this.locationObjects = locationObjects;
 	}
 	
 	/**
-	 * @return the m_bIsPublic
+	 * @return the isPublic
 	 */
-	public boolean isM_bIsPublic() {
-		return m_bIsPublic;
+	public boolean getIsPublic() {
+		return isPublic;
 	}
 
 	/**
-	 * @param m_bIsPublic the m_bIsPublic to set
+	 * @param isPublic the isPublic to set
 	 */
-	public void setM_bIsPublic(boolean m_bIsPublic) {
-		this.m_bIsPublic = m_bIsPublic;
+	public void setIsPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }
