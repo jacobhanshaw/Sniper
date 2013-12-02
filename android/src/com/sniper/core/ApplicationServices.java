@@ -30,13 +30,13 @@ public class ApplicationServices
         public void uploadUserPhoto(File photo, String name, Method completionMethod)
         {                        
                 //String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
-        	String bucket = baseBucketName + UserPhotoBucketName;    
+        	String bucket = baseBucketName + "_" + UserPhotoBucketName;    
         	uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
         public void uploadKillPhoto(File photo, String name, Method completionMethod)
         {
-                String bucket = baseBucketName + killBucketName;
+                String bucket = baseBucketName + "_"  + killBucketName;
                 uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
