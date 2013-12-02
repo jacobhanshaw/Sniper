@@ -34,14 +34,19 @@ public class Game {
         
         public Game() 
         {
-                createGameParseObject();
+               // createGameParseObject();
         }
         
         public Game(ParseObject gameObject)
         {
                 pullDataFromParseObject(gameObject);
         }
-                
+        
+        public void create(){
+        	createGameParseObject();
+        	pushParseObject();
+        }
+                      
         private void createGameParseObject()
         {
                 game = new ParseObject(Game.class.getSimpleName());

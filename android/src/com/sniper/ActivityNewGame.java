@@ -83,7 +83,7 @@ public class ActivityNewGame extends FragmentActivity {
 		game.setModeratorId(ParseUser.getCurrentUser().getObjectId().toString());
 		//targets? object id
 		game.setTargetIds(new ArrayList<String>());
-		game.setLocationObjects(new ArrayList<GpsLocation>());
+		game.setLocationObjects(new ArrayList<String>());
 		//create parse object
 		game.create();
 	}
