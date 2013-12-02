@@ -92,7 +92,10 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	
 	public static void receiveResponse(String response)
 	{
-		
+		Log.v("Debug", "receiveResponse");
+		KillAction kill = new KillAction();
+		kill.url = response;
+		kill.publish();
 	}
 	
 	public static File getImageFile(){

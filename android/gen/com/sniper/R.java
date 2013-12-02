@@ -69,7 +69,6 @@ public final class R {
         public static final int games_list=0x7f090011;
         public static final int home_button=0x7f090025;
         public static final int houserules=0x7f09000b;
-        public static final int ivPicture=0x7f090013;
         public static final int joinGame=0x7f09000f;
         public static final int label=0x7f090029;
         public static final int leaderboardNumber=0x7f090028;
@@ -89,6 +88,7 @@ public final class R {
         public static final int user_image=0x7f090022;
         public static final int username=0x7f090020;
         public static final int weapon_button=0x7f09001f;
+        public static final int wvPicture=0x7f090013;
     }
     public static final class layout {
         public static final int activity_activity_new_game=0x7f030000;

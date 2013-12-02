@@ -1,10 +1,11 @@
 package com.sniper.core;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
-
-import android.os.AsyncTask;
 
 public class AWSRequest extends AsyncTask<AWSFileUploadObject, Void, String>
 {
@@ -35,6 +36,7 @@ public class AWSRequest extends AsyncTask<AWSFileUploadObject, Void, String>
 		super.onPostExecute(result);
 		try
 		{
+			Log.v("Debug", result);
 			awsObject.postExecute.invoke(result);
 		}
 		catch(Exception e) { }

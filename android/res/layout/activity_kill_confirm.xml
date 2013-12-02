@@ -18,8 +18,8 @@
         android:text="Confirm Kill"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/ivPicture"
+    <WebView
+        android:id="@+id/wvPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvConfirmTitle"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="24dp"
-        android:layout_toLeftOf="@+id/ivPicture"
+        android:layout_toLeftOf="@+id/wvPicture"
         android:text="Yes" 
         android:onClick="confirmYes"/>
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/bConfirmYes"
         android:layout_marginLeft="24dp"
-        android:layout_toRightOf="@+id/ivPicture"
+        android:layout_toRightOf="@+id/wvPicture"
         android:text="No"
         android:onClick="confirmNo" />
 

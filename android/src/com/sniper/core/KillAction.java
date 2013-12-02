@@ -11,6 +11,7 @@ public class KillAction extends PlayerAction
 {
 	Player killer;
 	Player dead;
+	String url;
 	
 	public KillAction()
 	{
@@ -20,10 +21,11 @@ public class KillAction extends PlayerAction
 	public void publish() {
 		JSONObject data = new JSONObject();
 		try {
-			data.put("killer", killer.getObjectId());
-			data.put("dead", dead.getObjectId());
+			//data.put("killer", killer.getObjectId());
+			//data.put("dead", dead.getObjectId());
+			data.put("url", url);
 			ParsePush push = new ParsePush();
-			push.setChannel("Kill");
+			push.setChannel("AdamTesting");
 			push.setData(data);
 			push.sendInBackground();
 		} catch (JSONException e) {
