@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -59,13 +60,11 @@ public class ActivitySettingsHome extends FragmentActivity {
 		userImageView = (ImageView) findViewById(R.id.user_image);
 		userImageView.setImageResource(R.drawable.questionmark);
 		
-
 		URL url = null;
 		try {
 			url = new URL("https://s3.amazonaws.com/sniperprofilepictures/" 
-					+ ParseUser.getCurrentUser().getUsername());
+					+ ParseUser.getCurrentUser().getEmail());
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -129,7 +128,7 @@ public class ActivitySettingsHome extends FragmentActivity {
 					}
 					
 					File file = new File(getPath(selectedImage));					
-					String title = ParseUser.getCurrentUser().getUsername();
+					String title = ParseUser.getCurrentUser().getEmail();
 			        ApplicationServices.getInstance().uploadUserPhoto(file, title, method);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
