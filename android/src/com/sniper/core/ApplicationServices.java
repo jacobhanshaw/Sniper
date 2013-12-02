@@ -13,6 +13,7 @@ public class ApplicationServices
         private AmazonS3Client s3Client;
         private final String baseBucketName = "sniper";
         private final String killBucketName = "kill";
+        private final String UserPhotoBucketName = "profilepictures";
         
         protected ApplicationServices()
         {
@@ -28,8 +29,9 @@ public class ApplicationServices
 
         public void uploadUserPhoto(File photo, String name, Method completionMethod)
         {                        
-                        String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
-                uploadImageToBucket(photo, name, bucket, completionMethod);
+                //String bucket = baseBucketName + Model.getInstance().currentUser.name.substring(0, 1);
+        	String bucket = baseBucketName + UserPhotoBucketName;    
+        	uploadImageToBucket(photo, name, bucket, completionMethod);
         }
         
         public void uploadKillPhoto(File photo, String name, Method completionMethod)
