@@ -17,6 +17,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
@@ -60,29 +61,32 @@ public class ActivityNewGame extends FragmentActivity {
 		Game game = new Game();
 		
 		EditText name = (EditText) findViewById(R.id.GameName);
-		game.setM_sName(name.getText().toString());
+		game.setName(name.getText().toString());
 		
 		EditText houseRules = (EditText) findViewById(R.id.houserules);
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(houseRules.getText().toString());
-		game.setM_alHouseRules(list);
+		game.setHouseRules(houseRules.getText().toString());
 		
-		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<String> players = new ArrayList<String>();
 		// add the person who created the game
-		game.setM_alPlayers(players);
+		game.setPlayers(players);
 		
-		game.setM_dStartTime(startDate);
-		game.setM_dEndTime(endDate);
+		game.setStartTime(startDate);
+		game.setEndTime(endDate);
 		
 		CheckBox safe = (CheckBox)findViewById(R.id.SafeInside);
 		CheckBox publicGame = (CheckBox)findViewById(R.id.Public);		
-		game.setM_bIsPublic(publicGame.isChecked());
-		game.setM_bSafeInside(safe.isChecked());
+		game.setIsPublic(publicGame.isChecked());
+		game.setSafeInside(safe.isChecked());
 		
 		//set moderator
 		//targets? object id
 		
 		//create parse object
+		
+		Intent intent = new Intent(this, ActivityGamesHome.class);
+    	startActivity(intent);
 	}
 
 	@Override
