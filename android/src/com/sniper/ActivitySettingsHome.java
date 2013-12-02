@@ -62,7 +62,7 @@ public class ActivitySettingsHome extends FragmentActivity {
 		
 		URL url = null;
 		try {
-			url = new URL("https://s3.amazonaws.com/sniperprofilepictures/" 
+			url = new URL("https://s3.amazonaws.com/sniper_profilepictures/" 
 					+ ParseUser.getCurrentUser().getEmail());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
