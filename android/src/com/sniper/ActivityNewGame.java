@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import com.parse.ParseUser;
 import com.sniper.core.Game;
+import com.sniper.core.GpsLocation;
 import com.sniper.core.Player;
 
 import android.os.Bundle;
@@ -60,29 +61,31 @@ public class ActivityNewGame extends FragmentActivity {
 		Game game = new Game();
 		
 		EditText name = (EditText) findViewById(R.id.GameName);
-		game.setM_sName(name.getText().toString());
+		game.setName(name.getText().toString());
 		
 		EditText houseRules = (EditText) findViewById(R.id.houserules);
-		ArrayList<String> list = new ArrayList<String>();
-		list.add(houseRules.getText().toString());
-		game.setM_alHouseRules(list);
+		game.setHouseRules(houseRules.getText().toString());
 		
-		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<String> players = new ArrayList<String>();
 		// add the person who created the game
-		game.setM_alPlayers(players);
+		players.add(ParseUser.getCurrentUser().getObjectId().toString());
+		game.setPlayers(players);
 		
-		game.setM_dStartTime(startDate);
-		game.setM_dEndTime(endDate);
+		game.setStartTime(startDate);
+		game.setEndTime(endDate);
 		
 		CheckBox safe = (CheckBox)findViewById(R.id.SafeInside);
 		CheckBox publicGame = (CheckBox)findViewById(R.id.Public);		
-		game.setM_bIsPublic(publicGame.isChecked());
-		game.setM_bSafeInside(safe.isChecked());
+		game.setIsPublic(publicGame.isChecked());
+		game.setSafeInside(safe.isChecked());
 		
 		//set moderator
+		game.setModeratorId(ParseUser.getCurrentUser().getObjectId().toString());
 		//targets? object id
-		
+		game.setTargetIds(new ArrayList<String>());
+		game.setLocationObjects(new ArrayList<GpsLocation>());
 		//create parse object
+		game.create();
 	}
 
 	@Override

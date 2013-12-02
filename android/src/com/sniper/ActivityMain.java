@@ -133,7 +133,7 @@ public class ActivityMain extends FragmentActivity
 				String key = (String) itr.next();
 				String value = json.getString(key);
 			}
-
+			Log.d("Debug", "Received it main");
 		} catch (JSONException e)
 		{
 			Log.d(TAG, "JSONException: " + e.getMessage());

@@ -1,6 +1,5 @@
 package com.sniper.core;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,9 +31,14 @@ public class Game {
 	
 	public Game() 
 	{
-		createGameParseObject();
+		
 	}
 		
+	public void create() {
+		createGameParseObject();
+		pushParseObject();
+	}
+	
 	private void createGameParseObject()
 	{
 		game = new ParseObject(Game.class.getSimpleName());
@@ -99,6 +103,19 @@ public class Game {
 		return list;
 	}
 	
+	private void parseTargets(ArrayList<String> array) {
+		String currPlayer = ParseUser.getCurrentUser().getObjectId();
+		for(int i = 0; i < array.size(); i++) {
+			String curr = array.get(i);
+			String[] splits = curr.split("-");
+			if(splits[0].equals(currPlayer)) {
+				array.set(i, splits[1]);
+			} else {
+				array.set(i, splits[0]);
+			}
+		}
+	}
+	
 	private void pushParseObject() {
 		
 		game.fetchInBackground(new GetCallback<ParseObject>() {
@@ -117,6 +134,7 @@ public class Game {
 					game.put(DbContract.Game.MODERATOR, moderatorId);
 					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
 					game.put(DbContract.Game.IS_PUBLIC, isPublic);
+					game.saveInBackground();
 			    } 
 			    else 
 			    	pushParseObject();

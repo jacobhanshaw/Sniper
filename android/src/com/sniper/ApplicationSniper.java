@@ -7,6 +7,7 @@ import com.parse.ParseACL;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.PushService;
+import com.sniper.core.PushReceiver;
 
 public class ApplicationSniper extends Application {
 	
@@ -21,6 +22,7 @@ public class ApplicationSniper extends Application {
 		// defaultACL.setPublicReadAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);
 		PushService.setDefaultPushCallback(this, ActivityMain.class);
+		PushService.subscribe(this, "AdamTesting", ActivityKillConfirm.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 	}
 

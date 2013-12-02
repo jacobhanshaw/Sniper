@@ -65,6 +65,8 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.sniper.core.PushReceiver" />
+          
 
         <activity
             android:name="com.sniper.ActivityNewGame"
@@ -78,8 +80,12 @@
             android:theme="@style/Theme.SelectDate" />
         <activity
             android:name="com.sniper.ActivityLandMines"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_activity_land_mines" >
+            android:label="@string/title_activity_activity_land_mines"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityKillConfirm"
+            android:label="@string/title_activity_activity_kill_confirm" >
         </activity>
     </application>
 
