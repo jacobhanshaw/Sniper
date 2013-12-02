@@ -1,6 +1,6 @@
 package com.sniper.core;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,21 +18,23 @@ public class Game {
 
 	private ParseObject game;
 	
+	private ParseUser user;
 	private String name, houseRules, debugInfo;
-	private ArrayList<String> playerIds, targetIds;
+	private ArrayList<String> playerIds, targetIds, locationIds;
 	private Date startTime, endTime;
 	private boolean safeInside, isPublic;
 	private String moderatorId;
 	
-
 	private int points;
-	private ArrayList<GpsLocation> locationObjects;
-	
-	
 	
 	public Game() 
 	{
 		createGameParseObject();
+	}
+	
+	public Game(ParseObject gameObject)
+	{
+		pullDataFromParseObject(gameObject);
 	}
 		
 	private void createGameParseObject()
@@ -47,35 +49,66 @@ public class Game {
 		});
 	}
 	
-	private void pullParseObject() {
+	private void pullDataFromParseObject(ParseObject gameObject)
+	{
+    	game = gameObject;
+    	name = game.getString(DbContract.Game.NAME);
+    	user = game.getParseUser(DbContract.Game.CREATOR);
+    	startTime = gameObject.getDate(DbContract.Game.START_TIME);
+    	endTime = gameObject.getDate(DbContract.Game.END_TIME);
+    	
+    	playerIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.PLAYERS));
+    	targetIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.TARGETS));
+    	houseRules = gameObject.getString(DbContract.Game.HOUSE_RULES);
+		safeInside = gameObject.getBoolean(DbContract.Game.SAFE_INSIDE);
+		moderatorId = gameObject.getString(DbContract.Game.MODERATOR);
+		locationIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.LOCATION_OBJECTS));
+		isPublic = gameObject.getBoolean(DbContract.Game.IS_PUBLIC);
+		
+    	debugInfo = game.getString(DbContract.Game.DEBUGINFO);
+    	if(!debugInfo.equals(""))
+    		System.out.println("Error in " + Game.class.getSimpleName() + " pull method: " + debugInfo);
+	}
+	
+	public void pullParseObject() {
+		
+		game.fetchInBackground(new GetCallback<ParseObject>() {
+			  public void done(ParseObject gameObject, ParseException e) {
+			    if (e == null) 
+			    	pullDataFromParseObject(gameObject);
+			    else 
+			    	pullParseObject();
+			  }
+			});
+	}
+	
+	public void pushParseObject() {
 		
 		game.fetchInBackground(new GetCallback<ParseObject>() {
 			  public void done(ParseObject gameObject, ParseException e) {
 			    if (e == null) 
 			    {
-			    	game = gameObject;
-			    	name = game.getString(DbContract.Game.NAME);
-			    	startTime = gameObject.getDate(DbContract.Game.START_TIME);
-			    	endTime = gameObject.getDate(DbContract.Game.END_TIME);
-			    	
-			    	playerIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.PLAYERS));
-			    	targetIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.TARGETS));
-			    	houseRules = gameObject.getString(DbContract.Game.HOUSE_RULES);
-					safeInside = gameObject.getBoolean(DbContract.Game.SAFE_INSIDE);
-					moderatorId = gameObject.getString(DbContract.Game.MODERATOR);
+					game.put(DbContract.Game.NAME, name);
+					game.put(DbContract.Game.START_TIME, startTime); //.getTime());
+					game.put(DbContract.Game.END_TIME, endTime); //.getTime());
 					
-					
-					//NEED TO BE FINISHED
-					/*
-					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
+					game.put(DbContract.Game.PLAYERS, playerIds);
+					game.put(DbContract.Game.TARGETS, targetIds);
+					game.put(DbContract.Game.HOUSE_RULES, houseRules);
+					game.put(DbContract.Game.SAFE_INSIDE, safeInside);
+					game.put(DbContract.Game.MODERATOR, moderatorId);
+					game.put(DbContract.Game.LOCATION_OBJECTS, locationIds);
 					game.put(DbContract.Game.IS_PUBLIC, isPublic);
-			    	*/
-			    	debugInfo = game.getString(DbContract.Game.DEBUGINFO);
-			    	if(!debugInfo.equals(""))
-			    		System.out.println("Error in " + Game.class.getSimpleName() + " pull method: " + debugInfo);
-			    }
+					
+					game.saveEventually( new SaveCallback() {
+						   public void done(ParseException e) {
+							     if (e != null) 
+							    	pushParseObject();
+						   }
+					});
+			    } 
 			    else 
-			    	pullParseObject();
+			    	pushParseObject();
 			  }
 			});
 	}
@@ -98,34 +131,7 @@ public class Game {
 		
 		return list;
 	}
-	
-	private void pushParseObject() {
-		
-		game.fetchInBackground(new GetCallback<ParseObject>() {
-			  public void done(ParseObject gameObject, ParseException e) {
-			    if (e == null) 
-			    {
-					game.put(DbContract.Game.NAME, name);
-					game.put(DbContract.Game.START_TIME, startTime); //.getTime());
-					game.put(DbContract.Game.END_TIME, endTime); //.getTime());
-					
-			
-					game.put(DbContract.Game.PLAYERS, playerIds);
-					game.put(DbContract.Game.TARGETS, targetIds);
-					game.put(DbContract.Game.HOUSE_RULES, houseRules);
-					game.put(DbContract.Game.SAFE_INSIDE, safeInside);
-					game.put(DbContract.Game.MODERATOR, moderatorId);
-					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
-					game.put(DbContract.Game.IS_PUBLIC, isPublic);
-			    } 
-			    else 
-			    	pushParseObject();
-			  }
-			});
-	}
 
-
-	
 	/*************************************
 	 * Accessor Methods
 	 *************************************/
@@ -258,15 +264,15 @@ public class Game {
 	/**
 	 * @return the locationObjects
 	 */
-	public ArrayList<GpsLocation> getLocationObjects() {
-		return locationObjects;
+	public ArrayList<String> getLocationObjects() {
+		return locationIds;
 	}
 
 	/**
 	 * @param locationObjects the locationObjects to set
 	 */
-	public void setLocationObjects(ArrayList<GpsLocation> locationObjects) {
-		this.locationObjects = locationObjects;
+	public void setLocationObjects(ArrayList<String> locationIds) {
+		this.locationIds = locationIds;
 	}
 	
 	/**
