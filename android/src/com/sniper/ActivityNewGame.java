@@ -18,6 +18,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
@@ -86,6 +87,10 @@ public class ActivityNewGame extends FragmentActivity {
 		game.setLocationObjects(new ArrayList<String>());
 		//create parse object
 		game.create();
+		
+		Intent intent = new Intent(this, ActivityGamesHome.class);
+		startActivity(intent);
+
 	}
 
 	@Override
