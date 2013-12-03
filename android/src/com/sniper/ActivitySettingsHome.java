@@ -19,6 +19,7 @@ import com.parse.ParseUser;
 import com.sniper.core.AWSFileUploadObject;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
+import com.sniper.utility.LoadUserImage;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -65,16 +66,7 @@ public class ActivitySettingsHome extends FragmentActivity {
 		userImageView = (ImageView) findViewById(R.id.user_image);
 		userImageView.setImageResource(R.drawable.questionmark);
 		
-		URL url = null;
-		try {
-			url = new URL("https://s3.amazonaws.com/sniper_profilepictures/" 
-					+ ParseUser.getCurrentUser().getObjectId());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		
-		GetImageRequest request = new GetImageRequest(this);
-		request.execute(url);
+		LoadUserImage.GetImage(ParseUser.getCurrentUser(), this);
 	}
 
 	@Override
@@ -278,55 +270,4 @@ public class ActivitySettingsHome extends FragmentActivity {
 	    }
 	}
 	
-	class UpdateImage implements Runnable{
-		public Bitmap bitmap;
-		public UpdateImage(Bitmap bitmap){
-			this.bitmap = bitmap;
-		}
-		public void run(){
-			ImageView output = (ImageView) findViewById(R.id.user_image);
-			output.setImageBitmap(bitmap);
-		}	
-	}
-	public class GetImageRequest extends AsyncTask<URL, Void, String>
-	{
-		/** progress dialog to show user that the backup is processing. */
-	    private ProgressDialog dialog;
-	    /** application context. */
-	    private Activity activity;
-	    /** application context. */
-        private Context context;
-	    
-		public GetImageRequest(Activity activity){
-			this.activity = activity;
-			context = activity;
-			dialog = new ProgressDialog(context);
-		}
-		
-		 protected void onPreExecute() {
-	            this.dialog.setMessage("Loading...");
-	            this.dialog.show();
-	        }
-		 
-		 protected void onPostExecute(String result)
-			{
-				super.onPostExecute(result);
-				if (dialog.isShowing()) 
-	                dialog.dismiss();
-			}
-		protected String doInBackground(URL... params)
-		{
-			URL url = params[0];
-			
-			try {
-				Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-				activity.runOnUiThread(new UpdateImage(image));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-	        return url.toString();
-		}
-		
-	}
 }
