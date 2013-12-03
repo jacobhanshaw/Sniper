@@ -13,5 +13,6 @@
     <string name="title_activity_activity_new_game">Create New Game</string>
     <string name="title_activity_activity_land_mines">ActivityLandMines</string>
     <string name="title_activity_activity_kill_confirm">ActivityKillConfirm</string>
+    <string name="title_activity_activity_user_detail">ActivityUserDetail</string>
 
 </resources>

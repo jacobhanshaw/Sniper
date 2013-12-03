@@ -46,10 +46,13 @@ public final class R {
         public static final int target_image=0x7f020012;
     }
     public static final class id {
+        public static final int Email=0x7f090029;
         public static final int GameName=0x7f090000;
+        public static final int Points=0x7f09002a;
         public static final int Public=0x7f090002;
         public static final int SafeInside=0x7f090001;
-        public static final int action_settings=0x7f09002a;
+        public static final int UserName=0x7f090028;
+        public static final int action_settings=0x7f09002f;
         public static final int armory_button=0x7f090024;
         public static final int bConfirmNo=0x7f090015;
         public static final int bConfirmYes=0x7f090014;
@@ -69,9 +72,11 @@ public final class R {
         public static final int games_list=0x7f090011;
         public static final int home_button=0x7f090025;
         public static final int houserules=0x7f09000b;
+        public static final int inputText=0x7f09002d;
         public static final int joinGame=0x7f09000f;
-        public static final int label=0x7f090029;
-        public static final int leaderboardNumber=0x7f090028;
+        public static final int label=0x7f09002c;
+        public static final int layout_root=0x7f09002b;
+        public static final int leaderboardNumber=0x7f09002e;
         public static final int leaders_button=0x7f090026;
         public static final int leaders_list=0x7f090018;
         public static final int leadersheading=0x7f090017;
@@ -103,8 +108,10 @@ public final class R {
         public static final int activity_settings_home=0x7f030009;
         public static final int activity_toolbar=0x7f03000a;
         public static final int activity_toolbar_landscape=0x7f03000b;
-        public static final int leaderboard_view=0x7f03000c;
-        public static final int list_item=0x7f03000d;
+        public static final int activity_user_detail=0x7f03000c;
+        public static final int input_text=0x7f03000d;
+        public static final int leaderboard_view=0x7f03000e;
+        public static final int list_item=0x7f03000f;
     }
     public static final class menu {
         public static final int activity_kill_confirm=0x7f080000;
@@ -113,9 +120,10 @@ public final class R {
         public static final int activity_login=0x7f080003;
         public static final int activity_new_game=0x7f080004;
         public static final int activity_settings_home=0x7f080005;
-        public static final int armory_home=0x7f080006;
-        public static final int games_home=0x7f080007;
-        public static final int main=0x7f080008;
+        public static final int activity_user_detail=0x7f080006;
+        public static final int armory_home=0x7f080007;
+        public static final int games_home=0x7f080008;
+        public static final int main=0x7f080009;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -128,6 +136,7 @@ public final class R {
         public static final int title_activity_activity_login=0x7f060006;
         public static final int title_activity_activity_new_game=0x7f060009;
         public static final int title_activity_activity_settings_home=0x7f060008;
+        public static final int title_activity_activity_user_detail=0x7f06000c;
         public static final int title_activity_armory_home=0x7f060004;
         public static final int title_activity_games_home=0x7f060003;
     }
