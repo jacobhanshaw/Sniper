@@ -87,6 +87,8 @@ public class ActivityNewGame extends FragmentActivity {
 		game.setLocationObjects(new ArrayList<String>());
 		//create parse object
 		
+		game.push();
+		
 		Intent intent = new Intent(this, ActivityGamesHome.class);
 		startActivity(intent);
 
