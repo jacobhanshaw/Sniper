@@ -53,7 +53,7 @@ public class Toolbar extends Fragment{
 	            	if(link.isInstance(activity)){
 	            		if(isHome){
 	            			Camera.TakePicture();		            		
-		            		CharSequence text = "You just tried to shoot Chelsey";
+		            		CharSequence text = "You just tried to shoot " + ActivityMain.target.getUsername();
 		            		int duration = Toast.LENGTH_SHORT;
 		            		Toast toast = Toast.makeText(Camera.context, text, duration);
 		            		toast.setGravity(Gravity.CENTER, 0, 0);

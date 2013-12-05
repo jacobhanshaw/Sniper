@@ -90,8 +90,20 @@
         </activity>
         <activity
             android:name="com.sniper.ActivityUserDetail"
-            android:label="@string/title_activity_activity_user_detail" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_activity_user_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityModeratorGameView"
+            android:label="@string/title_activity_activity_moderator_game_view" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityGeneralYourGameView"
+            android:label="@string/title_activity_activity_general_your_game_view" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityGeneralGameView"
+            android:label="@string/title_activity_activity_general_game_view" >
         </activity>
     </application>
 

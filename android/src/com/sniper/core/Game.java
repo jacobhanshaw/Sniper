@@ -50,6 +50,7 @@ public class Game {
         private void createGameParseObject()
         {
                 game = new ParseObject(Game.class.getSimpleName());
+                //Log.d("game name", Game.class.getSimpleName());
                 game.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
                 game.saveEventually( new SaveCallback() {
                            public void done(ParseException e) {
@@ -76,7 +77,7 @@ public class Game {
                 isPublic = gameObject.getBoolean(DbContract.Game.IS_PUBLIC);
                 
             debugInfo = game.getString(DbContract.Game.DEBUGINFO);
-            if(!debugInfo.equals(""))
+            if(debugInfo != null && !debugInfo.equals(""))
                     System.out.println("Error in " + Game.class.getSimpleName() + " pull method: " + debugInfo);
         }
         

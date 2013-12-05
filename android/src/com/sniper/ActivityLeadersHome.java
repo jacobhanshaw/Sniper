@@ -25,7 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ActivityLeadersHome extends FragmentActivity {
 
-	String[] myStringArray = new String[0];
+	String[] myStringArray = { "Loading..."};
 	List<ParseUser> usersInList;
 	BasicListAdapter adapter;
 	

@@ -42,7 +42,7 @@ public class ActivityMain extends FragmentActivity
 	
 	List<ParseUser> targets;
 	String[] targetUserNames =	{};
-	static ParseUser target;
+	public static ParseUser target;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
 	public static final String PARSE_EXTRA_DATA_KEY = "com.parse.Data";

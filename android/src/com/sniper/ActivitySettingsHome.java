@@ -249,6 +249,9 @@ public class ActivitySettingsHome extends FragmentActivity {
 		            Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 		            userImageView.setImageBitmap(yourSelectedImage);
 		            
+		            LoadUserImage.UpdateImage(ParseUser.getCurrentUser(),
+		            		yourSelectedImage);
+		           		            
 		            Method method = null;
 					try
 					{

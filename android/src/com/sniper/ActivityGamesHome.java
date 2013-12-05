@@ -1,11 +1,22 @@
 package com.sniper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.sniper.core.Camera;
+import com.sniper.core.Game;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -18,31 +29,63 @@ import android.widget.Toast;
 
 public class ActivityGamesHome extends FragmentActivity {
 
-	String[] myStringArray = {"Mission X", "Black Hawk", "007", "t",
-			"e", "s", "t", "i", "n", "g", " ", "s", "c", "r", "o", "l", "l"};
+	ArrayList<String> gameNames = new ArrayList<String>();
+	List<Game> games = new ArrayList<Game>();
 	ArrayAdapter<String> adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_games_home);
+
+		gameNames.add("Loading...");
+		UpdateGamesList();
 		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
+		//query.whereContains(key, substring);		
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+		  public void done(List<ParseObject> objects, ParseException e) {			  
+		    if (e == null) {
+		     	games = new ArrayList<Game>();
+		     	gameNames.clear();
+		     	for(int i=0; i<objects.size(); i++){
+		     		Game game = new Game(objects.get(i));
+		     		if(game.getName() == null){
+		     			game.setName("No Name");
+		     		}
+		     		games.add(game);
+		     		gameNames.add(game.getName());
+		     	}
+		     	adapter.notifyDataSetChanged();
+		    } else {
+		      // something went wrong
+		    }
+		  }
+		});
+		
+	}
+	
+	private void UpdateGamesList(){
 		adapter = new ArrayAdapter<String>(this, 
-				//android.R.layout.simple_list_item_single_choice,
-		        R.layout.list_item,
-		        myStringArray);
+		        R.layout.list_item, R.id.label,
+		        gameNames);
 		ListView listView = (ListView) findViewById(R.id.games_list);
 		listView.setAdapter(adapter);
+		final Activity act = this;
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long id) {
-				
+				ActivityGeneralYourGameView.game = games.get(position);
+				Intent intent = new Intent(act, ActivityGeneralYourGameView.class);
+            	startActivity(intent);
 			}
 			});
 		adapter.notifyDataSetChanged();
-		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
