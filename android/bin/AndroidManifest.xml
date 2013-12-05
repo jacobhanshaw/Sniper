@@ -95,15 +95,18 @@
         </activity>
         <activity
             android:name="com.sniper.ActivityModeratorGameView"
-            android:label="@string/title_activity_activity_moderator_game_view" >
+            android:label="@string/title_activity_activity_moderator_game_view" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.sniper.ActivityGeneralYourGameView"
-            android:label="@string/title_activity_activity_general_your_game_view" >
+            android:label="@string/title_activity_activity_general_your_game_view" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.sniper.ActivityGeneralGameView"
-            android:label="@string/title_activity_activity_general_game_view" >
+            android:label="@string/title_activity_activity_general_game_view"
+            android:screenOrientation="portrait"  >
         </activity>
     </application>
 
