@@ -1,11 +1,10 @@
 package com.sniper.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import android.text.format.Time;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -20,9 +19,8 @@ public class SniperParseObject
 	public SniperParseObject()
 	{
 		parseObject = new ParseObject(this.getClass().getName());
-		Time now = new Time();
-		now.setToNow();
-		parseObject.put(DbContract.Game.CREATED, now);
+		Date currentDate = new Date();
+		parseObject.put(DbContract.Game.CREATED, currentDate);
 	}
 
 	public SniperParseObject(ParseObject object)

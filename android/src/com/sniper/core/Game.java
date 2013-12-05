@@ -1,6 +1,5 @@
 package com.sniper.core;
 
-//import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
