@@ -5,90 +5,46 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.sniper.utility.DbContract;
 
-public class Game
+public class Game extends SniperParseObject
 {
-
-	private ParseObject game;
 
 	public Game()
 	{
-		game = new ParseObject(Game.class.getSimpleName());
-		game.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
+		super();
+		
+		parseObject.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
 	}
 
-	public Game(ParseObject gameObject)
+	public Game(ParseObject object)
 	{
-		pullDataFromParseObject(gameObject);
+		pullData(object);
 	}
 
-	public void pullParseObject()
+	public void pull()
 	{
-		game.fetchInBackground(new GetCallback<ParseObject>()
-		{
-			public void done(ParseObject gameObject, ParseException e)
-			{
-				if (e == null)
-					pullDataFromParseObject(gameObject);
-				else
-					pullParseObject();
-			}
-		});
+		super.pull();
 	}
 
-	private void pullDataFromParseObject(ParseObject gameObject)
+	protected void pullData(ParseObject object)
 	{
-		game = gameObject;
+		super.pullData(object);
 
-		String debugInfo = game.getString(DbContract.Game.DEBUGINFO);
+		String debugInfo = parseObject.getString(DbContract.Game.DEBUGINFO);
 		if (debugInfo != null && !debugInfo.equals(""))
-			System.out.println("Error in " + Game.class.getSimpleName()
+			System.out.println("Error in " + this.getClass().getName()
 					+ " pull method: " + debugInfo);
 	}
 
-	public void pushParseObject()
+	public void push()
 	{
-		game.saveEventually(new SaveCallback()
-		{
-			public void done(ParseException e)
-			{
-				if (e != null)
-					pushParseObject();
-			}
-		});
-	}
-
-	private ArrayList<String> convertJSONStringArrayToArrayList(
-			JSONArray jsonArray)
-	{
-		ArrayList<String> list = new ArrayList<String>();
-		if (jsonArray != null)
-		{
-			int len = jsonArray.length();
-			for (int i = 0; i < len; i++)
-			{
-				try
-				{
-					list.add(jsonArray.get(i).toString());
-				} catch (JSONException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return list;
+		super.push();
 	}
 
 	public void invitePlayer(String playerEmail)
@@ -120,7 +76,7 @@ public class Game
 	 */
 	public ParseUser getCreator()
 	{
-		return game.getParseUser(DbContract.Game.CREATOR);
+		return parseObject.getParseUser(DbContract.Game.CREATOR);
 	}
 
 	/**
@@ -128,7 +84,7 @@ public class Game
 	 */
 	public String getName()
 	{
-		return game.getString(DbContract.Game.NAME);
+		return parseObject.getString(DbContract.Game.NAME);
 	}
 
 	/**
@@ -137,8 +93,7 @@ public class Game
 	 */
 	public void setName(String name)
 	{
-		game.put(DbContract.Game.NAME, name);
-		;
+		parseObject.put(DbContract.Game.NAME, name);
 	}
 
 	/**
@@ -146,7 +101,7 @@ public class Game
 	 */
 	public ArrayList<String> getPlayers()
 	{
-		return convertJSONStringArrayToArrayList(game
+		return convertJSONStringArrayToArrayList(parseObject
 				.getJSONArray(DbContract.Game.PLAYERS));
 	}
 
@@ -156,7 +111,7 @@ public class Game
 	 */
 	public void setPlayers(ArrayList<String> playerIds)
 	{
-		game.put(DbContract.Game.PLAYERS, playerIds);
+		parseObject.put(DbContract.Game.PLAYERS, playerIds);
 	}
 
 	/**
@@ -164,7 +119,7 @@ public class Game
 	 */
 	public ArrayList<String> getTargetIds()
 	{
-		return convertJSONStringArrayToArrayList(game
+		return convertJSONStringArrayToArrayList(parseObject
 				.getJSONArray(DbContract.Game.TARGETS));
 	}
 
@@ -174,7 +129,7 @@ public class Game
 	 */
 	public void setTargetIds(ArrayList<String> targetIds)
 	{
-		game.put(DbContract.Game.TARGETS, targetIds);
+		parseObject.put(DbContract.Game.TARGETS, targetIds);
 	}
 
 	/**
@@ -182,7 +137,7 @@ public class Game
 	 */
 	public Date getStartTime()
 	{
-		return game.getDate(DbContract.Game.START_TIME);
+		return parseObject.getDate(DbContract.Game.START_TIME);
 	}
 
 	/**
@@ -191,7 +146,7 @@ public class Game
 	 */
 	public void setStartTime(Date startTime)
 	{
-		game.put(DbContract.Game.START_TIME, startTime); // .getTime());
+		parseObject.put(DbContract.Game.START_TIME, startTime); // .getTime());
 	}
 
 	/**
@@ -199,7 +154,7 @@ public class Game
 	 */
 	public Date getEndTime()
 	{
-		return game.getDate(DbContract.Game.END_TIME);
+		return parseObject.getDate(DbContract.Game.END_TIME);
 	}
 
 	/**
@@ -208,7 +163,7 @@ public class Game
 	 */
 	public void setEndTime(Date endTime)
 	{
-		game.put(DbContract.Game.END_TIME, endTime); // .getTime());
+		parseObject.put(DbContract.Game.END_TIME, endTime); // .getTime());
 	}
 
 	/**
@@ -216,7 +171,7 @@ public class Game
 	 */
 	public String getHouseRules()
 	{
-		return game.getString(DbContract.Game.HOUSE_RULES);
+		return parseObject.getString(DbContract.Game.HOUSE_RULES);
 	}
 
 	/**
@@ -225,7 +180,7 @@ public class Game
 	 */
 	public void setHouseRules(String houseRules)
 	{
-		game.put(DbContract.Game.HOUSE_RULES, houseRules);
+		parseObject.put(DbContract.Game.HOUSE_RULES, houseRules);
 	}
 
 	/**
@@ -233,7 +188,7 @@ public class Game
 	 */
 	public boolean isSafeInside()
 	{
-		return game.getBoolean(DbContract.Game.SAFE_INSIDE);
+		return parseObject.getBoolean(DbContract.Game.SAFE_INSIDE);
 	}
 
 	/**
@@ -242,7 +197,7 @@ public class Game
 	 */
 	public void setSafeInside(boolean safeInside)
 	{
-		game.put(DbContract.Game.SAFE_INSIDE, safeInside);
+		parseObject.put(DbContract.Game.SAFE_INSIDE, safeInside);
 	}
 
 	/**
@@ -250,7 +205,7 @@ public class Game
 	 */
 	public String getModeratorId()
 	{
-		return game.getString(DbContract.Game.MODERATOR);
+		return parseObject.getString(DbContract.Game.MODERATOR);
 	}
 
 	/**
@@ -259,7 +214,7 @@ public class Game
 	 */
 	public void setModeratorId(String moderatorId)
 	{
-		game.put(DbContract.Game.MODERATOR, moderatorId);
+		parseObject.put(DbContract.Game.MODERATOR, moderatorId);
 	}
 
 	/**
@@ -267,7 +222,7 @@ public class Game
 	 */
 	public ArrayList<String> getPoints()
 	{
-		return convertJSONStringArrayToArrayList(game
+		return convertJSONStringArrayToArrayList(parseObject
 				.getJSONArray(DbContract.Game.POINTS));
 	}
 
@@ -277,7 +232,7 @@ public class Game
 	 */
 	public void setPoints(ArrayList<String> points)
 	{
-		game.put(DbContract.Game.POINTS, points);
+		parseObject.put(DbContract.Game.POINTS, points);
 	}
 
 	/**
@@ -285,7 +240,7 @@ public class Game
 	 */
 	public ArrayList<String> getLocationObjects()
 	{
-		return convertJSONStringArrayToArrayList(game
+		return convertJSONStringArrayToArrayList(parseObject
 				.getJSONArray(DbContract.Game.LOCATION_OBJECTS));
 	}
 
@@ -295,7 +250,7 @@ public class Game
 	 */
 	public void setLocationObjects(ArrayList<String> locationIds)
 	{
-		game.put(DbContract.Game.LOCATION_OBJECTS, locationIds);
+		parseObject.put(DbContract.Game.LOCATION_OBJECTS, locationIds);
 	}
 
 	/**
@@ -303,7 +258,7 @@ public class Game
 	 */
 	public boolean getIsPublic()
 	{
-		return game.getBoolean(DbContract.Game.IS_PUBLIC);
+		return parseObject.getBoolean(DbContract.Game.IS_PUBLIC);
 	}
 
 	/**
@@ -312,6 +267,6 @@ public class Game
 	 */
 	public void setIsPublic(boolean isPublic)
 	{
-		game.put(DbContract.Game.IS_PUBLIC, isPublic);
+		parseObject.put(DbContract.Game.IS_PUBLIC, isPublic);
 	}
 }
