@@ -106,7 +106,7 @@ public class ActivityMain extends FragmentActivity
 			setContentView(R.layout.activity_main_landscape);
 		}
 
-		if(android.hardware.Camera.getNumberOfCameras() > 0){
+		if(android.hardware.Camera.getNumberOfCameras() > 0){			
 			camera = new Camera(this);
 			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 			preview.addView(camera);
