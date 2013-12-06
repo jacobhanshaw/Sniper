@@ -34,17 +34,18 @@ public final class R {
         public static final int cbutton=0x7f020005;
         public static final int cbutton_landscape=0x7f020006;
         public static final int cropped_edit=0x7f020007;
-        public static final int gradient_bg=0x7f020008;
-        public static final int gradient_bg_hover=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int leader_icon=0x7f02000b;
-        public static final int list_selector=0x7f02000c;
-        public static final int questionmark=0x7f02000d;
-        public static final int scope=0x7f02000e;
-        public static final int scope_view=0x7f02000f;
-        public static final int scope_view_land=0x7f020010;
-        public static final int settings_gear=0x7f020011;
-        public static final int target_image=0x7f020012;
+        public static final int gamesicon2=0x7f020008;
+        public static final int gradient_bg=0x7f020009;
+        public static final int gradient_bg_hover=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int leader_icon=0x7f02000c;
+        public static final int list_selector=0x7f02000d;
+        public static final int questionmark=0x7f02000e;
+        public static final int scope=0x7f02000f;
+        public static final int scope_view=0x7f020010;
+        public static final int scope_view_land=0x7f020011;
+        public static final int settings_gear=0x7f020012;
+        public static final int target_image=0x7f020013;
     }
     public static final class id {
         public static final int BoolDescriptors=0x7f090003;
