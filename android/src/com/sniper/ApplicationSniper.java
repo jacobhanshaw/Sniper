@@ -19,11 +19,12 @@ public class ApplicationSniper extends Application {
 		ParseUser.enableAutomaticUser();
 		ParseACL defaultACL = new ParseACL();
 		// Optionally enable public read access.
-		// defaultACL.setPublicReadAccess(true);
+		defaultACL.setPublicReadAccess(true);
+		defaultACL.setPublicWriteAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);
 		PushService.setDefaultPushCallback(this, ActivityMain.class);
 		PushService.subscribe(this, "AdamTesting", ActivityKillConfirm.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
+		ParseInstallation.getCurrentInstallation().saveInBackground();		
 	}
 
 

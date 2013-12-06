@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.util.Log;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -17,8 +19,8 @@ public class Game extends SniperParseObject
 	public Game()
 	{
 		super();
-		
 		parseObject.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
+		this.Join(ParseUser.getCurrentUser());
 	}
 
 	public Game(ParseObject object)
@@ -44,6 +46,24 @@ public class Game extends SniperParseObject
 	public void push()
 	{
 		super.push();
+	}
+	
+	public void Join(ParseUser user){
+		Log.d("game", "hit join"); //object not found for update
+		ArrayList<String> players = this.getPlayers();
+		if(players.contains(user.getObjectId())){
+			return; // don't add user more than once
+		}
+		players.add(user.getObjectId());
+		this.setPlayers(players);
+		this.push();
+	}
+	
+	public void Remove(ParseUser user){
+		ArrayList<String> players = this.getPlayers();
+		players.remove(user.getObjectId());
+		this.setPlayers(players);
+		this.push();
 	}
 
 	public void invitePlayer(String playerEmail)
@@ -108,7 +128,7 @@ public class Game extends SniperParseObject
 	 * @param players
 	 *            the players to set
 	 */
-	public void setPlayers(ArrayList<String> playerIds)
+	private void setPlayers(ArrayList<String> playerIds)
 	{
 		parseObject.put(DbContract.Game.PLAYERS, playerIds);
 	}

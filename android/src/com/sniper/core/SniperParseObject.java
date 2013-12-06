@@ -6,6 +6,8 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.util.Log;
+
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -18,7 +20,7 @@ public class SniperParseObject
 
 	public SniperParseObject()
 	{
-		parseObject = new ParseObject(this.getClass().getName());
+		parseObject = new ParseObject(this.getClass().getSimpleName());
 		Date currentDate = new Date();
 		parseObject.put(DbContract.Game.CREATED, currentDate);
 	}

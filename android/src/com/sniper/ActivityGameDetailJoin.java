@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class ActivityGeneralYourGameView extends FragmentActivity {
+public class ActivityGameDetailJoin extends FragmentActivity {
 	public static Game game;
 	private ParseUser moderator;
 	private List<ParseUser> players = new ArrayList<ParseUser>();
@@ -33,7 +33,7 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_activity_general_your_game_view);
+		setContentView(R.layout.activity_game_detail_join);
 		
 		UpdateText(R.id.Name, game.getName());
 		TextView view = (TextView) findViewById(R.id.Moderator);
@@ -106,6 +106,12 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		adapter.notifyDataSetChanged();
 	}
 	
+	public void JoinGame(View view){
+		game.Join(ParseUser.getCurrentUser());
+		Intent intent = new Intent(this, ActivityGamesHome.class);
+    	startActivity(intent);
+	}
+	
 	private void UpdateText(int id, String string){
 		TextView view = (TextView) findViewById(id);
 		view.setText(string);
@@ -125,3 +131,4 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 	}
 
 }
+

@@ -17,5 +17,7 @@
     <string name="title_activity_activity_moderator_game_view">ActivityModeratorGameView</string>
     <string name="title_activity_activity_general_your_game_view">ActivityGeneralYourGameView</string>
     <string name="title_activity_activity_general_game_view">ActivityGeneralGameView</string>
+    <string name="title_activity_activity_join_game">ActivityJoinGame</string>
+    <string name="title_activity_activity_game_detail_join">ActivityGameDetailJoin</string>
 
 </resources>

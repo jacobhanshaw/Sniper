@@ -10,7 +10,8 @@
            android:layout_height="43dp"
            android:layout_gravity="bottom"
           android:layout_marginLeft="0dp"
-          android:layout_marginRight="-4dp"/>
+          android:layout_marginRight="-4dp"
+          android:drawableTop="@drawable/gamesicon2"/>
 
       <Button
           android:id="@+id/armory_button"
