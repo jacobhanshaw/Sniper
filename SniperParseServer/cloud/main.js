@@ -6,6 +6,55 @@ Parse.Cloud.define("hello", function(request, response) {
         response.success("Hello world!");
         });
 
+Parse.Cloud.beforeSave("KillAction", function(request, response) {
+
+
+        response.success();  
+        });
+
+Parse.Cloud.afterSave("KillAction", function(request) {
+        var channel = "user_" + request.object.get("target");
+        Parse.Push.send({
+            channels: [ channel ],
+            data: {
+                title: "Shot Down",
+                alert: request.object.get("player") + " claims to have shot you"
+                }
+            }, {
+            success: function() {
+            },
+            error: function(error) {
+                // Handle error
+            }
+        });
+
+                response.success();
+});
+
+
+function setUpGameStartNotification(gameId, gameName, startTime)
+{
+    var query = new Parse.Query(Parse.Installation);
+    query.equalTo('channels', gameId);
+
+    Parse.Push.send({
+where: query,
+data: {
+title: gameName + "has begun",
+alert: gameName + "has begun at " + startTime.toString()  
+},
+push_time: startTime 
+}, 
+{
+success: function() {
+// Push was successful
+},
+error: function(error) {
+// Handle error
+}
+});
+}
+
 Parse.Cloud.beforeSave("Game", function(request, response) {
 
         var startDate = new Date(request.object.get("startTime"));
@@ -32,37 +81,13 @@ response.success();
 });
 
 Parse.Cloud.afterSave("Game", function(request) 
-{
+        {
         if(!request.object.get("notifSent"))
         {
-           request.object.set("notifSent", "sent");
-           setUpGameStartNotification(request.object.id, request.object.get("name"), new Date(request.object.get("startTime")));
+        request.object.set("notifSent", "sent");
+        setUpGameStartNotification(request.object.id, request.object.get("name"), new Date(request.object.get("startTime")));
         }
-});
-
-function setUpGameStartNotification(gameId, gameName, startTime)
-{
-    var query = new Parse.Query(Parse.Installation);
-    query.equalTo('channels', gameId);
-
-    Parse.Push.send({
-where: query,
-data: {
-title: gameName + "has begun",
-alert: gameName + "has begun at " + startTime.toString()  
-},
-push_time: startTime 
-}, 
-{
-success: function() {
-// Push was successful
-},
-error: function(error) {
-// Handle error
-}
-});
-}
-
+        });
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {

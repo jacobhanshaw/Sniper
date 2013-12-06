@@ -32,4 +32,13 @@ public class DbContract {
 		public static final String ROLE = "role";
 		public static final String ARSENAL = "arsenal";
 	}
+	
+	public static abstract class PlayerAction implements BaseColumns {
+		public static final String NAME = "name";
+		public static final String DEBUGINFO = "debugInfo";
+		public static final String CREATED = "created";
+		public static final String PLAYER = "player";
+		public static final String TARGET = "target";
+		public static final String URL = "URL";
+	}
 }
