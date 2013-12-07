@@ -79,9 +79,17 @@ public class ActivityGamesHome extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long id) {
-				ActivityGeneralYourGameView.game = games.get(position);
-				Intent intent = new Intent(act, ActivityGeneralYourGameView.class);
-            	startActivity(intent);
+				Game game = games.get(position);
+				if(game.getModeratorId().equals(ParseUser.getCurrentUser().getObjectId())){
+					ActivityModeratorGameView.game = game;;
+					Intent intent = new Intent(act, ActivityModeratorGameView.class);
+	            	startActivity(intent);
+				}
+				else{
+					ActivityGeneralYourGameView.game = game;
+					Intent intent = new Intent(act, ActivityGeneralYourGameView.class);
+	            	startActivity(intent);
+				}
 			}
 			});
 		adapter.notifyDataSetChanged();

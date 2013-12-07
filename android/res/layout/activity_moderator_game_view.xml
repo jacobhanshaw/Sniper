@@ -2,15 +2,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/black"
     tools:context=".ActivityModeratorGameView" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_centerVertical="true"
+        android:paddingBottom="65dp">
+        <LinearLayout 
+            android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:orientation="vertical"
+	    	>            
+	        <TextView 
+	            android:id="@+id/Name"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="30sp"
+	            android:padding="10dp"
+	            android:text="Name"/>
+	        
+	        <Button 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:text="Delete Game"
+	            android:onClick="Delete"
+	            />
+	        
+	        <LinearLayout 
+	            android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:paddingTop="2dp"
+		        android:paddingRight="2dp"
+		        android:paddingBottom="2dp"
+		        android:paddingLeft="15dp"
+		    	> 
+		    	<TextView 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="#ffffffff"
+		            android:textSize="20sp"
+		            android:text="Moderator: "/>
+		    	<TextView 
+		            android:id="@+id/Moderator"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/BlueLink"
+		            android:textSize="20sp"
+		            android:text="Loading..."
+		            android:onClick="ModeratorClick"
+		            android:clickable="true"/>
+	    	
+	        </LinearLayout>
+	        
+	        <TextView 
+	            android:id="@+id/StartTime"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:paddingTop="2dp"
+	            android:paddingRight="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="15dp"
+	            android:text="StartTime"/>
+	        
+	        <TextView 
+	            android:id="@+id/BoolDescriptors"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:paddingTop="2dp"
+	            android:paddingRight="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="15dp"
+	            android:text="Is Public, Not Safe Inside"/>
+	        
+	        <TextView 
+	            android:id="@+id/HouseRules"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:paddingTop="2dp"
+	            android:paddingRight="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="15dp"
+	            android:text="Dont be a dick."/>
+	        
+	         <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:paddingTop="7dp"
+	            android:paddingRight="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="15dp"
+	            android:text="Players:"/>
+	         
+	        <ListView
+	            android:paddingTop="2dp"
+	            android:paddingRight="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="15dp"
+		        android:id="@+id/Players"
+		        android:layout_width="match_parent"
+		        android:layout_height="fill_parent"
+		        android:choiceMode="singleChoice"	        
+	        /> 
+	         
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <fragment android:name="com.sniper.Toolbar"
+        android:id="@+id/toolbar_fragment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
+
