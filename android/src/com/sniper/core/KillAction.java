@@ -24,6 +24,7 @@ public class KillAction extends PlayerAction
 			//data.put("killer", killer.getObjectId());
 			//data.put("dead", dead.getObjectId());
 			data.put("url", url);
+			data.put("action", "com.sniper.UPDATE");
 			ParsePush push = new ParsePush();
 			push.setChannel("AdamTesting");
 			push.setData(data);

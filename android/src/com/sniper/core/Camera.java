@@ -76,7 +76,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	        Method method = null;
 			try
 			{
-				method = Camera.class.getMethod("receiveResponse");
+				method = Camera.class.getMethod("receiveResponse", String.class);
 			} catch (NoSuchMethodException e)
 			{
 				// TODO Auto-generated catch block
@@ -92,7 +92,6 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	
 	public static void receiveResponse(String response)
 	{
-		Log.v("Debug", "receiveResponse");
 		KillAction kill = new KillAction();
 		kill.url = response;
 		kill.publish();
