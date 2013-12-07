@@ -54,7 +54,8 @@
         <activity
             android:name="com.sniper.ActivitySettingsHome"
             android:label="@string/title_activity_activity_settings_home"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
 
         <service android:name="com.parse.PushService" />
@@ -65,16 +66,21 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+<<<<<<< HEAD
         <receiver android:name="com.sniper.core.PushReceiver" >
             <intent-filter>
                 <action android:name="com.sniper.UPDATE" />
             </intent-filter>
         </receiver>
+=======
+        <receiver android:name="com.sniper.core.PushReceiver" />
+>>>>>>> 4cde599e1bd5a9951c0a7cab3ae63a8a79632925
 
         <activity
             android:name="com.sniper.ActivityNewGame"
             android:label="@string/title_activity_activity_new_game"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name="com.sniper.ui.phone.SelectDateActivity"
@@ -89,6 +95,35 @@
         <activity
             android:name="com.sniper.ActivityKillConfirm"
             android:label="@string/title_activity_activity_kill_confirm" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityUserDetail"
+            android:label="@string/title_activity_activity_user_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityModeratorGameView"
+            android:label="@string/title_activity_activity_moderator_game_view"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityGeneralYourGameView"
+            android:label="@string/title_activity_activity_general_your_game_view"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityGeneralGameView"
+            android:label="@string/title_activity_activity_general_game_view"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityJoinGame"
+            android:label="@string/title_activity_activity_join_game"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityGameDetailJoin"
+            android:label="@string/title_activity_activity_game_detail_join" >
         </activity>
     </application>
 

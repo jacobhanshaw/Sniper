@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ActivityUserDetail" >
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_centerVertical="true"
+        android:paddingBottom="65dp">
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:orientation="vertical"
+	    	>            
+	        <TextView 
+	            android:id="@+id/UserName"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="30sp"
+	            android:padding="10dp"
+	            android:text="UserName"/>
+	        <TextView 
+	            android:id="@+id/Email"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:padding="10dp"
+	            android:text="Email"/>
+	        <TextView 
+	            android:id="@+id/Points"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:textSize="20sp"
+	            android:padding="10dp"
+	            android:text="Points"/>
+	         <ImageView
+		        android:contentDescription=""
+		        android:id="@+id/user_image"
+		        android:layout_height="300dp"
+		        android:layout_width="300dp"
+		        android:paddingLeft="10dp"
+		        android:paddingTop="3dp"
+		     />
+        </LinearLayout>
+	   
+    </RelativeLayout>
+    
+    <fragment android:name="com.sniper.Toolbar"
+        android:id="@+id/toolbar_fragment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
+

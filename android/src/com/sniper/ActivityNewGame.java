@@ -18,7 +18,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,10 +68,10 @@ public class ActivityNewGame extends FragmentActivity {
 		EditText houseRules = (EditText) findViewById(R.id.houserules);
 		game.setHouseRules(houseRules.getText().toString());
 		
-		ArrayList<String> players = new ArrayList<String>();
-		// add the person who created the game
-		players.add(ParseUser.getCurrentUser().getObjectId().toString());
-		game.setPlayers(players);
+//		ArrayList<String> players = new ArrayList<String>();
+//		// add the person who created the game
+//		players.add(ParseUser.getCurrentUser().getObjectId().toString());
+//		game.setPlayers(players);
 		
 		game.setStartTime(startDate);
 		game.setEndTime(endDate);
@@ -83,9 +85,14 @@ public class ActivityNewGame extends FragmentActivity {
 		game.setModeratorId(ParseUser.getCurrentUser().getObjectId().toString());
 		//targets? object id
 		game.setTargetIds(new ArrayList<String>());
-		game.setLocationObjects(new ArrayList<GpsLocation>());
+		game.setLocationObjects(new ArrayList<String>());
 		//create parse object
-		game.create();
+		
+		game.push();
+		Log.d("new game", "pushed game");
+		Intent intent = new Intent(this, ActivityGamesHome.class);
+		startActivity(intent);
+
 	}
 
 	@Override

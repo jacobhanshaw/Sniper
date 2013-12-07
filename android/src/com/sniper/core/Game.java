@@ -2,302 +2,290 @@ package com.sniper.core;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import android.util.Log;
 
-import com.parse.GetCallback;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.sniper.utility.DbContract;
 
-public class Game {
+public class Game extends SniperParseObject
+{
 
-	private ParseObject game;
-	
-	private String name, houseRules, debugInfo;
-	private ArrayList<String> playerIds, targetIds;
-	private Date startTime, endTime;
-	private boolean safeInside, isPublic;
-	private String moderatorId;
-	
+	public Game()
+	{
+		super();
+		parseObject.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
+		this.Join(ParseUser.getCurrentUser());
+	}
 
-	private int points;
-	private ArrayList<GpsLocation> locationObjects;
-	
-	
-	
-	public Game() 
+	public Game(ParseObject object)
 	{
-		
+		pullData(object);
 	}
-		
-	public void create() {
-		createGameParseObject();
-		pushParseObject();
+
+	public void pull()
+	{
+		super.pull();
+	}
+
+	protected void pullData(ParseObject object)
+	{
+		super.pullData(object);
+
+		String debugInfo = parseObject.getString(DbContract.Game.DEBUGINFO);
+		if (debugInfo != null && !debugInfo.equals(""))
+			System.out.println("Error in " + this.getClass().getName()
+					+ " pull method: " + debugInfo);
+	}
+
+	public void push()
+	{
+		super.push();
 	}
 	
-	private void createGameParseObject()
+	public void Join(ParseUser user){
+		Log.d("game", "hit join"); //object not found for update
+		ArrayList<String> players = this.getPlayers();
+		if(players.contains(user.getObjectId())){
+			return; // don't add user more than once
+		}
+		players.add(user.getObjectId());
+		this.setPlayers(players);
+		this.push();
+	}
+	
+	public void Remove(ParseUser user){
+		ArrayList<String> players = this.getPlayers();
+		players.remove(user.getObjectId());
+		this.setPlayers(players);
+		this.push();
+	}
+
+	public void invitePlayer(String playerEmail)
 	{
-		game = new ParseObject(Game.class.getSimpleName());
-		game.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
-		game.saveEventually( new SaveCallback() {
-			   public void done(ParseException e) {
-				     if (e != null) 
-				    	createGameParseObject();
-			   }
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
+		query.whereEqualTo("email", playerEmail);
+		query.findInBackground(new FindCallback<ParseObject>()
+		{
+			public void done(List<ParseObject> userList, ParseException e)
+			{
+				if (e == null)
+				{
+					// send notification to
+					userList.get(0);
+				} else
+				{
+					// send email
+				}
+			}
 		});
 	}
-	
-	private void pullParseObject() {
-		
-		game.fetchInBackground(new GetCallback<ParseObject>() {
-			  public void done(ParseObject gameObject, ParseException e) {
-			    if (e == null) 
-			    {
-			    	game = gameObject;
-			    	name = game.getString(DbContract.Game.NAME);
-			    	startTime = gameObject.getDate(DbContract.Game.START_TIME);
-			    	endTime = gameObject.getDate(DbContract.Game.END_TIME);
-			    	
-			    	playerIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.PLAYERS));
-			    	targetIds = convertJSONStringArrayToArrayList (gameObject.getJSONArray(DbContract.Game.TARGETS));
-			    	houseRules = gameObject.getString(DbContract.Game.HOUSE_RULES);
-					safeInside = gameObject.getBoolean(DbContract.Game.SAFE_INSIDE);
-					moderatorId = gameObject.getString(DbContract.Game.MODERATOR);
-					
-					
-					//NEED TO BE FINISHED
-					/*
-					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
-					game.put(DbContract.Game.IS_PUBLIC, isPublic);
-			    	*/
-			    	debugInfo = game.getString(DbContract.Game.DEBUGINFO);
-			    	if(!debugInfo.equals(""))
-			    		System.out.println("Error in " + Game.class.getSimpleName() + " pull method: " + debugInfo);
-			    }
-			    else 
-			    	pullParseObject();
-			  }
-			});
-	}
-	
-	private ArrayList<String> convertJSONStringArrayToArrayList(JSONArray jsonArray)
-	{
-		ArrayList<String> list = new ArrayList<String>();     
-		if (jsonArray != null) { 
-		   int len = jsonArray.length();
-		   for (int i=0;i<len;i++){ 
-		    try
-			{
-				list.add(jsonArray.get(i).toString());
-			} catch (JSONException e)
-			{
-				e.printStackTrace();
-			}
-		   } 
-		} 
-		
-		return list;
-	}
-	
-	private void parseTargets(ArrayList<String> array) {
-		String currPlayer = ParseUser.getCurrentUser().getObjectId();
-		for(int i = 0; i < array.size(); i++) {
-			String curr = array.get(i);
-			String[] splits = curr.split("-");
-			if(splits[0].equals(currPlayer)) {
-				array.set(i, splits[1]);
-			} else {
-				array.set(i, splits[0]);
-			}
-		}
-	}
-	
-	private void pushParseObject() {
-		
-		game.fetchInBackground(new GetCallback<ParseObject>() {
-			  public void done(ParseObject gameObject, ParseException e) {
-			    if (e == null) 
-			    {
-					game.put(DbContract.Game.NAME, name);
-					game.put(DbContract.Game.START_TIME, startTime); //.getTime());
-					game.put(DbContract.Game.END_TIME, endTime); //.getTime());
-					
-			
-					game.put(DbContract.Game.PLAYERS, playerIds);
-					game.put(DbContract.Game.TARGETS, targetIds);
-					game.put(DbContract.Game.HOUSE_RULES, houseRules);
-					game.put(DbContract.Game.SAFE_INSIDE, safeInside);
-					game.put(DbContract.Game.MODERATOR, moderatorId);
-					game.put(DbContract.Game.LOCATION_OBJECTS, locationObjects);
-					game.put(DbContract.Game.IS_PUBLIC, isPublic);
-					game.saveInBackground();
-			    } 
-			    else 
-			    	pushParseObject();
-			  }
-			});
-	}
 
-
-	
 	/*************************************
 	 * Accessor Methods
 	 *************************************/
+
 	/**
-	 * @return the name
+	 * @return the creator
 	 */
-	public String getName() {
-		return name;
+	public ParseUser getCreator()
+	{
+		return parseObject.getParseUser(DbContract.Game.CREATOR);
 	}
 
 	/**
-	 * @param name the name to set
+	 * @return the name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public String getName()
+	{
+		return parseObject.getString(DbContract.Game.NAME);
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name)
+	{
+		parseObject.put(DbContract.Game.NAME, name);
 	}
 
 	/**
 	 * @return the players
 	 */
-	public ArrayList<String> getPlayers() {
-		return playerIds;
+	public ArrayList<String> getPlayers()
+	{
+		return convertJSONStringArrayToArrayList(parseObject
+				.getJSONArray(DbContract.Game.PLAYERS));
 	}
 
 	/**
-	 * @param players the players to set
+	 * @param players
+	 *            the players to set
 	 */
-	public void setPlayers(ArrayList<String> playerIds) {
-		this.playerIds = playerIds;
+	private void setPlayers(ArrayList<String> playerIds)
+	{
+		parseObject.put(DbContract.Game.PLAYERS, playerIds);
 	}
 
 	/**
 	 * @return the targets
 	 */
-	public ArrayList<String> getTargetIds() {
-		return targetIds;
+	public ArrayList<String> getTargetIds()
+	{
+		return convertJSONStringArrayToArrayList(parseObject
+				.getJSONArray(DbContract.Game.TARGETS));
 	}
 
 	/**
-	 * @param targets the targets to set
+	 * @param targets
+	 *            the targets to set
 	 */
-	public void setTargetIds(ArrayList<String> targetIds) {
-		this.targetIds = targetIds;
+	public void setTargetIds(ArrayList<String> targetIds)
+	{
+		parseObject.put(DbContract.Game.TARGETS, targetIds);
 	}
 
 	/**
 	 * @return the startTime
 	 */
-	public Date getStartTime() {
-		return startTime;
+	public Date getStartTime()
+	{
+		return parseObject.getDate(DbContract.Game.START_TIME);
 	}
 
 	/**
-	 * @param startTime the startTime to set
+	 * @param startTime
+	 *            the startTime to set
 	 */
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
+	public void setStartTime(Date startTime)
+	{
+		parseObject.put(DbContract.Game.START_TIME, startTime); // .getTime());
 	}
 
 	/**
 	 * @return the endTime
 	 */
-	public Date getEndTime() {
-		return endTime;
+	public Date getEndTime()
+	{
+		return parseObject.getDate(DbContract.Game.END_TIME);
 	}
 
 	/**
-	 * @param endTime the endTime to set
+	 * @param endTime
+	 *            the endTime to set
 	 */
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setEndTime(Date endTime)
+	{
+		parseObject.put(DbContract.Game.END_TIME, endTime); // .getTime());
 	}
 
 	/**
 	 * @return the houseRules
 	 */
-	public String getHouseRules() {
-		return houseRules;
+	public String getHouseRules()
+	{
+		return parseObject.getString(DbContract.Game.HOUSE_RULES);
 	}
 
 	/**
-	 * @param houseRules the houseRules to set
+	 * @param houseRules
+	 *            the houseRules to set
 	 */
-	public void setHouseRules(String houseRules) {
-		this.houseRules = houseRules;
+	public void setHouseRules(String houseRules)
+	{
+		parseObject.put(DbContract.Game.HOUSE_RULES, houseRules);
 	}
 
 	/**
 	 * @return the safeInside
 	 */
-	public boolean isSafeInside() {
-		return safeInside;
+	public boolean isSafeInside()
+	{
+		return parseObject.getBoolean(DbContract.Game.SAFE_INSIDE);
 	}
 
 	/**
-	 * @param safeInside the safeInside to set
+	 * @param safeInside
+	 *            the safeInside to set
 	 */
-	public void setSafeInside(boolean safeInside) {
-		this.safeInside = safeInside;
+	public void setSafeInside(boolean safeInside)
+	{
+		parseObject.put(DbContract.Game.SAFE_INSIDE, safeInside);
 	}
 
 	/**
 	 * @return the moderator
 	 */
-	public String getModeratorId() {
-		return moderatorId;
+	public String getModeratorId()
+	{
+		return parseObject.getString(DbContract.Game.MODERATOR);
 	}
 
 	/**
-	 * @param moderator the moderator to set
+	 * @param moderator
+	 *            the moderator to set
 	 */
-	public void setModeratorId(String moderatorId) {
-		this.moderatorId = moderatorId;
+	public void setModeratorId(String moderatorId)
+	{
+		parseObject.put(DbContract.Game.MODERATOR, moderatorId);
 	}
 
 	/**
 	 * @return the points
 	 */
-	public int getPoints() {
-		return points;
+	public ArrayList<String> getPoints()
+	{
+		return convertJSONStringArrayToArrayList(parseObject
+				.getJSONArray(DbContract.Game.POINTS));
 	}
 
 	/**
-	 * @param points the points to set
+	 * @param points
+	 *            the points to set
 	 */
-	public void setPoints(int points) {
-		this.points = points;
+	public void setPoints(ArrayList<String> points)
+	{
+		parseObject.put(DbContract.Game.POINTS, points);
 	}
 
 	/**
 	 * @return the locationObjects
 	 */
-	public ArrayList<GpsLocation> getLocationObjects() {
-		return locationObjects;
+	public ArrayList<String> getLocationObjects()
+	{
+		return convertJSONStringArrayToArrayList(parseObject
+				.getJSONArray(DbContract.Game.LOCATION_OBJECTS));
 	}
 
 	/**
-	 * @param locationObjects the locationObjects to set
+	 * @param locationObjects
+	 *            the locationObjects to set
 	 */
-	public void setLocationObjects(ArrayList<GpsLocation> locationObjects) {
-		this.locationObjects = locationObjects;
+	public void setLocationObjects(ArrayList<String> locationIds)
+	{
+		parseObject.put(DbContract.Game.LOCATION_OBJECTS, locationIds);
 	}
-	
+
 	/**
 	 * @return the isPublic
 	 */
-	public boolean getIsPublic() {
-		return isPublic;
+	public boolean getIsPublic()
+	{
+		return parseObject.getBoolean(DbContract.Game.IS_PUBLIC);
 	}
 
 	/**
-	 * @param isPublic the isPublic to set
+	 * @param isPublic
+	 *            the isPublic to set
 	 */
-	public void setIsPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+	public void setIsPublic(boolean isPublic)
+	{
+		parseObject.put(DbContract.Game.IS_PUBLIC, isPublic);
 	}
 }

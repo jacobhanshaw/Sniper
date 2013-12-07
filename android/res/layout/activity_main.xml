@@ -28,8 +28,9 @@
 		    android:paddingRight="0dp"
 		    android:paddingTop="0dp" >
 	        <Button
+	            android:onClick="SelectTargetClick"
 	            android:id="@+id/name_button"
-	            android:text="@string/targetName"
+	            android:text=""
 	            android:textColor="#ffffffff"
 	            android:layout_height="wrap_content"
 	            android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
 	        </Button>
 	        <ImageView
 	            android:contentDescription=""
-	            android:id="@+id/target_image"
+	            android:id="@+id/user_image"
 	            android:layout_height="80dp"
 	            android:layout_width="80dp"
 	            android:layout_alignParentTop="true"

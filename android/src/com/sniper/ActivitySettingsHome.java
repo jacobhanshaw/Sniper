@@ -19,30 +19,37 @@ import com.parse.ParseUser;
 import com.sniper.core.AWSFileUploadObject;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
+import com.sniper.utility.LoadUserImage;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivitySettingsHome extends FragmentActivity {
 	private static final int SELECT_PHOTO = 100;
-	
+	private TextView userName, email;
 	private ImageView userImageView;
 	
 	@Override
@@ -50,27 +57,16 @@ public class ActivitySettingsHome extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings_home);
 		
-		TextView username = (TextView) findViewById(R.id.username);
-		username.setText(ParseUser.getCurrentUser().getUsername());
+		userName = (TextView) findViewById(R.id.username);
+		userName.setText(ParseUser.getCurrentUser().getUsername());
 		
-		TextView email = (TextView) findViewById(R.id.email);
+		email = (TextView) findViewById(R.id.email);
 		email.setText(ParseUser.getCurrentUser().getEmail());
 		
 		userImageView = (ImageView) findViewById(R.id.user_image);
 		userImageView.setImageResource(R.drawable.questionmark);
 		
-
-		URL url = null;
-		try {
-			url = new URL("https://s3.amazonaws.com/sniperprofilepictures/" 
-					+ ParseUser.getCurrentUser().getUsername());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		GetImageRequest request = new GetImageRequest(this);
-		request.execute(url);
+		LoadUserImage.GetImage(ParseUser.getCurrentUser(), this);
 	}
 
 	@Override
@@ -79,6 +75,139 @@ public class ActivitySettingsHome extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.activity_settings_home, menu);
 				
 		return true;
+	}
+	
+	public void ChangePassword(View view){
+		LayoutInflater li = LayoutInflater.from(this);
+		View promptsView = li.inflate(R.layout.input_text, null);
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+
+		// set prompts.xml to alertdialog builder
+		alertDialogBuilder.setView(promptsView);
+
+		TextView label = (TextView) promptsView
+				.findViewById(R.id.label);
+		label.setText("Enter New Password:");
+		
+		final EditText userInput = (EditText) promptsView
+				.findViewById(R.id.inputText);
+
+		// set dialog message
+		alertDialogBuilder
+			.setCancelable(false)
+			.setPositiveButton("OK",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				// get user input and set it to result
+				// edit text
+			    	String newText = userInput.getText().toString();
+			    	//userName.setText(userInput.getText());
+			    	ParseUser.getCurrentUser().setPassword(newText);
+			    	ParseUser.getCurrentUser().saveInBackground();
+			    }
+			  })
+			.setNegativeButton("Cancel",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				dialog.cancel();
+			    }
+			  });
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+	}
+	
+	public void ChangeEmail(View view){
+		LayoutInflater li = LayoutInflater.from(this);
+		View promptsView = li.inflate(R.layout.input_text, null);
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+
+		// set prompts.xml to alertdialog builder
+		alertDialogBuilder.setView(promptsView);
+
+		TextView label = (TextView) promptsView
+				.findViewById(R.id.label);
+		label.setText("Enter New Email:");
+		
+		final EditText userInput = (EditText) promptsView
+				.findViewById(R.id.inputText);
+
+		// set dialog message
+		alertDialogBuilder
+			.setCancelable(false)
+			.setPositiveButton("OK",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				// get user input and set it to result
+				// edit text
+			    	String newText = userInput.getText().toString();
+			    	//userName.setText(userInput.getText());
+			    	ParseUser.getCurrentUser().setEmail(newText);
+			    	email.setText(ParseUser.getCurrentUser().getEmail());
+			    	ParseUser.getCurrentUser().saveInBackground();
+			    }
+			  })
+			.setNegativeButton("Cancel",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				dialog.cancel();
+			    }
+			  });
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+	}
+	
+	public void ChangeUserName(View view){
+		LayoutInflater li = LayoutInflater.from(this);
+		View promptsView = li.inflate(R.layout.input_text, null);
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+
+		// set prompts.xml to alertdialog builder
+		alertDialogBuilder.setView(promptsView);
+
+		final EditText userInput = (EditText) promptsView
+				.findViewById(R.id.inputText);
+
+		// set dialog message
+		alertDialogBuilder
+			.setCancelable(false)
+			.setPositiveButton("OK",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				// get user input and set it to result
+				// edit text
+			    	String newText = userInput.getText().toString();
+			    	//userName.setText(userInput.getText());
+			    	ParseUser.getCurrentUser().setUsername(newText);
+			    	userName.setText(ParseUser.getCurrentUser().getUsername());
+			    	ParseUser.getCurrentUser().saveInBackground();
+			    }
+			  })
+			.setNegativeButton("Cancel",
+			  new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog,int id) {
+				dialog.cancel();
+			    }
+			  });
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
 	}
 	
 	public void ChangePicture(View view){
@@ -94,6 +223,8 @@ public class ActivitySettingsHome extends FragmentActivity {
 	
 	public String getPath(Uri uri) 
     {
+		//TODO crashes if you select same picture twice, need to fix
+		// should get rid of deprecated method
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if (cursor == null) return null;
@@ -118,6 +249,9 @@ public class ActivitySettingsHome extends FragmentActivity {
 		            Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 		            userImageView.setImageBitmap(yourSelectedImage);
 		            
+		            LoadUserImage.UpdateImage(ParseUser.getCurrentUser(),
+		            		yourSelectedImage);
+		           		            
 		            Method method = null;
 					try
 					{
@@ -129,7 +263,7 @@ public class ActivitySettingsHome extends FragmentActivity {
 					}
 					
 					File file = new File(getPath(selectedImage));					
-					String title = ParseUser.getCurrentUser().getUsername();
+					String title = ParseUser.getCurrentUser().getObjectId();
 			        ApplicationServices.getInstance().uploadUserPhoto(file, title, method);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -139,55 +273,4 @@ public class ActivitySettingsHome extends FragmentActivity {
 	    }
 	}
 	
-	class UpdateImage implements Runnable{
-		public Bitmap bitmap;
-		public UpdateImage(Bitmap bitmap){
-			this.bitmap = bitmap;
-		}
-		public void run(){
-			ImageView output = (ImageView) findViewById(R.id.user_image);
-			output.setImageBitmap(bitmap);
-		}	
-	}
-	public class GetImageRequest extends AsyncTask<URL, Void, String>
-	{
-		/** progress dialog to show user that the backup is processing. */
-	    private ProgressDialog dialog;
-	    /** application context. */
-	    private Activity activity;
-	    /** application context. */
-        private Context context;
-	    
-		public GetImageRequest(Activity activity){
-			this.activity = activity;
-			context = activity;
-			dialog = new ProgressDialog(context);
-		}
-		
-		 protected void onPreExecute() {
-	            this.dialog.setMessage("Loading...");
-	            this.dialog.show();
-	        }
-		 
-		 protected void onPostExecute(String result)
-			{
-				super.onPostExecute(result);
-				if (dialog.isShowing()) 
-	                dialog.dismiss();
-			}
-		protected String doInBackground(URL... params)
-		{
-			URL url = params[0];
-			
-			try {
-				Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-				activity.runOnUiThread(new UpdateImage(image));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-	        return url.toString();
-		}
-		
-	}
 }

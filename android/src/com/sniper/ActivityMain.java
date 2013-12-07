@@ -1,6 +1,7 @@
 package com.sniper;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,17 +26,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
+import com.sniper.utility.LoadUserImage;
 
 public class ActivityMain extends FragmentActivity
 {
 	private Camera camera;
 	// private static final int SELECT_PHOTO = 100;
-	String[] targetNames =
-	{};
+	
+	List<ParseUser> targets;
+	String[] targetUserNames =	{};
+	public static ParseUser target;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
 	public static final String PARSE_EXTRA_DATA_KEY = "com.parse.Data";
@@ -43,6 +50,45 @@ public class ActivityMain extends FragmentActivity
 	public static final String PARSE_JSON_CHANNELS_KEY = "com.parse.Channel";
 
 	private static final String TAG = "TestBroadcastReceiver";
+	
+	private void GetTargets(final ActivityMain act){
+		ParseQuery<ParseUser> query = ParseUser.getQuery();
+		//query.orderByDescending(key)
+		query.findInBackground(new FindCallback<ParseUser>() {
+		  @Override
+		  public void done(List<ParseUser> objects, ParseException e) {
+		    if (e == null) {
+		        act.targetUserNames = new String[objects.size()];
+		        boolean foundTarget = false;
+		    	for(int i=0; i<objects.size() && i<act.targetUserNames.length; i++){
+		    		act.targetUserNames[i] = objects.get(i).getUsername();
+		    		if(target != null && objects.get(i).getObjectId().equals(target.getObjectId())){
+		    			foundTarget = true;
+		    		}
+		    	}
+		    	targets = objects;	
+		    	if(!foundTarget){
+		    		if(targets.size() > 0)
+		    			target = targets.get(0);
+		    		else
+		    			target = null;
+		    	}
+		    	
+		    	if(target != null){
+		    		NewTarget(act);
+		    	}
+		    } else {
+		        // Something went wrong.
+		    }
+		  }
+		});
+	}
+	
+	private void NewTarget(Activity activity){
+		Button b = (Button) findViewById(R.id.name_button);
+    	b.setText(target.getUsername());
+    	LoadUserImage.GetImage(target, activity);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -60,12 +106,14 @@ public class ActivityMain extends FragmentActivity
 			setContentView(R.layout.activity_main_landscape);
 		}
 
-		camera = new Camera(this);
-		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-		preview.addView(camera);
+		if(android.hardware.Camera.getNumberOfCameras() > 0){			
+			camera = new Camera(this);
+			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+			preview.addView(camera);
+		}
 
-		ImageView iv = (ImageView) findViewById(R.id.target_image);
-		iv.setImageResource(R.drawable.target_image);
+		ImageView iv = (ImageView) findViewById(R.id.user_image);
+		iv.setImageResource(R.drawable.questionmark);
 
 		Button b = (Button) findViewById(R.id.weapon_button);
     	b.setText(ActivityArmoryHome.myStringArray[
@@ -73,6 +121,8 @@ public class ActivityMain extends FragmentActivity
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, SELECT_PHOTO)
+    	
+    	GetTargets(this);
 	}
 	
 
@@ -82,6 +132,31 @@ public class ActivityMain extends FragmentActivity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void SelectTargetClick(View view){
+		AlertDialog.Builder builder = 
+	            new AlertDialog.Builder(this);
+	        builder.setTitle("Select Target");
+	                  
+	        final Activity act = this;
+	        final Context c = this;
+	        builder.setSingleChoiceItems(
+	                targetUserNames, 
+	                0, 
+	                new DialogInterface.OnClickListener() {
+	             
+	            @Override
+	            public void onClick(
+	                    DialogInterface dialog, 
+	                    int which) {
+	            	target = targets.get(which);
+	            	NewTarget(act);
+	            	dialog.dismiss();
+	            }
+	        });
+	        AlertDialog alert = builder.create();
+	        alert.show();
 	}
 
 	public void showDialogButtonClick(View view) {
@@ -104,12 +179,7 @@ public class ActivityMain extends FragmentActivity
             	Button b = (Button) findViewById(R.id.weapon_button);
             	b.setText(ActivityArmoryHome.myStringArray[
             	     ActivityArmoryHome.selectedPosition]);
-//                Toast.makeText(
-//                        c, 
-//                        "Select "+ActivityArmoryHome.myStringArray[which], 
-//                        Toast.LENGTH_SHORT
-//                        )
-//                        .show();
+            	dialog.dismiss();
             }
         });
         AlertDialog alert = builder.create();
