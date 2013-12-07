@@ -66,15 +66,11 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-<<<<<<< HEAD
         <receiver android:name="com.sniper.core.PushReceiver" >
             <intent-filter>
                 <action android:name="com.sniper.UPDATE" />
             </intent-filter>
         </receiver>
-=======
-        <receiver android:name="com.sniper.core.PushReceiver" />
->>>>>>> 4cde599e1bd5a9951c0a7cab3ae63a8a79632925
 
         <activity
             android:name="com.sniper.ActivityNewGame"
