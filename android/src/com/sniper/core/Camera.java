@@ -93,17 +93,11 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	
 	public static void receiveResponse(String response)
 	{
-<<<<<<< HEAD
 
 		Log.v("Debug", "receiveResponse");
 		//IMPORTANT: THIS IS NOT SETTING THE TARGET
 
-=======
-/*
-		Log.v("Debug", "receiveResponse");
-		//IMPORTANT: THIS IS NOT SETTING THE TARGET
-*/
->>>>>>> 9bcf8ad5ec59cf49323214d9e43425ba7ff97a29
+
 		KillAction kill = new KillAction();
 		kill.setPhotoURL(response);
 		kill.setTarget(ActivityMain.target.getObjectId());
