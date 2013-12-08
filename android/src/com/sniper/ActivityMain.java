@@ -31,6 +31,7 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
 import com.sniper.utility.LoadUserImage;
@@ -95,7 +96,8 @@ public class ActivityMain extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		ParseAnalytics.trackAppOpened(getIntent());
-
+		String userChannel = "user_" + ParseUser.getCurrentUser().getObjectId();
+		PushService.subscribe(this, userChannel, ActivityKillConfirm.class);
 		//Log.v("Debug", ParseUser.getCurrentUser().getEmail().toString());
 
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)

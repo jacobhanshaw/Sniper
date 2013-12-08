@@ -7,18 +7,34 @@ Parse.Cloud.define("hello", function(request, response) {
         });
 
 Parse.Cloud.beforeSave("KillAction", function(request, response) {
-
+		
 
         response.success();  
-        });
+});
 
 Parse.Cloud.afterSave("KillAction", function(request) {
         var channel = "user_" + request.object.get("target");
+		var killerName = "Player";
+		var query = new Parse.Query(Parse.User);		
+		query.equalTo("objectId", request.object.get("player").get("objectId"));
+		
+		query.find({
+		success: function(results) {
+		alert("Successfully retrieved " + results.length + " scores.");
+		// Do something with the returned Parse.Object values
+				killerName = resuilts[0].get("firstName");
+				console.log(results);
+		},
+		error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+		}
+	});
+		
         Parse.Push.send({
             channels: [ channel ],
             data: {
                 title: "Shot Down",
-                alert: request.object.get("player") + " claims to have shot you"
+                alert: killerName + " claims to have shot you"
                 }
             }, {
             success: function() {

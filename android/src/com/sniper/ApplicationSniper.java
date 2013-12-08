@@ -23,7 +23,7 @@ public class ApplicationSniper extends Application {
 		defaultACL.setPublicWriteAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);
 		PushService.setDefaultPushCallback(this, ActivityMain.class);
-		PushService.subscribe(this, "AdamTesting", ActivityKillConfirm.class);
+		
 		ParseInstallation.getCurrentInstallation().saveInBackground();		
 	}
 

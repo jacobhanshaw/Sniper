@@ -45,6 +45,10 @@ public class KillAction extends PlayerAction
 		return parseObject.getParseUser(DbContract.PlayerAction.TARGET);
 	}
 	
+	public void setTarget(String target) {
+		parseObject.put(DbContract.PlayerAction.TARGET, target);
+	}
+	
 	public void setPhotoURL(String url)
 	{
 		parseObject.put(DbContract.PlayerAction.URL, url);

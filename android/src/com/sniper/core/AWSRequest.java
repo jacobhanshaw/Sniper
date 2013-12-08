@@ -37,7 +37,7 @@ public class AWSRequest extends AsyncTask<AWSFileUploadObject, Void, String>
 		try
 		{
 			Log.v("Debug", result);
-			awsObject.postExecute.invoke(Camera.class, result);
+			awsObject.postExecute.invoke(awsObject.postExecute.getClass(), result);
 		}
 		catch(Exception e) { }
 	}
