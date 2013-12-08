@@ -1,5 +1,6 @@
 package com.sniper;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,21 +31,24 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.PushService;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
+import com.sniper.core.Game;
 import com.sniper.utility.LoadUserImage;
 import com.sniper.utility.MenuHelper;
+import com.sniper.utility.UtilityMethods;
 
 public class ActivityMain extends FragmentActivity
 {
 	private Camera camera;
 	// private static final int SELECT_PHOTO = 100;
 	
-	List<ParseUser> targets;
-	String[] targetUserNames =	{};
+	List<ParseUser> targets = new ArrayList<ParseUser>();
+	String[] targetUserNames =	{ };
 	public static ParseUser target;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
@@ -55,36 +59,33 @@ public class ActivityMain extends FragmentActivity
 	private static final String TAG = "TestBroadcastReceiver";
 	
 	private void GetTargets(final ActivityMain act){
-		ParseQuery<ParseUser> query = ParseUser.getQuery();
-		//query.orderByDescending(key)
-		query.findInBackground(new FindCallback<ParseUser>() {
-		  @Override
-		  public void done(List<ParseUser> objects, ParseException e) {
-		    if (e == null) {
-		        act.targetUserNames = new String[objects.size()];
-		        boolean foundTarget = false;
-		    	for(int i=0; i<objects.size() && i<act.targetUserNames.length; i++){
-		    		act.targetUserNames[i] = objects.get(i).getUsername();
-		    		if(target != null && objects.get(i).getObjectId().equals(target.getObjectId())){
-		    			foundTarget = true;
-		    		}
-		    	}
-		    	targets = objects;	
-		    	if(!foundTarget){
-		    		if(targets.size() > 0)
-		    			target = targets.get(0);
-		    		else
-		    			target = null;
-		    	}
-		    	
-		    	if(target != null){
-		    		NewTarget(act);
-		    	}
-		    } else {
-		        // Something went wrong.
-		    }
-		  }
-		});
+		
+		UtilityMethods.GetTargets(new FindCallback<ParseUser>(){
+			@Override
+			public void done(List<ParseUser> targets, ParseException e) {
+				if(e==null){
+					Log.d("num targets", ""+targets.size());
+					act.targets = targets;
+					targetUserNames = new String[targets.size()];
+					boolean foundTarget = false;
+			    	for(int i=0; i<targets.size(); i++){
+			    		act.targetUserNames[i] = targets.get(i).getUsername();
+			    		if(target != null && targets.get(i).getObjectId().equals(target.getObjectId())){
+			    			foundTarget = true;
+			    		}
+			    	}
+			    	if(!foundTarget){
+			    		if(targets.size() > 0)
+			    			target = targets.get(0);
+			    		else
+			    			target = null;
+			    	}
+			    	
+			    	if(target != null){
+			    		NewTarget(act);
+			    	}
+				}
+			}});		
 	}
 	
 	private void NewTarget(Activity activity){

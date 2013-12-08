@@ -48,6 +48,12 @@ public class Game extends SniperParseObject
 		super.push();
 	}
 	
+	public String GetTargetIdForUser(ParseUser user){
+		ArrayList<String> players = this.getPlayers();
+		int index = players.indexOf(user.getObjectId());
+		return this.getTargetIds().get(index).substring(user.getObjectId().length()+1);		
+	}
+	
 	public void Join(ParseUser user){
 		Log.d("game", "hit join"); //object not found for update
 		ArrayList<String> players = this.getPlayers();

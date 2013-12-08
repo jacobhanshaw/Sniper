@@ -50,8 +50,7 @@ public class ActivityGamesHome extends FragmentActivity {
 		UpdateGamesList();
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
-		//query.whereContains(key, substring);		
-		//query.wh
+		query.whereEqualTo("players", ParseUser.getCurrentUser().getObjectId());
 		query.findInBackground(new FindCallback<ParseObject>() {
 			@Override
 		  public void done(List<ParseObject> objects, ParseException e) {			  
@@ -60,11 +59,8 @@ public class ActivityGamesHome extends FragmentActivity {
 		     	gameNames.clear();
 		     	for(int i=0; i<objects.size(); i++){
 		     		Game game = new Game(objects.get(i));
-		     		if(game.getName() != null && game.getPlayers()
-		     				.contains(ParseUser.getCurrentUser().getObjectId())){
-		     			games.add(game);
-			     		gameNames.add(game.getName());
-		     		}
+		     		games.add(game);
+			     	gameNames.add(game.getName());
 		     	}
 		     	adapter.notifyDataSetChanged();
 		    } else {
