@@ -1,8 +1,11 @@
 package com.sniper;
 
+import com.sniper.utility.MenuHelper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class ActivityGeneralGameView extends Activity {
 
@@ -10,6 +13,11 @@ public class ActivityGeneralGameView extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_general_game_view);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 
 	@Override

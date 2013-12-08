@@ -65,6 +65,10 @@ public class Game extends SniperParseObject
 		this.setPlayers(players);
 		this.push();
 	}
+	
+	public void Delete(){
+		
+	}
 
 	public void invitePlayer(String playerEmail)
 	{

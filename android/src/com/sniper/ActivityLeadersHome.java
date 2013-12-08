@@ -7,6 +7,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.utility.BasicListAdapter;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,6 +30,11 @@ public class ActivityLeadersHome extends FragmentActivity {
 	String[] myStringArray = { "Loading..."};
 	List<ParseUser> usersInList;
 	BasicListAdapter adapter;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

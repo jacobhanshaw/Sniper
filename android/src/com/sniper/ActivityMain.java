@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -35,6 +36,7 @@ import com.parse.PushService;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
 import com.sniper.utility.LoadUserImage;
+import com.sniper.utility.MenuHelper;
 
 public class ActivityMain extends FragmentActivity
 {
@@ -211,5 +213,8 @@ public class ActivityMain extends FragmentActivity
 			Log.d(TAG, "JSONException: " + e.getMessage());
 		}
 	}
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 }

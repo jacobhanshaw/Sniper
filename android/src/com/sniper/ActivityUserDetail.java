@@ -6,6 +6,7 @@ import java.net.URL;
 
 import com.parse.ParseUser;
 import com.sniper.utility.LoadUserImage;
+import com.sniper.utility.MenuHelper;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,11 +17,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ActivityUserDetail extends FragmentActivity {
 	public static ParseUser User;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

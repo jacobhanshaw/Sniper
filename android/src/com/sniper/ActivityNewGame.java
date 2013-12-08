@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 import com.sniper.core.Game;
 import com.sniper.core.GpsLocation;
 import com.sniper.core.Player;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,6 +23,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,6 +34,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class ActivityNewGame extends FragmentActivity {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
+	
 	private TextView startDisplayTime;
 	private TextView endDisplayTime;
 	private Button btnChangeTime;

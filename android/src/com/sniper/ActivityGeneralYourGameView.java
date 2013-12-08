@@ -9,13 +9,17 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.core.Game;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +33,11 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 	private List<ParseUser> players = new ArrayList<ParseUser>();
 	private ArrayList<String> playerNames = new ArrayList<String>();
 	ArrayAdapter<String> adapter;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +119,25 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		TextView view = (TextView) findViewById(id);
 		view.setText(string);
 	}
-	
+	public void Leave(View view){
+		final Activity act = this;
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to leave "+game.getName()+"?");
+		builder.setPositiveButton("Leave", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+			       		game.Remove(ParseUser.getCurrentUser());
+			       		Intent intent = new Intent(act, ActivityGamesHome.class);
+			           	startActivity(intent);
+		           }
+		       });
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               // User cancelled the dialog
+		           }
+		       });
+		AlertDialog dialog = builder.create();		
+		dialog.show();
+	}
 	public void ModeratorClick(View view){
 		ActivityUserDetail.User = moderator;
 		Intent intent = new Intent(this, ActivityUserDetail.class);

@@ -20,6 +20,7 @@ import com.sniper.core.AWSFileUploadObject;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
 import com.sniper.utility.LoadUserImage;
+import com.sniper.utility.MenuHelper;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -40,6 +41,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +53,11 @@ public class ActivitySettingsHome extends FragmentActivity {
 	private static final int SELECT_PHOTO = 100;
 	private TextView userName, email;
 	private ImageView userImageView;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -245,8 +252,15 @@ public class ActivitySettingsHome extends FragmentActivity {
 	            Uri selectedImage = imageReturnedIntent.getData();
 	            InputStream imageStream;
 				try {
+					Log.d("settings", "got image");
 					imageStream = getContentResolver().openInputStream(selectedImage);
+					
 		            Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+		            int nh = (int) ( yourSelectedImage.getHeight() * 
+		            		(512.0 / yourSelectedImage.getWidth()) );
+		            Bitmap scaled = Bitmap.createScaledBitmap(yourSelectedImage, 512, nh, true);
+		            yourSelectedImage = scaled;
+		            
 		            userImageView.setImageBitmap(yourSelectedImage);
 		            
 		            LoadUserImage.UpdateImage(ParseUser.getCurrentUser(),
@@ -262,9 +276,13 @@ public class ActivitySettingsHome extends FragmentActivity {
 						e.printStackTrace();
 					}
 					
-					File file = new File(getPath(selectedImage));					
+					String path = getPath(selectedImage);
+					Log.d("path", path);
+					File file = new File(path);					
 					String title = ParseUser.getCurrentUser().getObjectId();
 			        ApplicationServices.getInstance().uploadUserPhoto(file, title, method);
+			        
+			        
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

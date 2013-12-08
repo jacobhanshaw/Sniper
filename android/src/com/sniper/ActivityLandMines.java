@@ -1,9 +1,12 @@
 package com.sniper;
 
+import com.sniper.utility.MenuHelper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class ActivityLandMines extends FragmentActivity {
 
@@ -11,6 +14,11 @@ public class ActivityLandMines extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_land_mines);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 
 	@Override

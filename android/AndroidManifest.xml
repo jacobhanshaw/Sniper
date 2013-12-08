@@ -71,8 +71,11 @@
                 <action android:name="com.sniper.UPDATE" />
             </intent-filter>
         </receiver>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9bcf8ad5ec59cf49323214d9e43425ba7ff97a29
 
         <activity
             android:name="com.sniper.ActivityNewGame"
