@@ -111,6 +111,10 @@ public class LoadUserImage {
 			
 			try {
 				Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+				int nh = (int) ( image.getHeight() * 
+	            		(512.0 / image.getWidth()) );
+				image = Bitmap.createScaledBitmap(image, 512, nh, true);
+				
 				LoadUserImage.map.put(userId, 
 						 new LoadUserImage().new UserImage(image)); 				
 				activity.runOnUiThread(new LoadUserImage().new UpdateImage(image, activity));
