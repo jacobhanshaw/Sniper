@@ -78,9 +78,10 @@ Parse.Cloud.beforeSave("Game", function(request, response) {
 
         request.object.set("debugInfo", "Start Date is valid: " + (startDate instanceof Date));
 
-        if(currentDate.timeNow() <= startDate)
+    
+        if(currentDate <= startDate)
         {
-
+            
         var players = shuffleArray(request.object.get("players"));
         var targets = new Array();
 
