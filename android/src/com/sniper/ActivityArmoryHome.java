@@ -3,6 +3,7 @@ package com.sniper;
 import java.nio.channels.Selector;
 
 import com.sniper.utility.BasicListAdapter;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,6 +30,11 @@ import android.widget.TextView;
 public class ActivityArmoryHome extends FragmentActivity 
 	implements OnItemClickListener {
 	public static int selectedPosition = 0;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	public static String[] myStringArray = {"Standard Bullet", "Silencer", "Something else..."};
 	BasicListAdapter adapter;

@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
 import com.sniper.core.AWSRequest;
+import com.sniper.utility.MenuHelper;
 
 public class ActivityKillConfirm extends Activity {
 
@@ -22,6 +24,11 @@ public class ActivityKillConfirm extends Activity {
 	public static final String PARSE_JSON_CHANNELS_KEY = "com.parse.Channel";
 	
 	private static final String TAG = "TestBroadcastReceiver";
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

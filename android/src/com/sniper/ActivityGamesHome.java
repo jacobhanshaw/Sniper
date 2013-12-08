@@ -12,6 +12,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.core.Camera;
 import com.sniper.core.Game;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +21,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,6 +35,11 @@ public class ActivityGamesHome extends FragmentActivity {
 	ArrayList<String> gameNames = new ArrayList<String>();
 	List<Game> games = new ArrayList<Game>();
 	ArrayAdapter<String> adapter;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

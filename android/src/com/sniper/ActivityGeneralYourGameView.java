@@ -9,6 +9,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.core.Game;
+import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -18,6 +19,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,11 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 	private List<ParseUser> players = new ArrayList<ParseUser>();
 	private ArrayList<String> playerNames = new ArrayList<String>();
 	ArrayAdapter<String> adapter;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
