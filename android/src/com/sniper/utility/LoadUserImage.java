@@ -95,7 +95,7 @@ public class LoadUserImage {
 		}
 		
 		 protected void onPreExecute() {
-	            this.dialog.setMessage("Loading...");
+	            this.dialog.setMessage("Loading Image...");
 	            this.dialog.show();
 	        }
 		 

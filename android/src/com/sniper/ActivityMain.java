@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,6 +50,7 @@ public class ActivityMain extends FragmentActivity
 	
 	List<ParseUser> targets = new ArrayList<ParseUser>();
 	String[] targetUserNames =	{ };
+	private ProgressDialog progressDialog;
 	public static ParseUser target;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
@@ -59,7 +61,8 @@ public class ActivityMain extends FragmentActivity
 	private static final String TAG = "TestBroadcastReceiver";
 	
 	private void GetTargets(final ActivityMain act){
-		
+		this.progressDialog = ProgressDialog.show(this, "",
+				"Loading Targets...", true);
 		UtilityMethods.GetTargets(new FindCallback<ParseUser>(){
 			@Override
 			public void done(List<ParseUser> targets, ParseException e) {
@@ -80,7 +83,7 @@ public class ActivityMain extends FragmentActivity
 			    		else
 			    			target = null;
 			    	}
-			    	
+			    	ActivityMain.this.progressDialog.dismiss();
 			    	if(target != null){
 			    		NewTarget(act);
 			    	}

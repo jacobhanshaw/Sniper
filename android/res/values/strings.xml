@@ -12,14 +12,14 @@
     <string name="title_activity_activity_leaders_home">Leaders</string>
     <string name="title_activity_activity_settings_home">Settings</string>
     <string name="title_activity_activity_new_game">Create New Game</string>
-    <string name="title_activity_activity_land_mines">ActivityLandMines</string>
+    <string name="title_activity_activity_land_mines">Land Mines</string>
     <string name="title_activity_activity_kill_confirm">ActivityKillConfirm</string>
-    <string name="title_activity_activity_user_detail">ActivityUserDetail</string>
-    <string name="title_activity_activity_moderator_game_view">ActivityModeratorGameView</string>
-    <string name="title_activity_activity_general_your_game_view">ActivityGeneralYourGameView</string>
-    <string name="title_activity_activity_general_game_view">ActivityGeneralGameView</string>
-    <string name="title_activity_activity_join_game">ActivityJoinGame</string>
-    <string name="title_activity_activity_game_detail_join">ActivityGameDetailJoin</string>
+    <string name="title_activity_activity_user_detail">Sniper</string>
+    <string name="title_activity_activity_moderator_game_view">Game</string>
+    <string name="title_activity_activity_general_your_game_view">Game</string>
+    <string name="title_activity_activity_general_game_view">Game</string>
+    <string name="title_activity_activity_join_game">Games</string>
+    <string name="title_activity_activity_game_detail_join">Game</string>
     <string name="title_activity_activity_new_user">ActivityNewUser</string>
 
 </resources>
