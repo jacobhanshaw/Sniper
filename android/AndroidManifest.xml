@@ -71,6 +71,7 @@
                 <action android:name="com.sniper.UPDATE" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name="com.sniper.ActivityNewGame"
             android:label="@string/title_activity_activity_new_game"
@@ -118,7 +119,13 @@
         </activity>
         <activity
             android:name="com.sniper.ActivityGameDetailJoin"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_activity_game_detail_join" >
+        </activity>
+        <activity
+            android:name="com.sniper.ActivityNewUser"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_activity_new_user" >
         </activity>
     </application>
 

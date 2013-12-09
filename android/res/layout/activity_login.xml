@@ -6,39 +6,78 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ActivityLogin" >
+    tools:context=".ActivityLogin"
+    android:background="@color/dkgrey" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/l1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="UserName: "
+        	android:textSize="17dp"
+        	android:textColor="#ffffffff"
+            />
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="Chelsey"
-        android:ems="10" >
-
+        android:ems="10" 
+        android:textColor="#ffffffff">
         <requestFocus />
     </EditText>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l1"
+        android:layout_marginTop="28dp"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Password: "
+        	android:textColor="#ffffffff"
+        	android:textSize="17dp"
+            />
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+         android:textColor="#ffffffff"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
         android:ems="10"
         android:text="chelsey"
         android:inputType="textPassword" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/l2"
+        android:layout_marginTop="18dp"
         android:text="Login" 
+        android:textColor="#ffffffff"
         android:onClick="login"/>
+    
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button1"
+        android:text="Create New Account" 
+        android:textColor="#ffffffff"
+        android:onClick="register"/>
 
 </RelativeLayout>

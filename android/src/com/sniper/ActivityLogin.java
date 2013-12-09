@@ -49,6 +49,7 @@ public void login(View v) {
 			});
 			
 	}
+	
 	private void success() {
 		Intent intent = new Intent(this, ActivityMain.class);
 		startActivity(intent);
@@ -56,8 +57,17 @@ public void login(View v) {
 	
 	public void register(View v) throws InterruptedException, ExecutionException {
 		//Pull Field Info
-		String sEmail = "User@domain.com";
-		String sPassword = "password";
+		//String sEmail = "User@domain.com";
+		//String sPassword = "password";
+		
+		Intent intent = new Intent(this, ActivityNewUser.class);
+		startActivity(intent);
+
+/*
+		EditText tEmail = (EditText) findViewById(R.id.editText1);
+		EditText tPassword = (EditText) findViewById(R.id.editText2);
+		String sEmail = tEmail.getText().toString();
+		String sPassword = tPassword.getText().toString();
 
 		ParseUser user = new ParseUser();
 		user.put("firstName", "User");
@@ -67,7 +77,7 @@ public void login(View v) {
 		user.setEmail(sEmail);
 
 		ActivityLogin.this.progressDialog = ProgressDialog.show(ActivityLogin.this, "",
-				"Registering...", true);
+				"Registering...", true);		
 		user.signUpInBackground(new SignUpCallback() {
 			public void done(ParseException e) {
 				if (e == null) {
@@ -76,14 +86,14 @@ public void login(View v) {
 				}
 				ActivityLogin.this.progressDialog.dismiss();
 			}
-		});
+		});*/
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_login, menu);
-		return true;
-	}
+//
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.activity_login, menu);
+//		return true;
+//	}
 
 }

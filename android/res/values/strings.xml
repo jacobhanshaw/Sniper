@@ -20,5 +20,6 @@
     <string name="title_activity_activity_general_game_view">ActivityGeneralGameView</string>
     <string name="title_activity_activity_join_game">ActivityJoinGame</string>
     <string name="title_activity_activity_game_detail_join">ActivityGameDetailJoin</string>
+    <string name="title_activity_activity_new_user">ActivityNewUser</string>
 
 </resources>
