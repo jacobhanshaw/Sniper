@@ -35,7 +35,7 @@ public class Toolbar extends Fragment{
 			LinkButton(v, R.id.game_button, ActivityGamesHome.class);
 			LinkButton(v, R.id.armory_button, ActivityArmoryHome.class);
 			LinkButton(v, R.id.home_button, ActivityMain.class, true);
-			LinkButton(v, R.id.leaders_button, ActivityLeadersHome.class);
+			LinkButton(v, R.id.leaders_button, ActivityTargets.class);
 			LinkButton(v, R.id.settings_button, ActivitySettingsHome.class);
 				
 		    return v;

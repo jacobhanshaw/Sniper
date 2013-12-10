@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ActivityTargets" >
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_centerVertical="true"
+        android:paddingBottom="65dp">
+        <TextView 
+            android:id="@+id/leadersheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:text="Targets:"/>
+	    <ListView
+	        android:id="@+id/leaders_list"
+	        android:layout_below="@+id/leadersheading"
+	        android:layout_width="match_parent"
+	        android:layout_height="fill_parent"
+	        android:choiceMode="singleChoice"	        
+	        />
+    </RelativeLayout>
+    
+    <fragment android:name="com.sniper.Toolbar"
+        android:id="@+id/toolbar_fragment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

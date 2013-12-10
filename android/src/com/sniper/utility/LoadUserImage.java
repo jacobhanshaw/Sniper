@@ -15,9 +15,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.parse.ParseUser;
+import com.sniper.ActivityTargets;
 import com.sniper.R;
 
 public class LoadUserImage {
@@ -64,16 +66,46 @@ public class LoadUserImage {
 		request.execute(url);
 	}
 	
+	public static void GetImage(ParseUser user, Activity activity, int index){
+		UserImage image = map.get(user.getObjectId());
+		if(image != null && !image.ShouldUpdate()){
+			activity.runOnUiThread(new LoadUserImage().new UpdateImage(image.image, activity, index));
+			return;
+		}
+		
+		URL url = null;
+		try {
+			url = new URL("https://s3.amazonaws.com/sniper_profilepictures/" 
+					+ user.getObjectId());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}		
+		GetImageRequest request = new GetImageRequest(activity, user, index);
+		request.execute(url);
+	}
+	
 	class UpdateImage implements Runnable{
 		public Bitmap bitmap;
 		public Activity activity;
+		public int index;
 		public UpdateImage(Bitmap bitmap, Activity activity){
 			this.bitmap = bitmap;
 			this.activity = activity;
 		}
+		public UpdateImage(Bitmap bitmap, Activity activity, int index){
+			this.bitmap = bitmap;
+			this.index = index;
+			this.activity = activity;
+		}
 		public void run(){
+			if(activity instanceof  ActivityTargets){
+				ActivityTargets targetActivity = (ActivityTargets)activity;
+				targetActivity.images[index] = bitmap;
+				targetActivity.SetupList();
+				return;
+			}
 			ImageView output = (ImageView) activity.findViewById(R.id.user_image);
-			output.setImageBitmap(bitmap);
+			output.setImageBitmap(bitmap);			
 		}	
 	}
 	public static class GetImageRequest extends AsyncTask<URL, Void, String>
@@ -87,11 +119,21 @@ public class LoadUserImage {
 	    
         private String userId;
         
+        private int index;
+        
 		public GetImageRequest(Activity activity, ParseUser user){
 			this.activity = activity;
 			context = activity;
 			dialog = new ProgressDialog(context);
 			userId = user.getObjectId();
+		}
+		
+		public GetImageRequest(Activity activity, ParseUser user, int index){
+			this.activity = activity;
+			context = activity;
+			dialog = new ProgressDialog(context);
+			userId = user.getObjectId();
+			this.index = index;
 		}
 		
 		 protected void onPreExecute() {
@@ -116,8 +158,14 @@ public class LoadUserImage {
 				image = Bitmap.createScaledBitmap(image, 512, nh, true);
 				
 				LoadUserImage.map.put(userId, 
-						 new LoadUserImage().new UserImage(image)); 				
-				activity.runOnUiThread(new LoadUserImage().new UpdateImage(image, activity));
+						 new LoadUserImage().new UserImage(image)); 	
+				
+				if(activity instanceof  ActivityTargets){
+					activity.runOnUiThread(new LoadUserImage().new UpdateImage(image, activity, index));
+				}
+				else{
+					activity.runOnUiThread(new LoadUserImage().new UpdateImage(image, activity));
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -131,12 +131,14 @@ public final class R {
         public static final int activity_moderator_game_view=0x7f03000d;
         public static final int activity_new_user=0x7f03000e;
         public static final int activity_settings_home=0x7f03000f;
-        public static final int activity_toolbar=0x7f030010;
-        public static final int activity_toolbar_landscape=0x7f030011;
-        public static final int activity_user_detail=0x7f030012;
-        public static final int input_text=0x7f030013;
-        public static final int leaderboard_view=0x7f030014;
-        public static final int list_item=0x7f030015;
+        public static final int activity_targets=0x7f030010;
+        public static final int activity_toolbar=0x7f030011;
+        public static final int activity_toolbar_landscape=0x7f030012;
+        public static final int activity_user_detail=0x7f030013;
+        public static final int input_text=0x7f030014;
+        public static final int leaderboard_view=0x7f030015;
+        public static final int list_item=0x7f030016;
+        public static final int target_item=0x7f030017;
     }
     public static final class menu {
         public static final int activity_game_detail_join=0x7f080000;
@@ -151,10 +153,11 @@ public final class R {
         public static final int activity_new_game=0x7f080009;
         public static final int activity_new_user=0x7f08000a;
         public static final int activity_settings_home=0x7f08000b;
-        public static final int activity_user_detail=0x7f08000c;
-        public static final int armory_home=0x7f08000d;
-        public static final int games_home=0x7f08000e;
-        public static final int main=0x7f08000f;
+        public static final int activity_targets=0x7f08000c;
+        public static final int activity_user_detail=0x7f08000d;
+        public static final int armory_home=0x7f08000e;
+        public static final int games_home=0x7f08000f;
+        public static final int main=0x7f080010;
     }
     public static final class string {
         public static final int Logout=0x7f060001;
@@ -174,6 +177,7 @@ public final class R {
         public static final int title_activity_activity_new_game=0x7f06000a;
         public static final int title_activity_activity_new_user=0x7f060013;
         public static final int title_activity_activity_settings_home=0x7f060009;
+        public static final int title_activity_activity_targets=0x7f060014;
         public static final int title_activity_activity_user_detail=0x7f06000d;
         public static final int title_activity_armory_home=0x7f060005;
         public static final int title_activity_games_home=0x7f060004;

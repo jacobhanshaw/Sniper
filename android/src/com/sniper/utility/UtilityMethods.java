@@ -23,6 +23,14 @@ public class UtilityMethods {
 		return poArray;
 	}
 	
+	public static void GetActiveGames(final FindCallback<ParseObject> callback){
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
+		query.whereEqualTo("players", ParseUser.getCurrentUser().getObjectId());
+		query.whereLessThanOrEqualTo(DbContract.Game.START_TIME, new Date());
+		query.whereGreaterThanOrEqualTo(DbContract.Game.END_TIME, new Date());		
+		query.findInBackground(callback);
+	}
+	
 	public static void GetTargets(final FindCallback<ParseUser> callback){
 		ParseQuery<ParseObject> gamequery = ParseQuery.getQuery(Game.class.getSimpleName());
 		gamequery.whereEqualTo("players", ParseUser.getCurrentUser().getObjectId());
