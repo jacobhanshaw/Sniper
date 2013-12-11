@@ -39,6 +39,7 @@ import com.parse.PushService;
 import com.sniper.core.ApplicationServices;
 import com.sniper.core.Camera;
 import com.sniper.core.Game;
+import com.sniper.core.GpsLocationService;
 import com.sniper.utility.LoadUserImage;
 import com.sniper.utility.MenuHelper;
 import com.sniper.utility.UtilityMethods;
@@ -46,6 +47,7 @@ import com.sniper.utility.UtilityMethods;
 public class ActivityMain extends FragmentActivity
 {
 	private Camera camera;
+	private static GpsLocationService gps;
 	// private static final int SELECT_PHOTO = 100;
 	
 	List<ParseUser> targets = new ArrayList<ParseUser>();
@@ -105,6 +107,13 @@ public class ActivityMain extends FragmentActivity
 		String userChannel = "user_" + ParseUser.getCurrentUser().getObjectId();
 		PushService.subscribe(this, userChannel, ActivityKillConfirm.class);
 		//Log.v("Debug", ParseUser.getCurrentUser().getEmail().toString());
+		gps = new GpsLocationService(ActivityMain.this);
+		
+		if(gps.canGetLocation())
+		{    
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+		}
 
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
 		{
@@ -220,5 +229,10 @@ public class ActivityMain extends FragmentActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
+	
+	public static GpsLocationService getGpsLocationService()
+	{
+		return gps;
 	}
 }

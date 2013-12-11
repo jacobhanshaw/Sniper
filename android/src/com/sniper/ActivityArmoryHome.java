@@ -2,6 +2,7 @@ package com.sniper;
 
 import java.nio.channels.Selector;
 
+import com.sniper.MapActivity;
 import com.sniper.utility.BasicListAdapter;
 import com.sniper.utility.MenuHelper;
 
@@ -59,8 +60,10 @@ public class ActivityArmoryHome extends FragmentActivity
 	}
 	
 	public void LandMinesClick(View view){
-		Intent intent = new Intent(this, ActivityLandMines.class);
-    	startActivity(intent);
+		/*Intent intent = new Intent(this, ActivityLandMines.class);
+    	startActivity(intent);*/
+		Intent intent = new Intent(this, MapActivity.class);
+		startActivity(intent);
 	}
 
 	private boolean first = true;

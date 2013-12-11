@@ -16,9 +16,11 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.sniper.core.GpsLocationService;
 
 public class ActivityLogin extends Activity {
 	private Dialog progressDialog;
+	GpsLocationService gps;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
