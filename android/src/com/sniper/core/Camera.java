@@ -10,6 +10,9 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera.PictureCallback;
 import android.os.Environment;
 import android.util.Log;
@@ -35,6 +38,8 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	private SurfaceHolder mHolder;
     public static android.hardware.Camera mCamera;
     private WindowManager mWindowManager;
+    
+    public static boolean isPortrait;
 
     public Camera(Context context) {
         super(context);
@@ -50,9 +55,88 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     }
         
     public static void TakePicture(){
-    	mCamera.takePicture(null, null, mPicture);
+    	mCamera.takePicture(null, null, jpegCallback);
 		mCamera.startPreview();
     }
+    
+    private static PictureCallback jpegCallback = new PictureCallback() {
+        @Override
+            public void onPictureTaken(byte[] data, android.hardware.Camera camera) { 
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 1;
+            options.inDither = false; // Disable Dithering mode
+            options.inPurgeable = true; // Tell to gc that whether it needs free
+                                        // memory, the Bitmap can be cleared
+            options.inInputShareable = true; // Which kind of reference will be
+                                                // used to recover the Bitmap
+                                                // data after being clear, when
+                                                // it will be used in the future
+            options.inTempStorage = new byte[32 * 1024];
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            Bitmap bMap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+
+            int orientation;
+            // others devices
+            if(bMap.getHeight() < bMap.getWidth()){
+                orientation = 90;
+            } else {
+                orientation = 0;
+            }
+
+            Bitmap bMapRotate;
+            if (Camera.isPortrait) {
+                Matrix matrix = new Matrix();
+                matrix.postRotate(orientation);
+                bMapRotate = Bitmap.createBitmap(bMap, 0, 0, bMap.getWidth(),
+                        bMap.getHeight(), matrix, true);
+            } else
+                bMapRotate = Bitmap.createScaledBitmap(bMap, bMap.getWidth(),
+                        bMap.getHeight(), true);
+
+
+            FileOutputStream out;
+        boolean mExternalStorageAvailable = false;
+        boolean mExternalStorageWriteable = false;
+            try {
+            String baseDir = Environment.getExternalStoragePublicDirectory(
+            		Environment.DIRECTORY_PICTURES).getAbsolutePath();
+            String fileName = "/MyCameraApp/" + System.currentTimeMillis() + ".jpg";
+
+                out = new FileOutputStream(baseDir + fileName);
+                bMapRotate.compress(Bitmap.CompressFormat.JPEG, 50, out);
+                if (bMapRotate != null) {
+                    bMapRotate.recycle();
+                    bMapRotate = null;
+                }
+
+                Method method = null;
+    			try
+    			{
+    				method = Camera.class.getMethod("receiveResponse", String.class);
+    			} catch (NoSuchMethodException e)
+    			{
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    	        
+    			out.flush();
+    			out.close();
+    			
+    			// don't need a million testing copies on aws
+    			//String title = ParseUser.getCurrentUser().getUsername()+"_";
+    			//title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    	        ApplicationServices.getInstance().uploadKillPhoto(new File(baseDir + fileName), "test", method);
+
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+        }
+    };
     
     private static PictureCallback mPicture = new PictureCallback() {
 
@@ -170,6 +254,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     private void SetOrientation(){
     	if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
         	mCamera.setDisplayOrientation(90);
+        	isPortrait = true;
         }        
         else{
         	Display mDisplay = mWindowManager.getDefaultDisplay();
@@ -177,6 +262,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         	if(!(rot == Surface.ROTATION_0 || rot == Surface.ROTATION_90)){
         		mCamera.setDisplayOrientation(180);
         	}
+        	isPortrait = false;
         } 
     }
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
