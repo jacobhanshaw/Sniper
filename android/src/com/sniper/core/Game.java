@@ -99,7 +99,15 @@ public class Game extends SniperParseObject
 	/*************************************
 	 * Accessor Methods
 	 *************************************/
-
+	
+	/**
+	 * @return the creator
+	 */
+	public String getObjectId()
+	{
+		return parseObject.getObjectId();
+	}
+	
 	/**
 	 * @return the creator
 	 */
