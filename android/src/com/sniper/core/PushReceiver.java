@@ -37,6 +37,7 @@ public class PushReceiver extends BroadcastReceiver {
 				Bundle b = new Bundle();
 				b.putString("killActionId", json.getString("killActionId"));
 				b.putString("URL",  json.getString("URL"));
+				b.putString("source", this.getClass().getSimpleName());
 				confirmIntent.putExtras(b); 
 				
 				context.startActivity(confirmIntent);
