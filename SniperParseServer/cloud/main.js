@@ -7,33 +7,21 @@ Parse.Cloud.define("hello", function(request, response) {
         });
 
 Parse.Cloud.beforeSave("KillAction", function(request, response) {
-
-        //if(!request.object.get("isVerified"))
+        var channel = "user_" + request.object.get("player");
+        var killVerified = request.object.get("isVerified");
+        var targetName = "Target";
+        //if(!killVerified)
         //Call Facial Recognition Code
         //request.object.set("isVerified", true);
 
-        if(request.object.get("isVerified"))
-        {
-
-
-
-
-        var channel = "user_" + request.object.get("player").id;
-        var targetName;
-        var query = new Parse.Query(Parse.User);		
-        //		query.equalTo("objectId", request.object.get("player").id);
-        query.get(request.object.get("target").id, 
-            {
-success: function(target) {
-// The object was retrieved successfully.
-targetName = target.get("username");
-},
-error: function(object, error) {
-// The object was not retrieved successfully.
-// error is a Parse.Error with an error code and description.
-}
-});
-
+        //killVerified = request.object.get("isVerified");
+if(killVerified)
+{
+        var user = new Parse.User;
+        user.id = request.object.get("target");
+        user.fetch({
+success: function(user){
+targetName = user.get("username");
 Parse.Push.send({
 channels: [ channel ],
 data: {
@@ -43,47 +31,34 @@ action: "com.sniper.CONFIRMED_KILL"
 }
 }, {
 success: function() {
+response.success();
 },
 error: function(error) {
 // Handle error
 }
 });
-
 }
-
-response.success();  
+});
+}
+else
+{ 
+response.success();
+}
 });
 
 Parse.Cloud.afterSave("KillAction", function(request) {
-        var channel = "user_" + request.object.get("target").id;
+        var channel = "user_" + request.object.get("target");
+        var killVerified = request.object.get("isVerified");
         var killerName = "Player";
-        var query = new Parse.Query(Parse.User);		
-        //		query.equalTo("objectId", request.object.get("player").id);
-        query.get(request.object.get("player").id, {
-success: function(player) {
-// The object was retrieved successfully.
-killerName = player.get("username");
-},
-error: function(object, error) {
-// The object was not retrieved successfully.
-// error is a Parse.Error with an error code and description.
-}
-});
-        /*
-           query.find({
-success: function(results) {
-alert("Successfully retrieved " + results.length + " scores.");
-// Do something with the returned Parse.Object values
-killerName = resuilts[0].get("username");
-console.log(results);
-},
-error: function(error) {
-alert("Error: " + error.code + " " + error.message);
-}
-});   */
-if(!request.object.get("isVerified"))
+
+        var user = new Parse.User;
+        user.id = request.object.get("player");
+        user.fetch({
+success: function(user){
+killerName = user.get("username");
+if(!killVerified)
 {
-    Parse.Push.send({
+Parse.Push.send({
 channels: [ channel ],
 data: {
 title: "Shot Down",
@@ -94,15 +69,20 @@ URL: request.object.get("URL")
 }
 }, {
 success: function() {
+response.success("Potential Kill Notification Sent");
 },
 error: function(error) {
 // Handle error
 }
 });
 }
-response.success();
+else
+{
+response.success("Kill Action Saved");
+}
+}
 });
-
+});
 
 function setUpGameStartNotification(gameId, gameName, startTime)
 {

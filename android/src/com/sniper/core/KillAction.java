@@ -20,10 +20,12 @@ public class KillAction extends PlayerAction
 	{
 		super();
 		
+		setIsVerified(false);
+		
 		if(actionType == KillActionType.GPS)
 		{
 			//parseObject.put(DbContract.PlayerAction.PLAYER, null);
-			parseObject.put(DbContract.PlayerAction.TARGET, ParseUser.getCurrentUser());
+			parseObject.put(DbContract.PlayerAction.TARGET, ParseUser.getCurrentUser().getObjectId());
 		}
 	}
 
@@ -47,9 +49,9 @@ public class KillAction extends PlayerAction
 		super.push();
 	}
 	
-	public ParseUser getTarget()
+	public String getTarget()
 	{
-		return parseObject.getParseUser(DbContract.PlayerAction.TARGET);
+		return parseObject.getString(DbContract.PlayerAction.TARGET);
 	}
 	
 	public void setTarget(String target) {

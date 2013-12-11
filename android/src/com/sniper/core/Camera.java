@@ -182,13 +182,11 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 		Log.v("Debug", "receiveResponse");
 		//IMPORTANT: THIS IS NOT SETTING THE TARGET
 
-
 		KillAction kill = new KillAction(KillActionType.CAMERA);
 		kill.setPhotoURL(response);
 		kill.setTarget(ActivityMain.target.getObjectId());
 		kill.push();
-		//kill.url = response;
-		//kill.publish();
+
 	}
 	
 	public static File getImageFile(){
