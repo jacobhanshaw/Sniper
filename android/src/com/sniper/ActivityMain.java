@@ -145,7 +145,7 @@ public class ActivityMain extends FragmentActivity
 		while(iter.hasNext()) {
 			String curr = iter.next();
 			Log.v("Debug", "Installation " + curr);
-			PushService.unsubscribe(this, iter.next());
+			PushService.unsubscribe(this, curr);
 		}
 		//Subscribe User
 		String userChannel = "user_" + ParseUser.getCurrentUser().getObjectId();

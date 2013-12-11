@@ -1,5 +1,7 @@
 package com.sniper.core;
 
+import android.util.Log;
+
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sniper.utility.DbContract;

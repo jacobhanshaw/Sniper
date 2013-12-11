@@ -2,6 +2,8 @@ package com.sniper.core;
 
 import java.util.Date;
 
+import android.util.Log;
+
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sniper.utility.DbContract;
@@ -15,6 +17,7 @@ public class PlayerAction extends SniperParseObject
 		
 		Date currentDate = new Date();
 		parseObject.put(DbContract.PlayerAction.PLAYER, ParseUser.getCurrentUser());
+		Log.v("Debug", "Logging Kill as: " + ParseUser.getCurrentUser().getEmail());
 		parseObject.put(DbContract.PlayerAction.CREATED, currentDate);
 		
 	}
