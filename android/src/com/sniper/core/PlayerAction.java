@@ -14,9 +14,8 @@ public class PlayerAction extends SniperParseObject
 		super();
 		
 		Date currentDate = new Date();
-		parseObject.put(DbContract.PlayerAction.PLAYER, ParseUser.getCurrentUser());
+		parseObject.put(DbContract.PlayerAction.PLAYER, ParseUser.getCurrentUser().getObjectId());
 		parseObject.put(DbContract.PlayerAction.CREATED, currentDate);
-		
 	}
 
 	public PlayerAction(ParseObject object)
@@ -39,9 +38,9 @@ public class PlayerAction extends SniperParseObject
 		super.push();
 	}
 	
-	public ParseUser getPlayer()
+	public String getPlayer()
 	{
-		return parseObject.getParseUser(DbContract.PlayerAction.PLAYER);
+		return parseObject.getString(DbContract.PlayerAction.PLAYER);
 	}
 	
 	public Date getCreatedTime()
