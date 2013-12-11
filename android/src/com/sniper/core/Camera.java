@@ -22,6 +22,7 @@ import com.parse.ParseUser;
 import com.sniper.ActivityLogin;
 import com.sniper.ActivityMain;
 import com.sniper.CrosshairsView;
+import com.sniper.core.KillAction.KillActionType;
 
 
 public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
@@ -98,7 +99,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 		//IMPORTANT: THIS IS NOT SETTING THE TARGET
 
 
-		KillAction kill = new KillAction();
+		KillAction kill = new KillAction(KillActionType.CAMERA);
 		kill.setPhotoURL(response);
 		kill.setTarget(ActivityMain.target.getObjectId());
 		kill.push();

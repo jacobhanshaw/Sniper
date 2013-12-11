@@ -40,5 +40,6 @@ public class DbContract {
 		public static final String PLAYER = "player";
 		public static final String TARGET = "target";
 		public static final String URL = "URL";
+		public static final String IS_VERIFIED = "isVerified";
 	}
 }

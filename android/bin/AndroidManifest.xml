@@ -69,6 +69,8 @@
         <receiver android:name="com.sniper.core.PushReceiver" >
             <intent-filter>
                 <action android:name="com.sniper.UPDATE" />
+                <action android:name="com.sniper.POTENTIAL_KILL" />
+                <action android:name="com.sniper.CONFIRMED_KILL" />
             </intent-filter>
         </receiver>
 

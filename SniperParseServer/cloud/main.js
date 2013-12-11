@@ -7,44 +7,100 @@ Parse.Cloud.define("hello", function(request, response) {
         });
 
 Parse.Cloud.beforeSave("KillAction", function(request, response) {
-		
 
-        response.success();  
+        //if(!request.object.get("isVerified"))
+        //Call Facial Recognition Code
+        //request.object.set("isVerified", true);
+
+        if(request.object.get("isVerified"))
+        {
+
+
+
+
+        var channel = "user_" + request.object.get("player").id;
+        var targetName;
+        var query = new Parse.Query(Parse.User);		
+        //		query.equalTo("objectId", request.object.get("player").id);
+        query.get(request.object.get("target").id, 
+            {
+success: function(target) {
+// The object was retrieved successfully.
+targetName = target.get("username");
+},
+error: function(object, error) {
+// The object was not retrieved successfully.
+// error is a Parse.Error with an error code and description.
+}
+});
+
+Parse.Push.send({
+channels: [ channel ],
+data: {
+title: "Kill Confirmed",
+alert: targetName + " has been confirmed dead",
+action: "com.sniper.CONFIRMED_KILL"
+}
+}, {
+success: function() {
+},
+error: function(error) {
+// Handle error
+}
+});
+
+}
+
+response.success();  
 });
 
 Parse.Cloud.afterSave("KillAction", function(request) {
-        var channel = "user_" + request.object.get("target");
-		var killerName = "Player";
-		var query = new Parse.Query(Parse.User);		
-		query.equalTo("objectId", request.object.get("player").get("objectId"));
-		
-		query.find({
-		success: function(results) {
-		alert("Successfully retrieved " + results.length + " scores.");
-		// Do something with the returned Parse.Object values
-				killerName = resuilts[0].get("firstName");
-				console.log(results);
-		},
-		error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-		}
-	});
-		
-        Parse.Push.send({
-            channels: [ channel ],
-            data: {
-                title: "Shot Down",
-                alert: killerName + " claims to have shot you"
-                }
-            }, {
-            success: function() {
-            },
-            error: function(error) {
-                // Handle error
-            }
-        });
-
-                response.success();
+        var channel = "user_" + request.object.get("target").id;
+        var killerName = "Player";
+        var query = new Parse.Query(Parse.User);		
+        //		query.equalTo("objectId", request.object.get("player").id);
+        query.get(request.object.get("player").id, {
+success: function(player) {
+// The object was retrieved successfully.
+killerName = player.get("username");
+},
+error: function(object, error) {
+// The object was not retrieved successfully.
+// error is a Parse.Error with an error code and description.
+}
+});
+        /*
+           query.find({
+success: function(results) {
+alert("Successfully retrieved " + results.length + " scores.");
+// Do something with the returned Parse.Object values
+killerName = resuilts[0].get("username");
+console.log(results);
+},
+error: function(error) {
+alert("Error: " + error.code + " " + error.message);
+}
+});   */
+if(!request.object.get("isVerified"))
+{
+    Parse.Push.send({
+channels: [ channel ],
+data: {
+title: "Shot Down",
+alert: killerName + " claims to have shot you",
+action: "com.sniper.POTENTIAL_KILL",
+killActionId: request.object.id,
+URL: request.object.get("URL") 
+}
+}, {
+success: function() {
+},
+error: function(error) {
+// Handle error
+}
+});
+}
+response.success();
 });
 
 
@@ -76,12 +132,11 @@ Parse.Cloud.beforeSave("Game", function(request, response) {
         var startDate = new Date(request.object.get("startTime"));
         var currentDate = new Date(); 
 
-        request.object.set("debugInfo", "Start Date is valid: " + (startDate instanceof Date));
+        request.object.set("debugInfo", "Start Date is: " + startDate.toString());
 
-    
         if(currentDate <= startDate)
         {
-            
+
         var players = shuffleArray(request.object.get("players"));
         var targets = new Array();
 

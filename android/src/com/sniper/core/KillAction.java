@@ -1,23 +1,28 @@
 package com.sniper.core;
-/*
-import java.util.Date;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.util.Log;
-*/
 import com.parse.ParseObject;
-//import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.sniper.utility.DbContract;
 
+
+
 public class KillAction extends PlayerAction
 {
+
+	public enum KillActionType
+	{
+		CAMERA, GPS
+	}
 	
-	public KillAction()
+	public KillAction(KillActionType actionType)
 	{
 		super();
+		
+		if(actionType == KillActionType.GPS)
+		{
+			//parseObject.put(DbContract.PlayerAction.PLAYER, null);
+			parseObject.put(DbContract.PlayerAction.TARGET, ParseUser.getCurrentUser());
+		}
 	}
 
 	public KillAction(ParseObject object)
@@ -59,19 +64,21 @@ public class KillAction extends PlayerAction
 		return parseObject.getString(DbContract.PlayerAction.TARGET);
 	}
 	
-/*	public void publish() {
-		JSONObject data = new JSONObject();
-		try {
-			//data.put("killer", killer.getObjectId());
-			//data.put("dead", dead.getObjectId());
-			data.put("url", url);
-			data.put("action", "com.sniper.UPDATE");
-			ParsePush push = new ParsePush();
-			push.setChannel("AdamTesting");
-			push.setData(data);
-			push.sendInBackground();
-		} catch (JSONException e) {
-			Log.e("Debug", "KillAction Publish");
-		}
-	} */
+	/**
+	 * @return the verified
+	 */
+	public boolean getIsVerified()
+	{
+		return parseObject.getBoolean(DbContract.PlayerAction.IS_VERIFIED);
+	}
+
+	/**
+	 * @param isVerified
+	 *            the isVerified to set
+	 */
+	public void setIsVerified(boolean isVerified)
+	{
+		parseObject.put(DbContract.PlayerAction.IS_VERIFIED, isVerified);
+	}
+	
 }

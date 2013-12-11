@@ -1,20 +1,18 @@
 package com.sniper;
 
-import java.util.Iterator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.sniper.core.AWSRequest;
+import com.sniper.utility.DbContract;
 import com.sniper.utility.MenuHelper;
 
 public class ActivityKillConfirm extends Activity {
@@ -25,6 +23,8 @@ public class ActivityKillConfirm extends Activity {
 	
 	private static final String TAG = "TestBroadcastReceiver";
 	
+	private String killActionId;
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    return MenuHelper.onOptionsItemSelected(item, this);
@@ -33,9 +33,12 @@ public class ActivityKillConfirm extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		AWSRequest request = new AWSRequest();
-		String url = "www.google.com";
-		try
+		
+		Bundle b = getIntent().getExtras();
+		String url = b.getString("URL");
+		killActionId = b.getString("killActionId");
+		
+	/*	try
 		{
 			Intent intent = getIntent();
 			String action = intent.getAction();
@@ -59,14 +62,23 @@ public class ActivityKillConfirm extends Activity {
 		{
 			Log.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+		*/
 		setContentView(R.layout.activity_kill_confirm);
 		WebView picture = (WebView) findViewById(R.id.wvPicture);
 		picture.loadUrl(url);
 	}
 	
 	public void confirmYes(View v) {
-		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("KillAction");
+		query.getInBackground(killActionId, new GetCallback<ParseObject>() {
+			  public void done(ParseObject killAction, ParseException e) {
+			    if (e == null) 
+			    {
+			      killAction.put(DbContract.PlayerAction.IS_VERIFIED, true);
+			      killAction.saveEventually();
+			    }
+			  }
+			});
 	}
 	
 	public void confirmNo(View v) {
