@@ -71,6 +71,7 @@
                 <action android:name="com.sniper.UPDATE" />
                 <action android:name="com.sniper.POTENTIAL_KILL" />
                 <action android:name="com.sniper.CONFIRMED_KILL" />
+                <action android:name="com.sniper.GAME_START" />
             </intent-filter>
         </receiver>
 
