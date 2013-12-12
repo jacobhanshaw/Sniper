@@ -45,8 +45,9 @@ public class PushReceiver extends BroadcastReceiver
 				confirmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				Bundle b = new Bundle();
 				b.putString("killActionId", json.getString("killActionId"));
-				b.putString("URL", json.getString("URL"));
-				confirmIntent.putExtras(b);
+				b.putString("URL",  json.getString("URL"));
+				b.putString("source", this.getClass().getSimpleName());
+				confirmIntent.putExtras(b); 
 				
 				if (ActivityMain.inBackground)
 				{

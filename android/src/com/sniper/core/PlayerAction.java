@@ -16,8 +16,7 @@ public class PlayerAction extends SniperParseObject
 		super();
 		
 		Date currentDate = new Date();
-		parseObject.put(DbContract.PlayerAction.PLAYER, ParseUser.getCurrentUser());
-		Log.v("Debug", "Logging Kill as: " + ParseUser.getCurrentUser().getEmail());
+		parseObject.put(DbContract.PlayerAction.PLAYER, ParseUser.getCurrentUser().getObjectId());
 		parseObject.put(DbContract.PlayerAction.CREATED, currentDate);
 		
 	}

@@ -1,7 +1,12 @@
 package com.sniper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +16,6 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.sniper.core.AWSRequest;
 import com.sniper.utility.DbContract;
 import com.sniper.utility.MenuHelper;
 
@@ -34,35 +38,30 @@ public class ActivityKillConfirm extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		Bundle b = getIntent().getExtras();
-		String url = b.getString("URL");
-		killActionId = b.getString("killActionId");
-		
-	/*	try
-		{
-			Intent intent = getIntent();
+		Intent intent = getIntent();
+		Bundle b = intent.getExtras();
+		String source = b.getString("source");
+		JSONObject json = new JSONObject();
+		String url = "";
+		if(source == null) {
 			String action = intent.getAction();
-
-			// "com.parse.Channel"
-			String channel = intent.getExtras().getString(PARSE_JSON_CHANNELS_KEY);
-			JSONObject json = new JSONObject(intent.getExtras().getString(PARSE_EXTRA_DATA_KEY));
-
-
-			Iterator<String> itr = json.keys();
-			while (itr.hasNext())
-			{
-				String key = (String) itr.next();
-				String value = json.getString(key);
-			}
-
-			url = json.getString("url");
+			try {
+				json = new JSONObject(intent.getExtras().getString(PARSE_EXTRA_DATA_KEY));
+				if(action.equals("com.sniper.POTENTIAL_KILL"))
+				{
+					url = json.getString("URL");
+					killActionId = json.getString("killActionId");
+				}
+			} catch (JSONException e) {
+				Log.d("Debug", "JSONException: " + e.getMessage());
+			}			
 			
-			Log.d("Debug", "Received it here");
-		} catch (JSONException e)
-		{
-			Log.d(TAG, "JSONException: " + e.getMessage());
+		} else {
+			url = b.getString("URL");
+			killActionId = b.getString("killActionId");
 		}
-		*/
+		
+
 		setContentView(R.layout.activity_kill_confirm);
 		WebView picture = (WebView) findViewById(R.id.wvPicture);
 		picture.loadUrl(url);
