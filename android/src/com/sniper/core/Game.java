@@ -80,6 +80,7 @@ public class Game extends SniperParseObject
 	{
 		setStartTime(new Date());
 		parseObject.put("notifSent", false);
+		push();
 	}
 	
 	public void invitePlayer(String playerEmail)
