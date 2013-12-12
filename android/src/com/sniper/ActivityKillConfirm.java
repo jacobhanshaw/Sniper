@@ -49,6 +49,7 @@ public class ActivityKillConfirm extends Activity {
 		if(source == null) {
 			String action = intent.getAction();
 			try {
+				
 				json = new JSONObject(intent.getExtras().getString(PARSE_EXTRA_DATA_KEY));
 				if(action.equals("com.sniper.POTENTIAL_KILL"))
 				{

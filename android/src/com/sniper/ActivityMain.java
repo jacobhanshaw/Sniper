@@ -198,16 +198,21 @@ public class ActivityMain extends FragmentActivity
 						Game game = new Game(objects.get(i));
 						games.add(game);
 					}
+					subscribeGames();
 				} else {
 					Log.e("Debug", e.getMessage());
 					// something went wrong
 				}
 			}
 		});
+		
+		Log.v("Debug", ParseInstallation.getCurrentInstallation().getObjectId());
+	}
+	
+	private void subscribeGames() {
 		for(int i = 0; i < games.size(); i++) {
 			PushService.subscribe(this, "game_" + games.get(i).getObjectId(), ActivityMain.class);
 		}
-		Log.v("Debug", ParseInstallation.getCurrentInstallation().getObjectId());
 	}
 
 	public void SelectTargetClick(View view){

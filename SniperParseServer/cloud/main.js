@@ -8,15 +8,17 @@ Parse.Cloud.define("hello", function(request, response) {
 
 Parse.Cloud.beforeSave("KillAction", function(request, response) {
     var channel = "user_" + request.object.get("player");
+    var currPlayer = request.object.get("player");
+    var currTarget = request.object.get("target");
     var killVerified = request.object.get("isVerified");
     var targetName = "Target";
         //if(!killVerified)
         //Call Facial Recognition Code
         //request.object.set("isVerified", true);
-
         //killVerified = request.object.get("isVerified");
         if(killVerified)
         {
+            console.log("Kill being verified");
             var user = new Parse.User;
             user.id = request.object.get("target");
             user.fetch({
@@ -39,6 +41,90 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
                     });
                 }
             });
+            console.log("Confirmed notification sent");
+            var Game = Parse.Object.extend("Game");
+            var query = new Parse.Query(Game);
+            query.equalTo("players", currPlayer);
+            query.lessThanOrEqualTo("startTime", new Date());
+            query.greaterThanOrEqualTo("endTime", new Date()); 
+            console.log("Starting games query"); 
+            query.find({
+                success: function(results) {
+                    console.log("Found some gamez");
+                    // Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) { 
+                        console.log("Processing game: ", results[i].get("name"));
+                        //Remove player from game
+                        var players = results[i].get("players");
+                        console.log("Before remove players: " + players);
+                        for(var j = 0; j < players.length; j++) {
+                            if(players[j] == currTarget) {
+                                players.splice(j, 1);
+                            }
+                        }
+                        
+                        console.log("After remove players: " + players);
+                        //Reassign targets
+                        var targets = results[i].get("targets");
+                        console.log("Before remove targets: " + targets);
+                        var newHunter, newTarget, p1, p2;
+                        for(var j = 0; j < targets.length; j++) {
+                            currPair = targets[j];
+                           if(currPair.indexOf(currTarget) == 0) {
+                                console.log("Pair 1: " + currPair);
+                                newTarget = currPair.substring(11);
+                                p1 = currPair;
+                            } else if(currPair.indexOf(currTarget) == 11) {
+                                console.log("Pair 2: " + currPair);
+                                newHunter = currPair.substring(0, 10);
+                                p2 = currPair;
+                            }
+                        }
+                        //Remove pair 1
+                        for(var j = 0; j < targets.length; j++) {
+                            if(targets[j] == p1) {
+                                targets.splice(j, 1);
+                                break;
+                            }
+                        }
+                        //Remove pair 2
+                        for(var j = 0; j < targets.length; j++) {
+                            if(targets[j] == p2) {
+                                targets.splice(j, 1);
+                                break;
+                            }
+                        }
+                        var newSet = newHunter + "-" + newTarget;
+                        targets.push(newSet);
+                        console.log("After remove targets: " + targets);
+                        //Save game
+                        results[i].set("players", players);
+                        results[i].set("targets", targets);
+                        results[i].save();
+                     if(players.length == 1) {
+                        gameChannel = "game_" + results[i].id;
+                        Parse.Push.send({
+                        channels: [ gameChannel ],
+                        data: {
+                            title: "GAME OVER",
+                            alert: currPlayer.get("firstName") + " has won",
+                            action: "com.sniper.CONFIRMED_KILL"
+                        }
+                        }, {
+                        success: function() {
+                            response.success();
+                        },
+                        error: function(error) {
+// Handle error
+                        }
+                        });
+                    }
+                    }
+                },
+                error: function(error) {
+                    console.error("Error: " + error.code + " " + error.message);
+                }  
+            });
         }
         else
         { 
@@ -47,44 +133,6 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
 });
 
 Parse.Cloud.afterSave("KillAction", function(request) {
-<<<<<<< HEAD
-        var channel = "user_" + request.object.get("target");
-        var killVerified = request.object.get("isVerified");
-        var killerName = "Player";
-
-        var user = new Parse.User;
-        user.id = request.object.get("player");
-        user.fetch({
-success: function(user){
-killerName = user.get("username");
-if(!killVerified)
-{
-Parse.Push.send({
-channels: [ channel ],
-data: {
-title: "Shot Down",
-alert: killerName + " claims to have shot you",
-action: "com.sniper.POTENTIAL_KILL",
-killActionId: request.object.id,
-killerName: killerName,
-URL: request.object.get("URL") 
-}
-}, {
-success: function() {
-//response.success("Potential Kill Notification Sent");
-},
-error: function(error) {
-// Handle error
-}
-});
-}
-else
-{
-//response.success("Kill Action Saved");
-}
-}
-});
-=======
     var channel = "user_" + request.object.get("target");
     var killVerified = request.object.get("isVerified");
     var killerName = "Player";
@@ -120,13 +168,10 @@ else
             }
         }
     });
->>>>>>> Some indents
 });
 
 function setUpGameStartNotification(gameId, gameName, startTime)
 {
-<<<<<<< HEAD
-=======
     var query = new Parse.Query(Parse.Installation);
     query.equalTo('channels', gameId);
 
@@ -146,7 +191,6 @@ error: function(error) {
 // Handle error
 }
 });
->>>>>>> Some indents
 }
 
 Parse.Cloud.beforeSave("Game", function(request, response) {
@@ -175,40 +219,6 @@ Parse.Cloud.beforeSave("Game", function(request, response) {
 });
 
 Parse.Cloud.afterSave("Game", function(request) 
-<<<<<<< HEAD
-        {
-        if(!request.object.get("notifSent"))
-        {
-        request.object.set("notifSent", false);
-        var gameId = request.object.id;
-        var gameName = request.object.get("name");
-        var startTime = new Date(request.object.get("startTime"));
-    var query = new Parse.Query(Parse.Installation);
-    query.equalTo('channels', gameId);
-
-    Parse.Push.send({
-where: query,
-data: {
-//title: gameName + " has begun",
-//alert: gameName + " has begun at " + startTime.toString()  
-action: "com.sniper.GAME_START",
-gameName: gameName,
-startMilli: startTime.getTime()
-},
-push_time: startTime 
-}, 
-{
-success: function() {
-// Push was successful
-},
-error: function(error) {
-// Handle error
-}
-});
-
-        }
-        });
-=======
 {
     if(!request.object.get("notifSent"))
     {
@@ -216,7 +226,6 @@ error: function(error) {
         setUpGameStartNotification(request.object.id, request.object.get("name"), new Date(request.object.get("startTime")));
     }
 });
->>>>>>> Some indents
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
