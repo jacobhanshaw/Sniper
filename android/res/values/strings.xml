@@ -22,5 +22,6 @@
     <string name="title_activity_activity_game_detail_join">Game</string>
     <string name="title_activity_activity_new_user">New Account</string>
     <string name="title_activity_activity_targets">Targets</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>

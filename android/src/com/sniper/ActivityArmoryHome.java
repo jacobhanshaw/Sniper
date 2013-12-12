@@ -59,8 +59,10 @@ public class ActivityArmoryHome extends FragmentActivity
 	}
 	
 	public void LandMinesClick(View view){
-		Intent intent = new Intent(this, ActivityLandMines.class);
-    	startActivity(intent);
+		/*Intent intent = new Intent(this, ActivityLandMines.class);
+    	startActivity(intent);*/
+		Intent intent = new Intent(this, MapActivity.class);
+		startActivity(intent);
 	}
 
 	private boolean first = true;
