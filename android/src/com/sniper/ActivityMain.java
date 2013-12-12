@@ -106,6 +106,11 @@ public class ActivityMain extends FragmentActivity
 				}
 			}});		
 	}
+	
+	public void LandMine(View v){
+		Intent intent = new Intent(this, MapActivity.class);
+		startActivity(intent);
+	}
 
 	private void NewTarget(Activity activity){
 		Button b = (Button) findViewById(R.id.name_button);
