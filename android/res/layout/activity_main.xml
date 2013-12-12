@@ -56,6 +56,15 @@
 	            android:layout_alignParentBottom="true"
 	            android:layout_alignParentLeft="true">	            
 	        </Button>
+	        
+	        <ImageButton
+	            android:scaleType="fitXY"
+	            android:id="@+id/mine_button"
+	            android:layout_height="52dp"
+	            android:layout_width="60dp"
+	            android:layout_alignParentBottom="true"
+	            android:layout_alignParentRight="true"
+	            />
 	    </RelativeLayout>
     </FrameLayout>
     

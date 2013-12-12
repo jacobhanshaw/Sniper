@@ -36,7 +36,7 @@ public class ActivityArmoryHome extends FragmentActivity
 	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 	
-	public static String[] myStringArray = {"Standard Bullet", "Silencer", "Something else..."};
+	public static String[] myStringArray = {"Standard Bullet"};
 	BasicListAdapter adapter;
 	
 	@Override

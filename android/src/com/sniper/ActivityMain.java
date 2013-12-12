@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.parse.FindCallback;
@@ -144,6 +145,9 @@ public class ActivityMain extends FragmentActivity
 
 		ImageView iv = (ImageView) findViewById(R.id.user_image);
 		iv.setImageResource(R.drawable.questionmark);
+		
+		ImageButton butt = (ImageButton)findViewById(R.id.mine_button);
+		butt.setImageResource(R.drawable.mineicon);
 
 		Button b = (Button) findViewById(R.id.weapon_button);
 		b.setText(ActivityArmoryHome.myStringArray[
