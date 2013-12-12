@@ -17,6 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.sniper.utility.DbContract;
+import com.sniper.utility.LoadUserImage;
 import com.sniper.utility.MenuHelper;
 
 public class ActivityKillConfirm extends Activity {
@@ -61,12 +62,10 @@ public class ActivityKillConfirm extends Activity {
 			killActionId = b.getString("killActionId");
 		}
 		
-
 		setContentView(R.layout.activity_kill_confirm);
-		WebView picture = (WebView) findViewById(R.id.wvPicture);
-		picture.loadUrl(url);
+		LoadUserImage.ShowKillImage(this, url);
 	}
-	
+		
 	public void confirmYes(View v) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("KillAction");
 		query.getInBackground(killActionId, new GetCallback<ParseObject>() {

@@ -84,6 +84,17 @@ public class LoadUserImage {
 		request.execute(url);
 	}
 	
+	public static void ShowKillImage(Activity activity, String urlS){
+		URL url = null;
+		try {
+			url = new URL(urlS);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}		
+		GetImageRequest request = new GetImageRequest(activity, null);
+		request.execute(url);
+	}
+	
 	class UpdateImage implements Runnable{
 		public Bitmap bitmap;
 		public Activity activity;
@@ -117,7 +128,7 @@ public class LoadUserImage {
 	    /** application context. */
         private Context context;
 	    
-        private String userId;
+        private String userId = null;
         
         private int index;
         
@@ -125,7 +136,8 @@ public class LoadUserImage {
 			this.activity = activity;
 			context = activity;
 			dialog = new ProgressDialog(context);
-			userId = user.getObjectId();
+			if(user != null)
+				userId = user.getObjectId();
 		}
 		
 		public GetImageRequest(Activity activity, ParseUser user, int index){
@@ -157,7 +169,8 @@ public class LoadUserImage {
 	            		(512.0 / image.getWidth()) );
 				image = Bitmap.createScaledBitmap(image, 512, nh, true);
 				
-				LoadUserImage.map.put(userId, 
+				if(userId != null)
+					LoadUserImage.map.put(userId, 
 						 new LoadUserImage().new UserImage(image)); 	
 				
 				if(activity instanceof  ActivityTargets){
