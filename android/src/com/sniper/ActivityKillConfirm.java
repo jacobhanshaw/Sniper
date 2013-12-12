@@ -4,6 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,14 +75,15 @@ public class ActivityKillConfirm extends Activity {
 			    if (e == null) 
 			    {
 			      killAction.put(DbContract.PlayerAction.IS_VERIFIED, true);
-			      killAction.saveEventually();
+			      killAction.saveEventually();			      
 			    }
 			  }
 			});
+		this.finish();
 	}
 	
 	public void confirmNo(View v) {
-		
+		this.finish();
 	}
 
 	@Override

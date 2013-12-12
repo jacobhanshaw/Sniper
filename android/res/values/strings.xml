@@ -13,7 +13,7 @@
     <string name="title_activity_activity_settings_home">Settings</string>
     <string name="title_activity_activity_new_game">Create New Game</string>
     <string name="title_activity_activity_land_mines">Land Mines</string>
-    <string name="title_activity_activity_kill_confirm">ActivityKillConfirm</string>
+    <string name="title_activity_activity_kill_confirm">Confirm Kill</string>
     <string name="title_activity_activity_user_detail">Sniper</string>
     <string name="title_activity_activity_moderator_game_view">Game</string>
     <string name="title_activity_activity_general_your_game_view">Game</string>
