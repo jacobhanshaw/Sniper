@@ -32,6 +32,15 @@
 	            android:onClick="Delete"
 	            />
 	        
+	        <Button 
+	            android:id="@+id/StartGameButton"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffffff"
+	            android:text="Start Game"
+	            android:onClick="StartGame"
+	            />
+	        
 	        <LinearLayout 
 	            android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
