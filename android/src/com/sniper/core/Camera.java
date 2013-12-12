@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera.PictureCallback;
 import android.os.Environment;
@@ -231,6 +232,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     	try{
     		// try to open camera
     		mCamera = android.hardware.Camera.open();
+    		
     	}catch(Exception e){
     		// camera was already open
     	}
@@ -265,6 +267,51 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         	isPortrait = false;
         } 
     }
+    
+    private android.hardware.Camera.Size getBestPreviewSize(int width, int height,
+    		android.hardware.Camera.Parameters parameters) {
+    	
+	    android.hardware.Camera.Size result=null;
+	
+		for (android.hardware.Camera.Size size : parameters.getSupportedPreviewSizes()) {
+			if (size.width <= width && size.height <= height) {
+				if (result == null) {
+					result=size;
+				}
+				else {
+					int resultArea=result.width * result.height;
+					int newArea=size.width * size.height;
+					
+					if (newArea > resultArea) {
+						result=size;
+					}
+				}
+			}
+		}
+
+		return(result);
+    }
+
+	private android.hardware.Camera.Size getBestPictureSize(android.hardware.Camera.Parameters parameters) {
+		android.hardware.Camera.Size result=null;
+		
+		for (android.hardware.Camera.Size size : parameters.getSupportedPictureSizes()) {
+			if (result == null) {
+				result=size;
+			}
+			else {
+				int resultArea=result.width * result.height;
+				int newArea=size.width * size.height;
+				
+				if (newArea > resultArea) {
+					result=size;
+				}
+			}
+		}
+		
+		return(result);
+	}
+
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         RefreshCamera();
     	
@@ -285,6 +332,18 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         // start preview with new settings
         try {
             mCamera.setPreviewDisplay(mHolder);
+            
+            android.hardware.Camera.Parameters parameters=mCamera.getParameters();
+            android.hardware.Camera.Size size= getBestPreviewSize(w, h, parameters);
+            android.hardware.Camera.Size pictureSize= getBestPictureSize(parameters);
+
+            if (size != null && pictureSize != null) {
+               parameters.setPreviewSize(size.width, size.height);
+               parameters.setPictureSize(pictureSize.width,
+                                            pictureSize.height);
+               parameters.setPictureFormat(ImageFormat.JPEG);
+               mCamera.setParameters(parameters);
+             }
             mCamera.startPreview();
 
         } catch (Exception e){
