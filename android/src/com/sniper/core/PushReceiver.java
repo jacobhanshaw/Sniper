@@ -49,7 +49,7 @@ public class PushReceiver extends BroadcastReceiver
 				b.putString("source", this.getClass().getSimpleName());
 				confirmIntent.putExtras(b); 
 				
-				if (ActivityMain.inBackground)
+			/*	if (ActivityMain.inBackground)
 				{
 					NotificationCompat.Builder mBuilder =
 						    new NotificationCompat.Builder(context)
@@ -70,11 +70,11 @@ public class PushReceiver extends BroadcastReceiver
 					NotificationManager mNotifyMgr = 
 							(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 					mNotifyMgr.notify(mNotificationId, mBuilder.build());
-				} else
-				{
-					System.out.println("Should Be Doing Shit");
+				}*/
+				//else
+				//{
 					context.startActivity(confirmIntent);
-				}
+				//}
 			} else if (action.equals("com.sniper.CONFIRMED_KILL"))
 			{
 				// Intent confirmIntent = new Intent(context,
@@ -82,6 +82,23 @@ public class PushReceiver extends BroadcastReceiver
 				// confirmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				// context.startActivity(confirmIntent);
 				System.out.println("Kill Confirmed");
+			}
+			else if(action.equals("com.sniper.GAME_START"))
+			{
+				if(Math.abs(json.getLong("startMilli") - System.currentTimeMillis()) <= 60000)
+				{
+				NotificationCompat.Builder mBuilder =
+					    new NotificationCompat.Builder(context)
+					 //   .setSmallIcon(R.drawable.)
+					    .setContentTitle("Project " + json.getString("gameName"))
+					    .setContentText("Project " + json.getString("gameName") + " has begun!");
+
+				int mNotificationId = (int)System.currentTimeMillis();
+				
+				NotificationManager mNotifyMgr = 
+						(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotifyMgr.notify(mNotificationId, mBuilder.build());
+				}
 			}
 			// "com.parse.Channel"
 

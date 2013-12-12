@@ -87,25 +87,6 @@ else
 
 function setUpGameStartNotification(gameId, gameName, startTime)
 {
-    var query = new Parse.Query(Parse.Installation);
-    query.equalTo('channels', gameId);
-
-    Parse.Push.send({
-where: query,
-data: {
-title: gameName + " has begun",
-alert: gameName + " has begun at " + startTime.toString()  
-},
-push_time: startTime 
-}, 
-{
-success: function() {
-// Push was successful
-},
-error: function(error) {
-// Handle error
-}
-});
 }
 
 Parse.Cloud.beforeSave("Game", function(request, response) {
@@ -137,8 +118,33 @@ Parse.Cloud.afterSave("Game", function(request)
         {
         if(!request.object.get("notifSent"))
         {
-        request.object.set("notifSent", "sent");
-        setUpGameStartNotification(request.object.id, request.object.get("name"), new Date(request.object.get("startTime")));
+        request.object.set("notifSent", false);
+        var gameId = request.object.id;
+        var gameName = request.object.get("name");
+        var startTime = new Date(request.object.get("startTime"));
+    var query = new Parse.Query(Parse.Installation);
+    query.equalTo('channels', gameId);
+
+    Parse.Push.send({
+where: query,
+data: {
+//title: gameName + " has begun",
+//alert: gameName + " has begun at " + startTime.toString()  
+action: "com.sniper.GAME_START",
+gameName: gameName,
+startMilli: startTime.getTime()
+},
+push_time: startTime 
+}, 
+{
+success: function() {
+// Push was successful
+},
+error: function(error) {
+// Handle error
+}
+});
+
         }
         });
 

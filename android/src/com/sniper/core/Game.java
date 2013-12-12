@@ -76,6 +76,12 @@ public class Game extends SniperParseObject
 		
 	}
 
+	public void StartGame()
+	{
+		setStartTime(new Date());
+		parseObject.put("notifSent", false);
+	}
+	
 	public void invitePlayer(String playerEmail)
 	{
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
@@ -306,4 +312,5 @@ public class Game extends SniperParseObject
 	{
 		parseObject.put(DbContract.Game.IS_PUBLIC, isPublic);
 	}
+	
 }

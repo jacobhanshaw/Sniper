@@ -115,6 +115,15 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		adapter.notifyDataSetChanged();
 	}
 	
+	/*
+	 * CHELSEY MAKE BUTTON
+	 */
+	
+	private void StartGame()
+	{
+		game.StartGame();
+	}
+	
 	private void UpdateText(int id, String string){
 		TextView view = (TextView) findViewById(id);
 		view.setText(string);

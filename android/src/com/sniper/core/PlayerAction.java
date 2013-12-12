@@ -41,9 +41,9 @@ public class PlayerAction extends SniperParseObject
 		super.push();
 	}
 	
-	public ParseUser getPlayer()
+	public String getPlayer()
 	{
-		return parseObject.getParseUser(DbContract.PlayerAction.PLAYER);
+		return parseObject.getString(DbContract.PlayerAction.PLAYER);
 	}
 	
 	public Date getCreatedTime()
