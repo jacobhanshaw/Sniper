@@ -2,6 +2,7 @@ package com.sniper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.parse.GetCallback;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -35,6 +37,15 @@ public class ActivityModeratorGameView extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    return MenuHelper.onOptionsItemSelected(item, this);
+	}
+
+
+	public void StartGame(View view){
+		game.StartGame();
+		Button startButton = (Button) findViewById(R.id.StartGameButton);
+		startButton.setVisibility(8);
+		UpdateText(R.id.StartTime, "Start Time: "+
+				new SimpleDateFormat("E MMM dd @ hh:mm a").format(game.getStartTime()));
 	}
 	
 	@Override
@@ -51,6 +62,11 @@ public class ActivityModeratorGameView extends FragmentActivity {
 			"Is not Public, ") + 
 				(game.isSafeInside()? "Is Safe Inside" : "Not Safe Inside"));
 		UpdateText(R.id.HouseRules, "House Rules: "+game.getHouseRules());
+		
+		if(game.getStartTime().before(new Date())){
+			Button startButton = (Button) findViewById(R.id.StartGameButton);
+			startButton.setVisibility(8);
+		}
 		
 		playerNames.add("Loading...");
 		

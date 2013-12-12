@@ -123,9 +123,9 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     			out.close();
     			
     			// don't need a million testing copies on aws
-    			//String title = ParseUser.getCurrentUser().getUsername()+"_";
-    			//title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-    	        ApplicationServices.getInstance().uploadKillPhoto(new File(baseDir + fileName), "test", method);
+    			String title = ParseUser.getCurrentUser().getUsername()+"_";
+    			title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    	        ApplicationServices.getInstance().uploadKillPhoto(new File(baseDir + fileName), title, method);
 
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
@@ -170,9 +170,9 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 			}
 	        
 			// don't need a million testing copies on aws
-			//String title = ParseUser.getCurrentUser().getUsername()+"_";
-			//title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	        ApplicationServices.getInstance().uploadKillPhoto(pictureFile, "test", method);
+			String title = ParseUser.getCurrentUser().getUsername()+"_";
+			title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	        ApplicationServices.getInstance().uploadKillPhoto(pictureFile, title, method);
 	    }
 	};
 	
