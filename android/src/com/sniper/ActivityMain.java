@@ -56,7 +56,23 @@ public class ActivityMain extends FragmentActivity
 	public static final String PARSE_JSON_CHANNELS_KEY = "com.parse.Channel";
 
 	private static final String TAG = "TestBroadcastReceiver";
+ 
+	public static boolean inBackground;
 
+	@Override
+	public void onPause()
+	{
+	     inBackground=true;
+	     super.onPause();
+	}
+
+	@Override
+	public void onResume()
+	{
+	     inBackground=false;
+	     super.onResume();
+	}
+	
 	private void GetTargets(final ActivityMain act){
 		this.progressDialog = ProgressDialog.show(this, "",
 				"Loading Targets...", true);

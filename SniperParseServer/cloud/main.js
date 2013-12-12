@@ -65,11 +65,12 @@ title: "Shot Down",
 alert: killerName + " claims to have shot you",
 action: "com.sniper.POTENTIAL_KILL",
 killActionId: request.object.id,
+killerName: killerName,
 URL: request.object.get("URL") 
 }
 }, {
 success: function() {
-response.success("Potential Kill Notification Sent");
+//response.success("Potential Kill Notification Sent");
 },
 error: function(error) {
 // Handle error
@@ -78,7 +79,7 @@ error: function(error) {
 }
 else
 {
-response.success("Kill Action Saved");
+//response.success("Kill Action Saved");
 }
 }
 });
@@ -92,8 +93,8 @@ function setUpGameStartNotification(gameId, gameName, startTime)
     Parse.Push.send({
 where: query,
 data: {
-title: gameName + "has begun",
-alert: gameName + "has begun at " + startTime.toString()  
+title: gameName + " has begun",
+alert: gameName + " has begun at " + startTime.toString()  
 },
 push_time: startTime 
 }, 

@@ -1,7 +1,5 @@
 package com.sniper.core;
 
-import android.util.Log;
-
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sniper.utility.DbContract;
@@ -24,7 +22,7 @@ public class KillAction extends PlayerAction
 		
 		if(actionType == KillActionType.GPS)
 		{
-			//parseObject.put(DbContract.PlayerAction.PLAYER, null);
+			parseObject.put(DbContract.PlayerAction.PLAYER, null);
 			parseObject.put(DbContract.PlayerAction.TARGET, ParseUser.getCurrentUser().getObjectId());
 		}
 	}
