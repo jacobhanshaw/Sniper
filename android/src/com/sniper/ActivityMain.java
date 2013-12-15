@@ -50,8 +50,9 @@ public class ActivityMain extends FragmentActivity
 	List<ParseUser> targets = new ArrayList<ParseUser>();
 	String[] targetUserNames =	{ };
 	ArrayList<Game> games = new ArrayList<Game>();
-	private ProgressDialog progressDialog;
+	public ProgressDialog progressDialog;
 	public static ParseUser target;
+	public AlertDialog alert;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
 	public static final String PARSE_EXTRA_DATA_KEY = "com.parse.Data";
@@ -236,7 +237,7 @@ public class ActivityMain extends FragmentActivity
 						dialog.dismiss();
 					}
 				});
-		AlertDialog alert = builder.create();
+		alert = builder.create();
 		alert.show();
 	}
 
