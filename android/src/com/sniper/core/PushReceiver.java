@@ -26,6 +26,11 @@ public class PushReceiver extends BroadcastReceiver
 
 	private static final String TAG = "TestBroadcastReceiver";
 
+	/*
+	 * The push receiver receives the push from the server and performs different actions based upon 
+	 * the data encoded in the push notification.
+	 */
+	
 	@Override
 	public void onReceive(Context context, Intent intent)
 	{

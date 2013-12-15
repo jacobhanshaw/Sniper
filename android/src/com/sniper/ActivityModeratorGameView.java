@@ -127,7 +127,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 	}
 	
 	public void Delete(View view){
-		game.Delete();
+		game.delete();
 	}
 	
 	public void ModeratorClick(View view){

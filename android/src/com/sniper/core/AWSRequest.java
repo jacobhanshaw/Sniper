@@ -1,11 +1,17 @@
 package com.sniper.core;
 
 import android.os.AsyncTask;
+
 import android.util.Log;
 
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
+
+/*
+ * A asynchronous task to upload a user's photo. Returns the static url when the upload is complete
+ * 
+ */
 
 public class AWSRequest extends AsyncTask<AWSFileUploadObject, Void, String>
 {
