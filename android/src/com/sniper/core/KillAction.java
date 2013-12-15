@@ -14,6 +14,12 @@ public class KillAction extends PlayerAction
 		CAMERA, GPS
 	}
 	
+	/*
+	 * Overloaded constructors allow creation of new objects or pull information from server objects
+	 * Super class handles much of the implementation
+	 * 
+	 */
+	
 	public KillAction(KillActionType actionType)
 	{
 		super();
@@ -31,10 +37,20 @@ public class KillAction extends PlayerAction
 	{
 		pullData(object);
 	}
+	
+	public KillAction(String objectId)
+	{
+		super(objectId);
+	}
 
 	public void pull()
 	{
 		super.pull();
+	}
+	
+	public void delete()
+	{
+		super.delete();
 	}
 
 	protected void pullData(ParseObject object)

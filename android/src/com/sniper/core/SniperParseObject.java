@@ -6,11 +6,10 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.util.Log;
-
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.sniper.utility.DbContract;
 
@@ -18,6 +17,12 @@ public class SniperParseObject
 {
 	protected ParseObject parseObject;
 
+	/*
+	 * Super class of all ParseObjects. Abstracts most of server access for all subclasses. Allows us to change 
+	 * server calls in a single place
+	 * 
+	 */
+	
 	public SniperParseObject()
 	{
 		parseObject = new ParseObject(this.getClass().getSimpleName());
@@ -28,6 +33,20 @@ public class SniperParseObject
 	public SniperParseObject(ParseObject object)
 	{
 		pullData(object);
+	}
+	
+	public SniperParseObject(String objectId)
+	{
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(this.getClass().getSimpleName());
+		query.getInBackground(objectId, new GetCallback<ParseObject>() {
+		  public void done(ParseObject object, ParseException e) {
+		    if (e == null) {
+		      parseObject = object;
+		    } else {
+		      // something went wrong
+		    }
+		  }
+		});
 	}
 
 	public void pull()
@@ -59,6 +78,11 @@ public class SniperParseObject
 					push();
 			}
 		});
+	}
+	
+	public void delete()
+	{
+		parseObject.deleteEventually();
 	}
 	
 	protected ArrayList<String> convertJSONStringArrayToArrayList(

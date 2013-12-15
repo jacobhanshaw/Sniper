@@ -16,6 +16,12 @@ import com.sniper.utility.DbContract;
 public class Game extends SniperParseObject
 {
 
+	/*
+	 * Overloaded constructors allow creation of new objects or pull information from server objects
+	 * Super class handles much of the implementation
+	 * 
+	 */
+	
 	public Game()
 	{
 		super();
@@ -26,6 +32,11 @@ public class Game extends SniperParseObject
 	public Game(ParseObject object)
 	{
 		pullData(object);
+	}
+	
+	public Game(String objectId)
+	{
+		super(objectId);
 	}
 
 	public void pull()
@@ -46,6 +57,11 @@ public class Game extends SniperParseObject
 	public void push()
 	{
 		super.push();
+	}
+	
+	public void delete()
+	{
+		super.delete();
 	}
 	
 	public String GetTargetIdForUser(ParseUser user){
@@ -72,10 +88,6 @@ public class Game extends SniperParseObject
 		this.push();
 	}
 	
-	public void Delete(){
-		
-	}
-
 	public void StartGame()
 	{
 		setStartTime(new Date());
