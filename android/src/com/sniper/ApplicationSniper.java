@@ -7,7 +7,6 @@ import com.parse.ParseACL;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.PushService;
-import com.sniper.core.PushReceiver;
 
 public class ApplicationSniper extends Application {
 	

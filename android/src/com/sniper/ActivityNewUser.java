@@ -6,18 +6,16 @@ import com.parse.LogInCallback;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import android.net.ParseException;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 public class ActivityNewUser extends Activity {
-
+	
 	private ProgressDialog progressDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +23,13 @@ public class ActivityNewUser extends Activity {
 		setContentView(R.layout.activity_new_user);
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		//getMenuInflater().inflate(R.menu.activity_new_user, menu);
-//		return false;
-//	}
-	
+	//gets edit text from id used in xml
 	private String GetString(int id){
 		EditText e = (EditText) findViewById(id);
 		return e.getText().toString();
 	}
+	
+	//read fields, creates and pushes a new user
 	public void register(View v) throws InterruptedException, ExecutionException {
 		ParseUser user = new ParseUser();
 		user.put("firstName", GetString(R.id.FirstName));
@@ -44,6 +38,7 @@ public class ActivityNewUser extends Activity {
 		user.setPassword(GetString(R.id.Password));
 		user.setEmail(GetString(R.id.Email));
 
+		//show progress dialog while registering
 		this.progressDialog = ProgressDialog.show(this, "",
 				"Registering...", true);		
 		user.signUpInBackground(new SignUpCallback() {
@@ -63,6 +58,7 @@ public class ActivityNewUser extends Activity {
 						ActivityNewUser.this.GetString(R.id.Password), 
 						new LogInCallback() {		  
 
+					//when done registering, dismiss progress dialog and return to sign in
 					@Override
 					public void done(ParseUser user,
 							com.parse.ParseException e) {

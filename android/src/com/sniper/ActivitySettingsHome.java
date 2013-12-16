@@ -2,51 +2,29 @@ package com.sniper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
 import com.parse.ParseUser;
-import com.sniper.core.AWSFileUploadObject;
 import com.sniper.core.ApplicationServices;
-import com.sniper.core.Camera;
 import com.sniper.utility.LoadUserImage;
 import com.sniper.utility.MenuHelper;
 
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class ActivitySettingsHome extends FragmentActivity {
@@ -228,16 +206,20 @@ public class ActivitySettingsHome extends FragmentActivity {
 		
 	}
 	
+	//gets exact path from uri, would have debugged further if had more time
 	public String getPath(Uri uri) 
     {
 		//TODO crashes if you select same picture twice, need to fix
 		// should get rid of deprecated method
         String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if (cursor == null) return null;
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        @SuppressWarnings("deprecation")
+		Cursor cursor = managedQuery(uri, projection, null, null, null);
+        if (cursor == null){
+        	 return null;
+        }
+        int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
-        String s=cursor.getString(column_index);
+        String s = cursor.getString(colIndex);
         cursor.close();
         return s;
     }
@@ -245,50 +227,47 @@ public class ActivitySettingsHome extends FragmentActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) { 
 	    super.onActivityResult(requestCode, resultCode, imageReturnedIntent); 
-
-	    switch(requestCode) { 
-	    case SELECT_PHOTO:
-	        if(resultCode == RESULT_OK){  
-	            Uri selectedImage = imageReturnedIntent.getData();
-	            InputStream imageStream;
-				try {
-					Log.d("settings", "got image");
-					imageStream = getContentResolver().openInputStream(selectedImage);
-					
-		            Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-		            int nh = (int) ( yourSelectedImage.getHeight() * 
-		            		(512.0 / yourSelectedImage.getWidth()) );
-		            Bitmap scaled = Bitmap.createScaledBitmap(yourSelectedImage, 512, nh, true);
-		            yourSelectedImage = scaled;
-		            
-		            userImageView.setImageBitmap(yourSelectedImage);
-		            
-		            LoadUserImage.UpdateImage(ParseUser.getCurrentUser(),
-		            		yourSelectedImage);
-		           		            
-		            Method method = null;
-					try
-					{
-						method = ActivitySettingsHome.class.getMethod("receiveResponse");
-					} catch (NoSuchMethodException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					String path = getPath(selectedImage);
-					Log.d("path", path);
-					File file = new File(path);					
-					String title = ParseUser.getCurrentUser().getObjectId();
-			        ApplicationServices.getInstance().uploadUserPhoto(file, title, method);
-			        
-			        
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	    
+	    if(SELECT_PHOTO == requestCode && resultCode == RESULT_OK){
+	    	//this should always be the case, but oh well
+	    	Uri selectedImage = imageReturnedIntent.getData();
+            InputStream imageStream;
+			try {
+				imageStream = getContentResolver().openInputStream(selectedImage);
+				
+	            Bitmap profilePic = BitmapFactory.decodeStream(imageStream);
+	            //scale down bitmap, user might save image thats too big
+	            int nh = (int) ( profilePic.getHeight() * 
+	            		(512.0 / profilePic.getWidth()) );
+	            Bitmap scaled = Bitmap.createScaledBitmap(profilePic, 512, nh, true);
+	            profilePic = scaled;
+	            
+	            userImageView.setImageBitmap(profilePic);
+	            
+	            // update "cache" of images
+	            LoadUserImage.UpdateImage(ParseUser.getCurrentUser(),
+	            		profilePic);
+	           		            
+	            Method method = null;
+				try
+				{
+					method = ActivitySettingsHome.class.getMethod("receiveResponse");
+				} catch (NoSuchMethodException e)
+				{
+					// if its not there, we just wont call it, its ok
 				}
-	        }
+				
+				//upload to aws the users new profile image
+				String path = getPath(selectedImage);
+				File file = new File(path);					
+				String title = ParseUser.getCurrentUser().getObjectId();
+		        ApplicationServices.getInstance().uploadUserPhoto(file, title, method);		        
+		        
+			} catch (FileNotFoundException e) {
+				// ignore
+			}
 	    }
+	    
 	}
 	
 }
