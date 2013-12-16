@@ -63,6 +63,15 @@ public class KillAction extends PlayerAction
 		super.push();
 	}
 	
+	public String getPlayer()
+	{
+		return parseObject.getString(DbContract.PlayerAction.PLAYER);
+	}
+	
+	public void setPlayer(String target) {
+		parseObject.put(DbContract.PlayerAction.PLAYER, target);
+	}
+	
 	public String getTarget()
 	{
 		return parseObject.getString(DbContract.PlayerAction.TARGET);

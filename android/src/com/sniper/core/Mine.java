@@ -4,22 +4,26 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sniper.utility.DbContract;
 
-public class GpsLocation extends SniperParseObject
+public class Mine extends GpsLocation
 {
-	public GpsLocation()
+	public Mine()
 	{
 		super();
 		parseObject.put(DbContract.Game.CREATOR, ParseUser.getCurrentUser());
 		double lat = GpsLocationService.getLatitude();
 		double lng = GpsLocationService.getLongitude();
+		parseObject.put(DbContract.GpsLocation.LAT, lat);
+		parseObject.put(DbContract.GpsLocation.LNG, lng);
+		
+		
 	}
 
-	public GpsLocation(ParseObject object)
+	public Mine(ParseObject object)
 	{
 		pullData(object);
 	}
-	
-	public GpsLocation(String objectId)
+
+	public Mine(String objectId)
 	{
 		super(objectId);
 	}
@@ -43,9 +47,29 @@ public class GpsLocation extends SniperParseObject
 	{
 		super.push();
 	}
-	
+
 	public void delete()
 	{
 		super.delete();
+	}
+	
+	public double getLongitude()
+	{
+		return parseObject.getDouble(DbContract.GpsLocation.LNG);
+	}
+	
+	public double getLatitude()
+	{
+		return parseObject.getDouble(DbContract.GpsLocation.LAT);
+	}
+	
+	public void setPlayer(String p)
+	{
+		parseObject.put(DbContract.GpsLocation.PLAYER, p);
+	}
+	
+	public String getPlayer()
+	{
+		return parseObject.getString(DbContract.GpsLocation.PLAYER);
 	}
 }

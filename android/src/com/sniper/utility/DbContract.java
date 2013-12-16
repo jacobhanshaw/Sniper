@@ -42,4 +42,16 @@ public class DbContract {
 		public static final String URL = "URL";
 		public static final String IS_VERIFIED = "isVerified";
 	}
+	
+	public static abstract class GpsLocation implements BaseColumns {
+		public static final String CREATED = "created";
+		public static final String PLAYER = "player";
+		public static final String TARGET = "target";
+		public static final String LAT = "latitude";
+		public static final String LNG = "longitude";
+	}
+	
+	public static abstract class Mine implements BaseColumns {
+		
+	}
 }

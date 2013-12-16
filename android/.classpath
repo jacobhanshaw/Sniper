@@ -9,6 +9,6 @@
 	<classpathentry kind="lib" path="libs/aws-android-sdk-1.7.0-s3.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="C:/Android/sdk/extras/android/support/v4/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/cdent_000/Downloads/adt-bundle-windows-x86_64-20130729/adt-bundle-windows-x86_64-20130729/sdk/extras/android/support/v4/android-support-v4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

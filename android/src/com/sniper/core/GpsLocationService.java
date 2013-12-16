@@ -1,5 +1,9 @@
 package com.sniper.core;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -21,11 +25,17 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.sniper.core.KillAction.KillActionType;
+import com.sniper.utility.DbContract;
 
 public class GpsLocationService extends Service implements LocationListener, android.location.LocationListener{
 
-	private LocationRequest mLocationRequest;  
-	private LocationClient mLocationClient; 
+	private int updateTimer;
 
 	private final Context mContext;
 
@@ -38,9 +48,10 @@ public class GpsLocationService extends Service implements LocationListener, and
 	// flag for GPS status
 	boolean canGetLocation = false;
 
-	Location location;
-	double latitude;
-	double longitude;
+	static Location location;
+	static double latitude;
+	static double longitude;
+	private List<Mine> actualMines;
 
 	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -55,6 +66,7 @@ public class GpsLocationService extends Service implements LocationListener, and
 	{
 		this.mContext = context;
 		getLocation();
+		updateTimer = 0;
 	}
 
 
@@ -103,7 +115,7 @@ public class GpsLocationService extends Service implements LocationListener, and
 						{
 							latitude = location.getLatitude();
 							longitude = location.getLongitude();
-							Log.i("info", "Latitude :: " + latitude);///
+							Log.i("info", "Latitude : " + latitude + "\nLongitude : " + longitude);///
 						}
 					}
 				}
@@ -149,7 +161,7 @@ public class GpsLocationService extends Service implements LocationListener, and
 	/**
 	 * Function to get latitude
 	 * */
-	public double getLatitude()
+	public static double getLatitude()
 	{
 		if(location != null)
 		{
@@ -161,7 +173,7 @@ public class GpsLocationService extends Service implements LocationListener, and
 	/**
 	 * Function to get longitude
 	 * */
-	public double getLongitude()
+	public static double getLongitude()
 	{
 		if(location != null)
 		{
@@ -215,8 +227,69 @@ public class GpsLocationService extends Service implements LocationListener, and
 	public void onLocationChanged(Location location)
 	{
 		this.getLocation();
-		this.latitude = location.getLatitude();
-		this.longitude = location.getLongitude();
+		updateTimer++;
+		if(updateTimer == 360)
+		{
+			ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
+			query.whereEqualTo("players", ParseUser.getCurrentUser().getObjectId());
+			query.whereLessThanOrEqualTo(DbContract.Game.START_TIME, new Date());
+			query.whereGreaterThanOrEqualTo(DbContract.Game.END_TIME, new Date());
+			query.findInBackground(new FindCallback<ParseObject>() {
+				@Override
+				public void done(List<ParseObject> objects, ParseException e) {			  
+					if (e == null) {
+						List<String> mines = new ArrayList<String>();
+						Log.d("Games in:", ""+objects.size());
+						for(int i=0; i<objects.size(); i++){
+							Game game = new Game(objects.get(i));
+							List<String> gameMines = game.getLocationObjects();
+							for(int j=0; j<gameMines.size(); j++){
+								mines.add(gameMines.get(j));
+							}
+							//targetIds.add(targetId);
+							//Log.d("Target",targetId);
+						}
+						ParseQuery<ParseObject> mineQuery = ParseQuery.getQuery(Mine.class.getSimpleName());
+						mineQuery.whereContainedIn("objectId", mines);
+						mineQuery.findInBackground(new FindCallback<ParseObject>(){
+
+							@Override
+							public void done(List<ParseObject> objects, ParseException e) {
+								List<Mine> mines = new ArrayList<Mine>();
+								for(int i=0; i<objects.size(); i++){
+									mines.add(new Mine(objects.get(i)));
+								}
+								actualMines = mines;
+							}
+						});
+					}
+					else
+					{
+						// something went wrong
+					}
+				}
+			});
+		}
+		//this.latitude = location.getLatitude();
+		//this.longitude = location.getLongitude();
+		for(int i = 0; actualMines != null && i < actualMines.size() ; i++)
+		{
+			if(actualMines.get(i).getPlayer() != ParseUser.getCurrentUser().getObjectId())
+			{
+				double dlong = (actualMines.get(i).getLongitude() - this.longitude) * 0.0174532925199433;
+				double dlat = (actualMines.get(i).getLatitude() - this.latitude) * 0.0174532925199433;
+				double a = Math.pow(Math.sin(dlat/2.0), 2) + Math.cos(this.latitude*0.0174532925199433) * Math.cos(actualMines.get(i).getLatitude()*0.0174532925199433) * Math.pow(Math.sin(dlong/2.0), 2);
+				double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+				double distance = 6367 * c;
+				if(distance <= .01)
+				{
+					KillAction kill = new KillAction(KillActionType.GPS);
+					kill.setPlayer(actualMines.get(i).getPlayer());
+					kill.setIsVerified(true);
+					kill.push();
+				}
+			}
+		}
 	}
 
 	@Override

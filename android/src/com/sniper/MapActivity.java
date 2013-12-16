@@ -11,7 +11,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseUser;
 import com.sniper.core.GpsLocationService;
+import com.sniper.core.Mine;
 
 public class MapActivity extends FragmentActivity {
 
@@ -54,6 +56,9 @@ public class MapActivity extends FragmentActivity {
 		.icon(BitmapDescriptorFactory.fromResource(R.drawable.mine_marker))
 		.anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
 		.position(new LatLng(ActivityMain.gps.getLatitude(), ActivityMain.gps.getLongitude())));
+		Mine mine = new Mine();
+		mine.setPlayer(ParseUser.getCurrentUser().getObjectId());
+		mine.push();
 	}
 
 }
