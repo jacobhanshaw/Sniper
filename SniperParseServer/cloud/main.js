@@ -98,10 +98,8 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
                         targets.push(newSet);
                         console.log("After remove targets: " + targets);
                         //Save game
-                        results[i].set("players", players);
-                        results[i].set("targets", targets);
-                        results[i].save();
-                     if(players.length == 1) {
+                        
+                     if(players.length <= 1) {
                         gameChannel = "game_" + results[i].id;
                         Parse.Push.send({
                         channels: [ gameChannel ],
@@ -118,7 +116,11 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
 // Handle error
                         }
                         });
-                    }
+                        results[i].set("endTime", new Date());
+                      }
+                        results[i].set("players", players);
+                        results[i].set("targets", targets);
+                        results[i].save();
                     }
                 },
                 error: function(error) {
@@ -147,8 +149,8 @@ Parse.Cloud.afterSave("KillAction", function(request) {
                 Parse.Push.send({
                     channels: [ channel ],
                     data: {
-                        title: "Shot Down",
-                        alert: killerName + " claims to have shot you",
+                        //title: "Shot Down",
+                        //alert: killerName + " claims to have shot you",
                         action: "com.sniper.POTENTIAL_KILL",
                         killActionId: request.object.id,
                         URL: request.object.get("URL") 
