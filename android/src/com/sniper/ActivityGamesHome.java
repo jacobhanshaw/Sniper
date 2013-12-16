@@ -1,16 +1,13 @@
 package com.sniper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.sniper.core.Camera;
 import com.sniper.core.Game;
 import com.sniper.utility.MenuHelper;
 
@@ -18,23 +15,19 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class ActivityGamesHome extends FragmentActivity {
 
-	ArrayList<String> gameNames = new ArrayList<String>();
-	List<Game> games = new ArrayList<Game>();
-	ArrayAdapter<String> adapter;
+	ArrayList<String> gameNames = new ArrayList<String>(); //names to display
+	List<Game> games = new ArrayList<Game>(); //list of actually games
+	ArrayAdapter<String> adapter; //adapter for list of game names
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,6 +42,7 @@ public class ActivityGamesHome extends FragmentActivity {
 		gameNames.add("Loading...");
 		UpdateGamesList();
 		
+		//query for all games where the current user is a player (past future and present)
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
 		query.whereEqualTo("players", ParseUser.getCurrentUser().getObjectId());
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -62,6 +56,7 @@ public class ActivityGamesHome extends FragmentActivity {
 		     		games.add(game);
 			     	gameNames.add(game.getName());
 		     	}
+		     	//add all names to the display and update
 		     	adapter.notifyDataSetChanged();
 		    } else {
 		      // something went wrong
@@ -83,6 +78,7 @@ public class ActivityGamesHome extends FragmentActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long id) {
 				Game game = games.get(position);
+				//switch to view based on whether or not current user is moderator
 				if(game.getModeratorId().equals(ParseUser.getCurrentUser().getObjectId())){
 					ActivityModeratorGameView.game = game;;
 					Intent intent = new Intent(act, ActivityModeratorGameView.class);
@@ -114,9 +110,4 @@ public class ActivityGamesHome extends FragmentActivity {
     	Intent intent = new Intent(this, ActivityNewGame.class);
     	startActivity(intent);
     }
-//	public void onListItemClick(ListView l, View v, int position, long id) {
-//		ListView listView = (ListView) findViewById(R.id.games_list);
-//		listView.setSelection(position);
-//    }
-
 }

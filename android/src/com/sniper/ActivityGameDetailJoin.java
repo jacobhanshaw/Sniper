@@ -12,6 +12,7 @@ import com.sniper.core.Game;
 import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -30,13 +31,14 @@ public class ActivityGameDetailJoin extends FragmentActivity {
 	private ParseUser moderator;
 	private List<ParseUser> players = new ArrayList<ParseUser>();
 	private ArrayList<String> playerNames = new ArrayList<String>();
-	ArrayAdapter<String> adapter;
+	ArrayAdapter<String> adapter;//for player name list
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class ActivityGameDetailJoin extends FragmentActivity {
 		
 		playerNames.add("Loading...");
 		
+		// query for moderator user name to display when query done
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.getInBackground(game.getModeratorId(), new GetCallback<ParseUser>(){
 			@Override
@@ -65,6 +68,8 @@ public class ActivityGameDetailJoin extends FragmentActivity {
 			}			
 		});
 		
+		// query for player user names and add to list to be displayed when
+		// all queries complete
 		for(int i=0; i<game.getPlayers().size(); i++){
 			query = ParseUser.getQuery();
 			query.getInBackground(game.getPlayers().get(i), new GetCallback<ParseUser>(){
@@ -85,19 +90,15 @@ public class ActivityGameDetailJoin extends FragmentActivity {
 				}			
 			});
 		}
-//		if(game.getPlayers().size() == 0){
-//			playerNames.clear();
-//			playerNames.add("No Players");
-//			adapter.notifyDataSetChanged();
-//		}
-		
-		
+
+		//adapter for list of players
 		adapter = new ArrayAdapter<String>(this, 
 		        R.layout.list_item, R.id.label,
 		        playerNames);
 		ListView listView = (ListView) findViewById(R.id.Players);
 		listView.setAdapter(adapter);
 		final Activity act = this;
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
@@ -105,6 +106,7 @@ public class ActivityGameDetailJoin extends FragmentActivity {
 				if(players == null || players.size() ==0){
 					return;
 				}
+				// on click select player and show detailed view
 				ActivityUserDetail.User = players.get(position);
 				Intent intent = new Intent(act, ActivityUserDetail.class);
 		    	startActivity(intent);

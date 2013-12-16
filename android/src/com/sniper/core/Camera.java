@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -23,28 +24,28 @@ import android.view.SurfaceHolder;
 import android.view.WindowManager;
 
 import com.parse.ParseUser;
-import com.sniper.ActivityLogin;
 import com.sniper.ActivityMain;
 import com.sniper.CrosshairsView;
 import com.sniper.core.KillAction.KillActionType;
 
-
+/*
+ * Implement surface view for camera which includes camera functions
+ * to keep all the camera stuff packaged together
+ */
 public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 	private static final String TAG = "Camera Error";
+	//hold onto context used to create for later use
 	public static Context context;
-	
-	protected static final int MEDIA_TYPE_IMAGE = 1;
-	private static final int MEDIA_TYPE_VIDEO = 2;
-	
+		
 	private SurfaceHolder mHolder;
     public static android.hardware.Camera mCamera;
+    //get manager to check for orientation
     private WindowManager mWindowManager;
     
     public static boolean isPortrait;
 
     public Camera(Context context) {
         super(context);
-        Log.d("camera", "end super");
         Camera.context = context;
         
         RefreshCamera();
@@ -52,42 +53,36 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         
         mHolder = getHolder();
         mHolder.addCallback(this);
-        Log.d("camera", "done");
     }
         
+    // take picture as static so it can be called from anywhere
+    // trust others to only call from home screen when
+    // camera open, or will fail...
     public static void TakePicture(){
     	mCamera.takePicture(null, null, jpegCallback);
 		mCamera.startPreview();
     }
     
+    // callback after take picture to save image and send kill notification
     private static PictureCallback jpegCallback = new PictureCallback() {
-        @Override
+        @SuppressLint("SimpleDateFormat")
+		@Override
             public void onPictureTaken(byte[] data, android.hardware.Camera camera) { 
+        	//setup bitmap
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 1;
-            options.inDither = false; // Disable Dithering mode
-            options.inPurgeable = true; // Tell to gc that whether it needs free
-                                        // memory, the Bitmap can be cleared
-            options.inInputShareable = true; // Which kind of reference will be
-                                                // used to recover the Bitmap
-                                                // data after being clear, when
-                                                // it will be used in the future
+            options.inDither = false;
+            options.inPurgeable = true;
+            options.inInputShareable = true; 
             options.inTempStorage = new byte[32 * 1024];
             options.inPreferredConfig = Bitmap.Config.RGB_565;
             Bitmap bMap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
-            int orientation;
-            // others devices
-            if(bMap.getHeight() < bMap.getWidth()){
-                orientation = 90;
-            } else {
-                orientation = 0;
-            }
-
+            // rotate if portrait
             Bitmap bMapRotate;
             if (Camera.isPortrait) {
                 Matrix matrix = new Matrix();
-                matrix.postRotate(orientation);
+                matrix.postRotate(90);
                 bMapRotate = Bitmap.createBitmap(bMap, 0, 0, bMap.getWidth(),
                         bMap.getHeight(), matrix, true);
             } else
@@ -96,12 +91,11 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 
 
             FileOutputStream out;
-        boolean mExternalStorageAvailable = false;
-        boolean mExternalStorageWriteable = false;
             try {
-            String baseDir = Environment.getExternalStoragePublicDirectory(
-            		Environment.DIRECTORY_PICTURES).getAbsolutePath();
-            String fileName = "/MyCameraApp/" + System.currentTimeMillis() + ".jpg";
+            	//save file
+	            String baseDir = Environment.getExternalStoragePublicDirectory(
+	            		Environment.DIRECTORY_PICTURES).getAbsolutePath();
+	            String fileName = "/MyCameraApp/" + System.currentTimeMillis() + ".jpg";
 
                 out = new FileOutputStream(baseDir + fileName);
                 bMapRotate.compress(Bitmap.CompressFormat.JPEG, 50, out);
@@ -116,119 +110,39 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     				method = Camera.class.getMethod("receiveResponse", String.class);
     			} catch (NoSuchMethodException e)
     			{
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
+    				//dont care
     			}
     	        
     			out.flush();
     			out.close();
     			
-    			// don't need a million testing copies on aws
+    			// save kill photo to aws
     			String title = ParseUser.getCurrentUser().getUsername()+"_";
     			title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
     	        ApplicationServices.getInstance().uploadKillPhoto(new File(baseDir + fileName), title, method);
 
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                // ignore
             } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// ignore
 			}
 
         }
     };
     
-    private static PictureCallback mPicture = new PictureCallback() {
-
-	    @Override
-	    public void onPictureTaken(byte[] data, android.hardware.Camera camera) {
-
-	        File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-	        if (pictureFile == null){
-	            Log.d(TAG, "Error creating media file");
-	            return;
-	        }
-
-	        try {
-	            FileOutputStream fos = new FileOutputStream(pictureFile);
-	            fos.write(data);
-	            fos.close();
-	        } catch (FileNotFoundException e) {
-	            Log.d(TAG, "File not found: " + e.getMessage());
-	        } catch (IOException e) {
-	            Log.d(TAG, "Error accessing file: " + e.getMessage());
-	        }
-	        
-	        Method method = null;
-			try
-			{
-				method = Camera.class.getMethod("receiveResponse", String.class);
-			} catch (NoSuchMethodException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-			// don't need a million testing copies on aws
-			String title = ParseUser.getCurrentUser().getUsername()+"_";
-			title += new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	        ApplicationServices.getInstance().uploadKillPhoto(pictureFile, title, method);
-	    }
-	};
-	
+    //called after kill photo uploaded sends kill action to parse
 	public static void receiveResponse(String response)
 	{
-
-		Log.v("Debug", "receiveResponse");
-		//IMPORTANT: THIS IS NOT SETTING THE TARGET
-
+		Log.v("Debug", "receiveResponse");		
 		KillAction kill = new KillAction(KillActionType.CAMERA);
 		kill.setPhotoURL(response);
 		kill.setTarget(ActivityMain.target.getObjectId());
 		kill.push();
 
 	}
-	
-	public static File getImageFile(){
-		return getOutputMediaFile(MEDIA_TYPE_IMAGE);	
-	}
-	
-	/** Create a File for saving an image or video */
-	private static File getOutputMediaFile(int type){
-	    // To be safe, you should check that the SDCard is mounted
-	    // using Environment.getExternalStorageState() before doing this.
-
-	    File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-	              Environment.DIRECTORY_PICTURES), "MyCameraApp");
-	    // This location works best if you want the created images to be shared
-	    // between applications and persist after your app has been uninstalled.
-
-	    // Create the storage directory if it does not exist
-	    if (! mediaStorageDir.exists()){
-	        if (! mediaStorageDir.mkdirs()){
-	            Log.d("MyCameraApp", "failed to create directory");
-	            return null;
-	        }
-	    }
-
-	    // Create a media file name
-	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	    File mediaFile;
-	    if (type == MEDIA_TYPE_IMAGE){
-	        mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-	        "IMG_"+ timeStamp + ".jpg");
-	    } else if(type == MEDIA_TYPE_VIDEO) {
-	        mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-	        "VID_"+ timeStamp + ".mp4");
-	    } else {
-	        return null;
-	    }
-
-	    return mediaFile;
-	}
-    
-    private void RefreshCamera(){
+		
+	// re-open camera if possible
+	private void RefreshCamera(){
     	try{
     		// try to open camera
     		mCamera = android.hardware.Camera.open();
@@ -253,6 +167,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
     	mCamera.release();
     }
     
+    //update orienation
     private void SetOrientation(){
     	if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
         	mCamera.setDisplayOrientation(90);
@@ -268,6 +183,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
         } 
     }
     
+    //get highest quality suported size for preveiw
     private android.hardware.Camera.Size getBestPreviewSize(int width, int height,
     		android.hardware.Camera.Parameters parameters) {
     	
@@ -292,6 +208,7 @@ public class Camera extends CrosshairsView implements SurfaceHolder.Callback  {
 		return(result);
     }
 
+    // get highest quality size suported for saving picture
 	private android.hardware.Camera.Size getBestPictureSize(android.hardware.Camera.Parameters parameters) {
 		android.hardware.Camera.Size result=null;
 		
