@@ -15,6 +15,7 @@ import com.sniper.utility.DbContract;
 import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -26,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+// activity to shows games a user can join
 public class ActivityJoinGame extends FragmentActivity {
 
 	ArrayList<String> gameNames = new ArrayList<String>();
@@ -37,6 +39,7 @@ public class ActivityJoinGame extends FragmentActivity {
 	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,10 +47,11 @@ public class ActivityJoinGame extends FragmentActivity {
 		
 		gameNames.add("Loading...");
 		
+		//find games that havent started that a user is not in yet
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Game.class.getSimpleName());
 		query.whereGreaterThan(DbContract.Game.START_TIME, new Date());
 		//exclude games you're already in
-		query.orderByAscending(DbContract.Game.START_TIME);		
+		query.orderByAscending(DbContract.Game.START_TIME); //show soonest games first
 		final SimpleDateFormat format = 
 				new SimpleDateFormat("E MMM dd @ hh:mm a");		
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -65,6 +69,7 @@ public class ActivityJoinGame extends FragmentActivity {
 			     				format.format(game.getStartTime()));
 		     		}		     		
 		     	}
+		     	//display game names
 		     	adapter.notifyDataSetChanged();
 		    } else {
 		      // something went wrong
@@ -82,6 +87,7 @@ public class ActivityJoinGame extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long id) {
+				// show game details on click
 				ActivityGameDetailJoin.game = games.get(position);
 				Intent intent = new Intent(act, ActivityGameDetailJoin.class);
             	startActivity(intent);

@@ -1,9 +1,7 @@
 package com.sniper.core;
 
 public class Model
-{
-	public Profile currentUser;
-	
+{	
 	
 	private static Model instance = null;
 

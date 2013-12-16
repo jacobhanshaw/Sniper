@@ -4,16 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -28,8 +24,6 @@ public class ActivityKillConfirm extends Activity {
 	public static final String PARSE_JSON_ALERT_KEY = "alert";
 	public static final String PARSE_JSON_CHANNELS_KEY = "com.parse.Channel";
 	
-	private static final String TAG = "TestBroadcastReceiver";
-	
 	private String killActionId;
 	
 	@Override
@@ -42,6 +36,8 @@ public class ActivityKillConfirm extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		Intent intent = getIntent();
+		
+		//pull info from intent for kill confirm (launched from push receiver)
 		Bundle b = intent.getExtras();
 		String source = b.getString("source");
 		JSONObject json = new JSONObject();
@@ -63,13 +59,16 @@ public class ActivityKillConfirm extends Activity {
 		} else {
 			url = b.getString("URL");
 			killActionId = b.getString("killActionId");
-		}
+		}	
 		
 		setContentView(R.layout.activity_kill_confirm);
+		
+		//load bitmap asynchronously
 		LoadUserImage.ShowKillImage(this, url);
 	}
 		
 	public void confirmYes(View v) {
+		//find kill confirmation and verify it
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("KillAction");
 		query.getInBackground(killActionId, new GetCallback<ParseObject>() {
 			  public void done(ParseObject killAction, ParseException e) {

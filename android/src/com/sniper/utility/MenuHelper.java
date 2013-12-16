@@ -2,7 +2,6 @@ package com.sniper.utility;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.ClipData.Item;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,6 +14,8 @@ public class MenuHelper {
 		act.getMenuInflater().inflate(R.menu.main, menu);		
 	}
 
+	//use this to have global logout filled in from activity
+	@SuppressWarnings("static-access")
 	public static boolean onOptionsItemSelected(MenuItem item, Activity act) {
 	    switch (item.getItemId()) {
 	    	case R.id.action_settings:

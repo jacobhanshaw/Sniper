@@ -12,6 +12,7 @@ import com.sniper.core.Game;
 import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,11 +40,13 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 	    return MenuHelper.onOptionsItemSelected(item, this);
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_activity_general_your_game_view);
 		
+		//update info fields
 		UpdateText(R.id.Name, game.getName());
 		TextView view = (TextView) findViewById(R.id.Moderator);
 		view.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -56,6 +59,7 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		
 		playerNames.add("Loading...");
 		
+		//find moderator
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.getInBackground(game.getModeratorId(), new GetCallback<ParseUser>(){
 			@Override
@@ -67,6 +71,7 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 			}			
 		});
 		
+		// find and display players
 		for(int i=0; i<game.getPlayers().size(); i++){
 			query = ParseUser.getQuery();
 			query.getInBackground(game.getPlayers().get(i), new GetCallback<ParseUser>(){
@@ -87,19 +92,14 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 				}			
 			});
 		}
-//		if(game.getPlayers().size() == 0){
-//			playerNames.clear();
-//			playerNames.add("No Players");
-//			adapter.notifyDataSetChanged();
-//		}
-		
-		
+
 		adapter = new ArrayAdapter<String>(this, 
 		        R.layout.list_item, R.id.label,
 		        playerNames);
 		ListView listView = (ListView) findViewById(R.id.Players);
 		listView.setAdapter(adapter);
 		final Activity act = this;
+		// display detail player view on click
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
@@ -119,6 +119,8 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		TextView view = (TextView) findViewById(id);
 		view.setText(string);
 	}
+	
+	//call when user wants to leave game
 	public void Leave(View view){
 		final Activity act = this;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -138,6 +140,7 @@ public class ActivityGeneralYourGameView extends FragmentActivity {
 		AlertDialog dialog = builder.create();		
 		dialog.show();
 	}
+	
 	public void ModeratorClick(View view){
 		ActivityUserDetail.User = moderator;
 		Intent intent = new Intent(this, ActivityUserDetail.class);

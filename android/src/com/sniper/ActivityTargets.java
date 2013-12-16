@@ -6,7 +6,6 @@ import java.util.List;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sniper.core.Game;
 import com.sniper.utility.BasicListAdapter;
@@ -15,7 +14,6 @@ import com.sniper.utility.MenuHelper;
 import com.sniper.utility.UtilityMethods;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -33,9 +31,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ActivityTargets extends FragmentActivity {
 	String[] myStringArray = { "Loading..."};
-	List<ParseUser> usersInList;
+	List<ParseUser> usersInList;//targets for current user
 	BasicListAdapter adapter;
+	//list of names of games where each "usersInList[i]" is the current target
 	List<ArrayList<String>> gamesForTarget;
+	//images for usersInList
 	public Bitmap[] images;
 	
 	@Override
@@ -56,22 +56,32 @@ public class ActivityTargets extends FragmentActivity {
 					ActivityTargets.this.images = new Bitmap[users.size()];
 					ActivityTargets.this.myStringArray = new String[users.size()];
 			    	for(int i=0; i<users.size(); i++){
+			    		//update username for display
 			    		ActivityTargets.this.myStringArray[i] = users.get(i).getUsername();
+			    		// start query for image for user, display automatically
+			    		// updated when user done (required name "bitmaps" not be changed)
 			    		LoadUserImage.GetImage(users.get(i), ActivityTargets.this, i);
 			    	}
-			    	usersInList = users;
+			    	usersInList = users; //update actual users to be referenced on click
+			    	
+			    	//update the list of names of games where each "usersInList[i]" is the current target
 			    	UtilityMethods.GetActiveGames(new FindCallback<ParseObject>(){
 						@Override
 						public void done(List<ParseObject> games,
 								ParseException e) {
 							if(e==null){
+								//update array list to be correct length to match targets
 								gamesForTarget = new ArrayList<ArrayList<String>>();
 								for(int j=0; j<ActivityTargets.this.usersInList.size(); j++){
 									gamesForTarget.add(new ArrayList<String>());
 								}
+								
+								// for all games the user is in
 								for(int i=0; i<games.size(); i++){
 									Game game = new Game(games.get(i));
+									//find the users target in the game
 									String targetId = game.GetTargetIdForUser(ParseUser.getCurrentUser());
+									//match the game's target to one of the users targets
 									for(int j=0; j<ActivityTargets.this.usersInList.size(); j++){
 										ParseUser user = ActivityTargets.this.usersInList.get(j);
 										if(user.getObjectId().equals(targetId)){
@@ -79,33 +89,15 @@ public class ActivityTargets extends FragmentActivity {
 										}
 									}
 								}
+								
+								//update display
 						    	ActivityTargets.this.SetupList();								
 							}
 						}});
 			    	
 				}				
 			}});
-		
-//		ParseQuery<ParseUser> query = ParseUser.getQuery();
-//		//query.orderByDescending(key)
-//		query.findInBackground(new FindCallback<ParseUser>() {
-//		  @Override
-//		  public void done(List<ParseUser> objects, ParseException e) {
-//		    if (e == null) {
-//		        // The query was successful.
-//		    	//myStringArray
-//		    	ActivityTargets.this.myStringArray = new String[objects.size()];
-//		    	for(int i=0; i<objects.size() && i<ActivityTargets.this.myStringArray.length; i++){
-//		    		ActivityTargets.this.myStringArray[i] = objects.get(i).getUsername();
-//		    	}
-//		    	usersInList = objects;
-//		    	ActivityTargets.this.SetupList();
-//		    	//act.adapter.notifyDataSetChanged();		    	
-//		    } else {
-//		        // Something went wrong.
-//		    }
-//		  }
-//		});
+
 	}
 
 	public void SetupList(){
@@ -113,14 +105,16 @@ public class ActivityTargets extends FragmentActivity {
 		        R.layout.target_item){
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				//View v = super.getView(position, convertView, parent);
+				//for each view, need to update fields
 				LayoutInflater inflater = (LayoutInflater) this.context
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			 
+				// username is simplest update
 				View rowView = inflater.inflate(this.resource, parent, false);
 				TextView textView = (TextView) rowView.findViewById(R.id.username);
 				textView.setText(this.values[position]);
 				
+				// if users actual image is loaded, use it. else, show question mark
 				ImageView iv = (ImageView) rowView.findViewById(R.id.user_image);
 				if(images == null || images[position] == null){
 					iv.setImageResource(R.drawable.questionmark);
@@ -129,6 +123,7 @@ public class ActivityTargets extends FragmentActivity {
 					iv.setImageBitmap(images[position]);
 				}
 
+				//display string of list of games the user is a target in
 				TextView games = (TextView)rowView.findViewById(R.id.games_list);
 				if(gamesForTarget != null){
 					List<String> strings = gamesForTarget.get(position);
@@ -145,9 +140,6 @@ public class ActivityTargets extends FragmentActivity {
 					games.setText("");
 				}
 				
-				//TextView placeView = (TextView)rowView.findViewById(R.id.leaderboardNumber);
-				//placeView.setText(""+(position+1));
-					
 				return rowView;
 			}
 		};
@@ -157,7 +149,7 @@ public class ActivityTargets extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
-				//view.setSelected(true);
+				//on click show target in more detail
 				ActivityUserDetail.User = usersInList.get(position);
 				Intent intent = new Intent(ActivityTargets.this, ActivityUserDetail.class);
             	startActivity(intent);

@@ -10,6 +10,12 @@ import com.sniper.utility.DbContract;
 
 public class PlayerAction extends SniperParseObject
 {
+	
+	/*
+	 * Overloaded constructors allow creation of new objects or pull information from server objects
+	 * Super class handles much of the implementation
+	 * 
+	 */
 
 	public PlayerAction()
 	{
@@ -25,6 +31,11 @@ public class PlayerAction extends SniperParseObject
 	{
 		pullData(object);
 	}
+	
+	public PlayerAction(String objectId)
+	{
+		super(objectId);
+	}
 
 	public void pull()
 	{
@@ -39,6 +50,11 @@ public class PlayerAction extends SniperParseObject
 	public void push()
 	{
 		super.push();
+	}
+	
+	public void delete()
+	{
+		super.delete();
 	}
 	
 	public String getPlayer()

@@ -3,7 +3,6 @@ package com.sniper;
 import com.sniper.core.Camera;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+//fragment used to display navigation toolbar accross all screens
 public class Toolbar extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class Toolbar extends Fragment{
 			}
 			
 
+			// link all buttons to navigate to the correct activity
 			LinkButton(v, R.id.game_button, ActivityGamesHome.class);
 			LinkButton(v, R.id.armory_button, ActivityArmoryHome.class);
 			LinkButton(v, R.id.home_button, ActivityMain.class, true);
@@ -40,9 +41,14 @@ public class Toolbar extends Fragment{
 				
 		    return v;
 		}
+	
+		//general link
 		private void LinkButton(View v, int id, final Class<?> link){
 			LinkButton(v, id, link, false);			
 		}
+		
+		//link special option for home button. if already on home screen
+		//take picture instead of re navigation
 		private void LinkButton(View v, int id, final Class<?> link, final boolean isHome){
 			Button button = (Button)v.findViewById(id);
 	        button.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +58,7 @@ public class Toolbar extends Fragment{
 	            	
 	            	if(link.isInstance(activity)){
 	            		if(isHome){
+	            			//attempt kill shot
 	            			Camera.TakePicture();		            		
 		            		CharSequence text = "You just tried to shoot " + ActivityMain.target.getUsername();
 		            		int duration = Toast.LENGTH_SHORT;

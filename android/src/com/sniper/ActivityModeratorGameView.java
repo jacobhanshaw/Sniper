@@ -13,6 +13,7 @@ import com.sniper.core.Game;
 import com.sniper.utility.MenuHelper;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -40,6 +41,8 @@ public class ActivityModeratorGameView extends FragmentActivity {
 	}
 
 
+	//start game and update display
+	@SuppressLint("SimpleDateFormat")
 	public void StartGame(View view){
 		game.StartGame();
 		Button startButton = (Button) findViewById(R.id.StartGameButton);
@@ -48,11 +51,13 @@ public class ActivityModeratorGameView extends FragmentActivity {
 				new SimpleDateFormat("E MMM dd @ hh:mm a").format(game.getStartTime()));
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moderator_game_view);
 		
+		//update game display info
 		UpdateText(R.id.Name, game.getName());
 		TextView view = (TextView) findViewById(R.id.Moderator);
 		view.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -73,6 +78,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 		moderator = ParseUser.getCurrentUser();
 		UpdateText(R.id.Moderator, moderator.getUsername());
 		
+		//query for all user names of players in game
 		for(int i=0; i<game.getPlayers().size(); i++){
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.getInBackground(game.getPlayers().get(i), new GetCallback<ParseUser>(){
@@ -86,6 +92,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 						players.add(user);
 						playerNames.add(user.getUsername());
 						
+						//when all player names have been found, update display
 						if(players.size() == game.getPlayers().size()){
 							adapter.notifyDataSetChanged();
 						}
@@ -94,6 +101,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 			});
 		}
 		
+		//setup list
 		adapter = new ArrayAdapter<String>(this, 
 		        R.layout.list_item, R.id.label,
 		        playerNames);
@@ -107,6 +115,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 				if(players == null || players.size() ==0){
 					return;
 				}
+				// launch user detail page for selected user
 				ActivityUserDetail.User = players.get(position);
 				Intent intent = new Intent(act, ActivityUserDetail.class);
 		    	startActivity(intent);
@@ -127,7 +136,7 @@ public class ActivityModeratorGameView extends FragmentActivity {
 	}
 	
 	public void Delete(View view){
-		game.Delete();
+		game.delete();
 	}
 	
 	public void ModeratorClick(View view){

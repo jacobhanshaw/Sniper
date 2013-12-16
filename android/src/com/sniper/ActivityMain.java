@@ -45,13 +45,13 @@ public class ActivityMain extends FragmentActivity
 {
 	private Camera camera;
 	public static GpsLocationService gps;
-	// private static final int SELECT_PHOTO = 100;
 
 	List<ParseUser> targets = new ArrayList<ParseUser>();
 	String[] targetUserNames =	{ };
 	ArrayList<Game> games = new ArrayList<Game>();
-	private ProgressDialog progressDialog;
+	public ProgressDialog progressDialog;
 	public static ParseUser target;
+	public AlertDialog alert;
 
 	public static final String ACTION = "com.androidbook.parse.TestPushAction";
 	public static final String PARSE_EXTRA_DATA_KEY = "com.parse.Data";
@@ -221,7 +221,6 @@ public class ActivityMain extends FragmentActivity
 		builder.setTitle("Select Target");
 
 		final Activity act = this;
-		final Context c = this;
 		builder.setSingleChoiceItems(
 				targetUserNames, 
 				0, 
@@ -236,7 +235,7 @@ public class ActivityMain extends FragmentActivity
 						dialog.dismiss();
 					}
 				});
-		AlertDialog alert = builder.create();
+		alert = builder.create();
 		alert.show();
 	}
 
@@ -246,7 +245,6 @@ public class ActivityMain extends FragmentActivity
 				new AlertDialog.Builder(this);
 		builder.setTitle("Shoot With");
 
-		final Context c = this;
 		builder.setSingleChoiceItems(
 				ActivityArmoryHome.myStringArray, 
 				ActivityArmoryHome.selectedPosition, 
@@ -258,8 +256,8 @@ public class ActivityMain extends FragmentActivity
 							int which) {
 						ActivityArmoryHome.selectedPosition = which;
 						Button b = (Button) findViewById(R.id.weapon_button);
-						b.setText(ActivityArmoryHome.myStringArray[
-						                                           ActivityArmoryHome.selectedPosition]);
+						b.setText(
+							ActivityArmoryHome.myStringArray[ActivityArmoryHome.selectedPosition]);
 						dialog.dismiss();
 					}
 				});
@@ -271,14 +269,11 @@ public class ActivityMain extends FragmentActivity
 	{
 		try
 		{
-			String action = intent.getAction();
-
-			// "com.parse.Channel"
-			String channel = intent.getExtras().getString(PARSE_JSON_CHANNELS_KEY);
 			JSONObject json = new JSONObject(intent.getExtras().getString(PARSE_EXTRA_DATA_KEY));
 
 
-			Iterator<String> itr = json.keys();
+			@SuppressWarnings("unchecked")
+			Iterator<String> itr = (Iterator<String>)json.keys();
 			while (itr.hasNext())
 			{
 				String key = (String) itr.next();

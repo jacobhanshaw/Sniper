@@ -1,20 +1,10 @@
 package com.sniper;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import com.parse.ParseUser;
 import com.sniper.utility.LoadUserImage;
 import com.sniper.utility.MenuHelper;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,16 +27,14 @@ public class ActivityUserDetail extends FragmentActivity {
 		TextView username = (TextView) findViewById(R.id.UserName);
 		username.setText(User.getUsername());
 		
-		//TODO set points
-		//TextView email = (TextView) findViewById(R.id.UserName);
-		//email.setText(ParseUser.getCurrentUser().getEmail());
+		//TODO set points, didn't get done. not enough time
 		
 		TextView email = (TextView) findViewById(R.id.Email);
 		email.setText(User.getEmail());
 		
+		//start user image as question mark, then start load
 		ImageView userImageView = (ImageView) findViewById(R.id.user_image);
-		userImageView.setImageResource(R.drawable.questionmark);
-		
+		userImageView.setImageResource(R.drawable.questionmark);		
 		LoadUserImage.GetImage(User, this);
 	}
 
