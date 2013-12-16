@@ -7,17 +7,17 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 Parse.Cloud.beforeSave("KillAction", function(request, response) {
+    //Pull request information
     var channel = "user_" + request.object.get("player");
     var currPlayer = request.object.get("player");
     var currTarget = request.object.get("target");
     var killVerified = request.object.get("isVerified");
     var targetName = "Target";
-        //if(!killVerified)
-        //Call Facial Recognition Code
-        //request.object.set("isVerified", true);
-        //killVerified = request.object.get("isVerified");
+        
+        //If the kill is being updated as a success
         if(killVerified)
         {
+            //Query for user and send push notification
             console.log("Kill being verified");
             var user = new Parse.User;
             user.id = request.object.get("target");
@@ -42,6 +42,7 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
                 }
             });
             console.log("Confirmed notification sent");
+            //Query for game associated with kill
             var Game = Parse.Object.extend("Game");
             var query = new Parse.Query(Game);
             query.equalTo("players", currPlayer);
@@ -51,7 +52,7 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
             query.find({
                 success: function(results) {
                     console.log("Found some gamez");
-                    // Do something with the returned Parse.Object values
+                    // Iterate over games to remove killed player
                     for (var i = 0; i < results.length; i++) { 
                         console.log("Processing game: ", results[i].get("name"));
                         //Remove player from game
@@ -97,8 +98,10 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
                         var newSet = newHunter + "-" + newTarget;
                         targets.push(newSet);
                         console.log("After remove targets: " + targets);
-                        //Save game
                         
+                        
+                        //If game is over, send push notification and set end game
+                        //time to now
                      if(players.length <= 1) {
                         gameChannel = "game_" + results[i].id;
                         Parse.Push.send({
@@ -118,6 +121,7 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
                         });
                         results[i].set("endTime", new Date());
                       }
+                      //Save game changes
                         results[i].set("players", players);
                         results[i].set("targets", targets);
                         results[i].save();
@@ -135,10 +139,12 @@ Parse.Cloud.beforeSave("KillAction", function(request, response) {
 });
 
 Parse.Cloud.afterSave("KillAction", function(request) {
+    //Pull in request information
     var channel = "user_" + request.object.get("target");
     var killVerified = request.object.get("isVerified");
     var killerName = "Player";
 
+    //Query for usera associated and send push notification
     var user = new Parse.User;
     user.id = request.object.get("player");
     user.fetch({
@@ -172,6 +178,8 @@ Parse.Cloud.afterSave("KillAction", function(request) {
     });
 });
 
+
+//Function to send a start game push notification to all players in game
 function setUpGameStartNotification(gameId, gameName, startTime)
 {
     var query = new Parse.Query(Parse.Installation);
@@ -195,6 +203,8 @@ error: function(error) {
 });
 }
 
+//Before save on Game, every time a player is added, re-generate
+//a new targets array
 Parse.Cloud.beforeSave("Game", function(request, response) {
 
     var startDate = new Date(request.object.get("startTime"));
@@ -229,6 +239,7 @@ Parse.Cloud.afterSave("Game", function(request)
     }
 });
 
+//shuffles an array indexes
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
